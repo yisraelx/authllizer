@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">Profile</div>
+    <div class="panel-body">
+      <legend><i class="fa fa-clipboard"></i> Edit My Profile</legend>
+      <form (ngSubmit)="updateProfile()" #profileForm="ngForm">
+        <div class="form-group">
+          <label class="control-label">Profile Picture</label>
+          <img class="profile-picture" [src]="user.picture || 'https://placehold.it/100x100'">
+        </div>
+        <div class="form-group has-feedback" [class.has-error]="displayName.invalid && displayName.dirty">
+          <label class="control-label"><i class="fa fa-user"></i> Display Name</label>
+          <input type="text" class="form-control" name="displayName" id="displayName" [(ngModel)]="user.displayName" #displayName="ngModel"
+            required/>
+          <div class="help-block text-danger" *ngIf="displayName.invalid && (displayName.dirty || displayName.touched)">
+            <div *ngIf="displayName.errors.required">You must enter your name.</div>
+          </div>
+        </div>
+        <div class="form-group has-feedback" [class.has-error]="email.invalid && email.dirty">
+          <label class="control-label"><i class="fa fa-at"></i> Email Address</label>
+          <input type="email" class="form-control" name="email" id="email" [(ngModel)]="user.email" #email="ngModel" required email/>
+          <div class="help-block text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors.required">Your email address is required.</div>
+            <div *ngIf="email.errors.email">Your email address is invalid.</div>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-success" type="submit" [disabled]="profileForm.form.invalid">Update Information</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Accounts</div>
+    <div class="panel-body">
+      <legend><i class="fa fa-link"></i> Linked Accounts</legend>
+      <div class="btn-group-vertical">
+        <button class="btn btn-sm" [ngClass]="user.bitbucket ? 'btn-danger' : 'btn-primary'" (click)="user.bitbucket ? unlink('bitbucket') : link('bitbucket')">
+          <i class="fa fa-bitbucket"></i> {{user.bitbucket ? 'Unlink' : 'Link'}} Bitbucket Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.facebook ? 'btn-danger' : 'btn-primary'" (click)="user.facebook ? unlink('facebook') : link('facebook')">
+          <i class="fa fa-facebook"></i> {{user.facebook ? 'Unlink' : 'Link'}} Facebook Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.foursquare ? 'btn-danger' : 'btn-primary'" (click)="user.foursquare ? unlink('foursquare') : link('foursquare')">
+          <i class="fa fa-foursquare"></i> {{user.foursquare ? 'Unlink' : 'Link'}} Foursquare Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.github ? 'btn-danger' : 'btn-primary'" (click)="user.github ? unlink('github') : link('github')">
+          <i class="fa fa-github"></i> {{user.github ? 'Unlink' : 'Link'}} GitHub Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.google ? 'btn-danger' : 'btn-primary'" (click)="user.google ? unlink('google') : link('google')">
+          <i class="fa fa-google"></i>{{user.google ? 'Unlink' : 'Link'}} Google Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.instagram ? 'btn-danger' : 'btn-primary'" (click)="user.instagram ? unlink('instagram') : link('instagram')">
+          <i class="fa fa-instagram"></i> {{user.instagram ? 'Unlink' : 'Link'}} Instagram Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.linkedin ? 'btn-danger' : 'btn-primary'" (click)="user.linkedin ? unlink('linkedin') : link('linkedin')">
+          <i class="fa fa-linkedin"></i> {{user.linkedin ? 'Unlink' : 'Link'}} LinkedIn Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.live ? 'btn-danger' : 'btn-primary'" (click)="user.live ? unlink('live') : link('live')">
+          <i class="fa fa-windows"></i> {{user.live ? 'Unlink' : 'Link'}} Windows Live Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.reddit ? 'btn-danger' : 'btn-primary'" (click)="user.reddit ? unlink('reddit') : link('reddit')">
+          <i class="fa fa-reddit"></i> {{user.reddit ? 'Unlink' : 'Link'}} Reddit Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.spotify ? 'btn-danger' : 'btn-primary'" (click)="user.spotify ? unlink('spotify') : link('spotify')">
+          <i class="fa fa-spotify"></i> {{user.spotify ? 'Unlink' : 'Link'}} Spotify Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.twitch ? 'btn-danger' : 'btn-primary'" (click)="user.twitch ? unlink('twitch') : link('twitch')">
+          <i class="fa fa-twitch"></i> {{user.twitch ? 'Unlink' : 'Link'}} Twitch Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.twitter ? 'btn-danger' : 'btn-primary'" (click)="user.twitter ? unlink('twitter') : link('twitter')">
+          <i class="fa fa-twitter"></i> {{user.twitter ? 'Unlink' : 'Link'}} Twitter Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.vk ? 'btn-danger' : 'btn-primary'" (click)="user.vk ? unlink('vk') : link('vk')">
+          <i class="fa fa-vk"></i> {{user.vk ? 'Unlink' : 'Link'}} Vk Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.wordpress ? 'btn-danger' : 'btn-primary'" (click)="user.wordpress ? unlink('wordpress') : link('wordpress')">
+          <i class="fa fa-wordpress"></i> {{user.wordpress ? 'Unlink' : 'Link'}} Wordpress Account
+        </button>
+        <button class="btn btn-sm" [ngClass]="user.yahoo ? 'btn-danger' : 'btn-primary'" (click)="user.yahoo ? unlink('yahoo') : link('yahoo')">
+          <i class="fa fa-yahoo"></i> {{user.yahoo ? 'Unlink' : 'Link'}} Yahoo Account
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

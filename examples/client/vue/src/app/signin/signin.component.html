@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+        <div class="center-form panel">
+            <div class="panel-body">
+                <h2 class="text-center">Sign in</h2>
+                <form v-on:submit.prevent="signIn()" name="signinForm">
+                    <div class="form-group has-feedback" v-bind:class="{ 'has-error' : errors.has('email') }">
+                        <input class="form-control input-lg" type="text" name="email" v-model="user.email" placeholder="Email" v-validate="{ required: true, email: true}">
+                        <span class="fa fa-at form-control-feedback"></span>
+                        <div class="help-block text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</div>
+                    </div>
+                    <div class="form-group has-feedback" v-bind:class="{ 'has-error' : errors.has('password') }">
+                        <input class="form-control input-lg" type="password" name="password" v-model="user.password" placeholder="Password" v-validate="{ required: true }">
+                        <span class="fa fa-key form-control-feedback"></span>
+                        <div class="help-block text-danger" v-if="errors.has('password')">{{ errors.first('password') }}</div>
+                    </div>
+                    <button type="submit" class="btn btn-lg  btn-block btn-success" v-bind:disabled="!!errors.count()">Sign in</button>
+                    <br/>
+                    <p class="text-center text-muted">
+                        <small>Don't have an account yet? <router-link to="/signup">Sign up</router-link></small>
+                    </p>
+                    <div class="signup-or-separator">
+                        <h6 class="text">or</h6>
+                        <hr>
+                    </div>
+                </form>
+                <button class="btn btn-block btn-bitbucket" v-on:click="authenticate('bitbucket')">
+                    <i class="fa fa-bitbucket"></i> Sign in with Bitbucket
+                </button>
+                <button class="btn btn-block btn-facebook" v-on:click="authenticate('facebook')">
+                    <i class="fa fa-facebook"></i> Sign in with Facebook
+                </button>
+                <button class="btn btn-block btn-foursquare" v-on:click="authenticate('foursquare')">
+                    <i class="fa fa-foursquare"></i> Sign in with Foursquare
+                </button>
+                <button class="btn btn-block btn-github" v-on:click="authenticate('github')">
+                    <i class="fa fa-github"></i> Sign in with GitHub
+                </button>
+                <button class="btn btn-block btn-google" v-on:click="authenticate('google')">
+                    <i class="fa fa-google"></i>Sign in with Google
+                </button>
+                <button class="btn btn-block btn-instagram" v-on:click="authenticate('instagram')">
+                    <i class="fa fa-instagram"></i> Sign in with Instagram
+                </button>
+                <button class="btn btn-block btn-linkedin" v-on:click="authenticate('linkedin')">
+                    <i class="fa fa-linkedin"></i> Sign in with LinkedIn
+                </button>
+                <button class="btn btn-block btn-live" v-on:click="authenticate('live')">
+                    <i class="fa fa-windows"></i> Sign in with Windows Live
+                </button>
+                <button class="btn btn-block btn-reddit" v-on:click="authenticate('reddit')">
+                    <i class="fa fa-reddit"></i> Sign in with Reddit
+                </button>
+                <button class="btn btn-block btn-spotify" v-on:click="authenticate('spotify')">
+                    <i class="fa fa-spotify"></i> Sign in with Spotify
+                </button>
+                <button class="btn btn-block btn-twitch" v-on:click="authenticate('twitch')">
+                    <i class="fa fa-twitch"></i> Sign in with Twitch
+                </button>
+                <button class="btn btn-block btn-twitter" v-on:click="authenticate('twitter')">
+                    <i class="fa fa-twitter"></i> Sign in with Twitter
+                </button>
+                <button class="btn btn-block btn-vk" v-on:click="authenticate('vk')">
+                    <i class="fa fa-vk"></i> Sign in with Vk
+                </button>
+                <button class="btn btn-block btn-wordpress" v-on:click="authenticate('wordpress')">
+                    <i class="fa fa-wordpress"></i> Sign in with Wordpress
+                </button>
+                <button class="btn btn-block btn-yahoo" v-on:click="authenticate('yahoo')">
+                    <i class="fa fa-yahoo"></i> Sign in with Yahoo
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Profile</div>
+        <div class="panel-body">
+            <legend><i class="fa fa-clipboard"></i> Edit My Profile</legend>
+            <form v-on:submit.prevent="updateProfile()" name="profileForm">
+                <div class="form-group">
+                    <label class="control-label">Profile Picture</label>
+                    <img class="profile-picture" v-bind:src="user.picture || 'https://placehold.it/100x100'">
+                </div>
+                <div class="form-group  has-feedback" v-bind:class="{ 'has-error' : errors.has('displayName') }">
+                    <label class="control-label"><i class="fa fa-user"></i> Display Name</label>
+                    <input class="form-control" type="text" name="displayName" v-model="user.displayName" v-validate="{ required: true }" />
+                    <div class="help-block text-danger" v-if="errors.has('displayName')">{{ errors.first('displayName') }}</div>
+                </div>
+                <div class="form-group has-feedback" v-bind:class="{ 'has-error' : errors.has('email') }">
+                    <label class="control-label"><i class="fa fa-at"></i> Email Address</label>
+                    <input class="form-control" type="email" name="email" v-model="user.email" v-validate="{ required: true, email: true }" />
+                    <div class="help-block text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</div>
+                </div>
+                <button class="btn btn-lg btn-success" v-bind:disabled="!!errors.count()">Update Information</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Accounts</div>
+        <div class="panel-body">
+            <legend><i class="fa fa-link"></i> Linked Accounts</legend>
+            <div class="btn-group-vertical">
+                <button class="btn btn-sm" v-bind:class="user.bitbucket ? 'btn-danger' : 'btn-primary'" v-on:click="user.bitbucket ? unlink('bitbucket') : link('bitbucket')">
+                    <i class="fa fa-bitbucket"></i> {{user.bitbucket ? 'Unlink' : 'Link'}} Bitbucket Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.facebook ? 'btn-danger' : 'btn-primary'" v-on:click="user.facebook ? unlink('facebook') : link('facebook')">
+                    <i class="fa fa-facebook"></i> {{user.facebook ? 'Unlink' : 'Link'}} Facebook Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.foursquare ? 'btn-danger' : 'btn-primary'" v-on:click="user.foursquare ? unlink('foursquare') : link('foursquare')">
+                    <i class="fa fa-foursquare"></i> {{user.foursquare ? 'Unlink' : 'Link'}} Foursquare Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.github ? 'btn-danger' : 'btn-primary'" v-on:click="user.github ? unlink('github') : link('github')">
+                    <i class="fa fa-github"></i> {{user.github ? 'Unlink' : 'Link'}} GitHub Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.google ? 'btn-danger' : 'btn-primary'" v-on:click="user.google ? unlink('google') : link('google')">
+                    <i class="fa fa-google"></i>{{user.google ? 'Unlink' : 'Link'}} Google Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.instagram ? 'btn-danger' : 'btn-primary'" v-on:click="user.instagram ? unlink('instagram') : link('instagram')">
+                    <i class="fa fa-instagram"></i> {{user.instagram ? 'Unlink' : 'Link'}} Instagram Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.linkedin ? 'btn-danger' : 'btn-primary'" v-on:click="user.linkedin ? unlink('linkedin') : link('linkedin')">
+                    <i class="fa fa-linkedin"></i> {{user.linkedin ? 'Unlink' : 'Link'}} LinkedIn Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.live ? 'btn-danger' : 'btn-primary'" v-on:click="user.live ? unlink('live') : link('live')">
+                    <i class="fa fa-windows"></i> {{user.live ? 'Unlink' : 'Link'}} Windows Live Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.reddit ? 'btn-danger' : 'btn-primary'" v-on:click="user.reddit ? unlink('reddit') : link('reddit')">
+                    <i class="fa fa-reddit"></i> {{user.reddit ? 'Unlink' : 'Link'}} Reddit Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.spotify ? 'btn-danger' : 'btn-primary'" v-on:click="user.spotify ? unlink('spotify') : link('spotify')">
+                    <i class="fa fa-spotify"></i> {{user.spotify ? 'Unlink' : 'Link'}} Spotify Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.twitch ? 'btn-danger' : 'btn-primary'" v-on:click="user.twitch ? unlink('twitch') : link('twitch')">
+                    <i class="fa fa-twitch"></i> {{user.twitch ? 'Unlink' : 'Link'}} Twitch Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.twitter ? 'btn-danger' : 'btn-primary'" v-on:click="user.twitter ? unlink('twitter') : link('twitter')">
+                    <i class="fa fa-twitter"></i> {{user.twitter ? 'Unlink' : 'Link'}} Twitter Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.vk ? 'btn-danger' : 'btn-primary'" v-on:click="user.vk ? unlink('vk') : link('vk')">
+                    <i class="fa fa-vk"></i> {{user.vk ? 'Unlink' : 'Link'}} Vk Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.wordpress ? 'btn-danger' : 'btn-primary'" v-on:click="user.wordpress ? unlink('wordpress') : link('wordpress')">
+                    <i class="fa fa-wordpress"></i> {{user.wordpress ? 'Unlink' : 'Link'}} Wordpress Account
+                </button>
+                <button class="btn btn-sm" v-bind:class="user.yahoo ? 'btn-danger' : 'btn-primary'" v-on:click="user.yahoo ? unlink('yahoo') : link('yahoo')">
+                    <i class="fa fa-yahoo"></i> {{user.yahoo ? 'Unlink' : 'Link'}} Yahoo Account
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

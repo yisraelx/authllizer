@@ -1,0 +1,45 @@
+@mixin fa-color($color-name, $color) {
+  .fa-ios-#{$color-name} {
+    color: $color;
+  }
+  .fa-md-#{$color-name} {
+    color: $color;
+  }
+  .fa-wp-#{$color-name} {
+    color: $color;
+  }
+}
+
+@each $color-name, $color-base, $color-contrast in get-colors($colors) {
+  @include fa-color($color-name, $color-base);
+}
+
+// Icons and buttons
+
+@mixin button-icon {
+  font-size: 1.3em;
+  line-height: .67;
+
+  pointer-events: none;
+}
+
+[icon-left] fa-icon {
+  @include button-icon;
+
+  @include padding-horizontal(null, .3em);
+}
+
+[icon-right] fa-icon {
+  @include button-icon;
+
+  @include padding-horizontal(.4em, null);
+}
+
+[icon-only] fa-icon {
+  @include padding(0, .5em);
+
+  font-size: 1.8em;
+  line-height: .67;
+
+  pointer-events: none;
+}

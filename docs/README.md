@@ -1,0 +1,9 @@
+## Docs
+* [Authllizer](https://github.com/yisraelx/authllizer/blob/master/docs/authllizer.md)
+* [Adapter](https://github.com/yisraelx/authllizer/blob/master/docs/adapter.md)
+* [Dialog](https://github.com/yisraelx/authllizer/blob/master/docs/dialog.md)
+* [Http](https://github.com/yisraelx/authllizer/blob/master/docs/http.md)
+* [Interceptor](https://github.com/yisraelx/authllizer/blob/master/docs/interceptor.md)
+* [Provider](https://github.com/yisraelx/authllizer/blob/master/docs/provider.md)
+* [Storage](https://github.com/yisraelx/authllizer/blob/master/docs/storage.md)
+* [Token](https://github.com/yisraelx/authllizer/blob/master/docs/token.md)

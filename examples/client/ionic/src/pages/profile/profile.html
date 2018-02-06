@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <form (ngSubmit)="updateProfile()" [formGroup]="profileForm">
+      <ion-item>
+        <img [src]="user?.picture || 'https://placehold.it/100x100'">
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" formControlName="displayName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button type="submit" block [disabled]="profileForm.invalid">Update Information</button>
+      </ion-item>
+    </form>
+  </ion-card>
+  <ion-card>
+    <button block ion-button [color]="user.bitbucket ? 'danger' : 'primary'" (click)="user.bitbucket ? unlink('bitbucket') : link('bitbucket')">
+      <fa-icon name="bitbucket" fixed-width></fa-icon> {{user.bitbucket ? 'Unlink' : 'Link'}} Bitbucket Account
+    </button>
+    <button block ion-button [color]="user.facebook ? 'danger' : 'primary'" (click)="user.facebook ? unlink('facebook') : link('facebook')">
+      <fa-icon name="facebook" fixed-width></fa-icon> {{user.facebook ? 'Unlink' : 'Link'}} Facebook Account
+    </button>
+    <button block ion-button [color]="user.foursquare ? 'danger' : 'primary'" (click)="user.foursquare ? unlink('foursquare') : link('foursquare')">
+      <fa-icon name="foursquare" fixed-width></fa-icon> {{user.foursquare ? 'Unlink' : 'Link'}} Foursquare Account
+    </button>
+    <button block ion-button [color]="user.github ? 'danger' : 'primary'" (click)="user.github ? unlink('github') : link('github')">
+      <fa-icon name="github" fixed-width></fa-icon> {{user.github ? 'Unlink' : 'Link'}} GitHub Account
+    </button>
+    <button block ion-button [color]="user.google ? 'danger' : 'primary'" (click)="user.google ? unlink('google') : link('google')">
+      <fa-icon name="google" fixed-width></fa-icon>{{user.google ? 'Unlink' : 'Link'}} Google Account
+    </button>
+    <button block ion-button [color]="user.instagram ? 'danger' : 'primary'" (click)="user.instagram ? unlink('instagram') : link('instagram')">
+      <fa-icon name="instagram" fixed-width></fa-icon> {{user.instagram ? 'Unlink' : 'Link'}} Instagram Account
+    </button>
+    <button block ion-button [color]="user.linkedin ? 'danger' : 'primary'" (click)="user.linkedin ? unlink('linkedin') : link('linkedin')">
+      <fa-icon name="linkedin" fixed-width></fa-icon> {{user.linkedin ? 'Unlink' : 'Link'}} LinkedIn Account
+    </button>
+    <button block ion-button [color]="user.live ? 'danger' : 'primary'" (click)="user.live ? unlink('live') : link('live')">
+      <fa-icon name="windows" fixed-width></fa-icon> {{user.live ? 'Unlink' : 'Link'}} Windows Live Account
+    </button>
+    <button block ion-button [color]="user.reddit ? 'danger' : 'primary'" (click)="user.reddit ? unlink('reddit') : link('reddit')">
+      <fa-icon name="reddit" fixed-width></fa-icon> {{user.reddit ? 'Unlink' : 'Link'}} Reddit Account
+    </button>
+    <button block ion-button [color]="user.spotify ? 'danger' : 'primary'" (click)="user.spotify ? unlink('spotify') : link('spotify')">
+      <fa-icon name="spotify" fixed-width></fa-icon> {{user.spotify ? 'Unlink' : 'Link'}} Spotify Account
+    </button>
+    <button block ion-button [color]="user.twitch ? 'danger' : 'primary'" (click)="user.twitch ? unlink('twitch') : link('twitch')">
+      <fa-icon name="twitch" fixed-width></fa-icon> {{user.twitch ? 'Unlink' : 'Link'}} Twitch Account
+    </button>
+    <button block ion-button [color]="user.twitter ? 'danger' : 'primary'" (click)="user.twitter ? unlink('twitter') : link('twitter')">
+      <fa-icon name="twitter" fixed-width></fa-icon> {{user.twitter ? 'Unlink' : 'Link'}} Twitter Account
+    </button>
+    <button block ion-button [color]="user.vk ? 'danger' : 'primary'" (click)="user.vk ? unlink('vk') : link('vk')">
+      <fa-icon name="vk" fixed-width></fa-icon> {{user.vk ? 'Unlink' : 'Link'}} Vk Account
+    </button>
+    <button block ion-button [color]="user.wordpress ? 'danger' : 'primary'" (click)="user.wordpress ? unlink('wordpress') : link('wordpress')">
+      <fa-icon name="wordpress" fixed-width></fa-icon> {{user.wordpress ? 'Unlink' : 'Link'}} Wordpress Account
+    </button>
+    <button block ion-button [color]="user.yahoo ? 'danger' : 'primary'" (click)="user.yahoo ? unlink('yahoo') : link('yahoo')">
+      <fa-icon name="yahoo" fixed-width></fa-icon> {{user.yahoo ? 'Unlink' : 'Link'}} Yahoo Account
+    </button>
+  </ion-card>
+</ion-content>

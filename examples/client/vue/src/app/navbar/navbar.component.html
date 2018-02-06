@@ -1,0 +1,26 @@
+<div class="navbar navbar-default navbar-static-top">
+    <div class="navbar-header">
+        <router-link class="navbar-brand" to="/"><i class="ion-ios7-pulse-strong"></i> Authllizer</router-link>
+    </div>
+    <ul class="nav navbar-nav">
+        <li>
+            <router-link to="/" active-class="active">Home</router-link>
+        </li>
+        <li v-show="isAuth">
+            <router-link to="/profile" active-class="active">Profile</router-link>
+        </li>
+    </ul>
+    <ul v-show="!isAuth" class="nav navbar-nav pull-right">
+        <li>
+            <router-link to="/signin" active-class="active">Sign in</router-link>
+        </li>
+        <li>
+            <router-link to="/signup" active-class="active">Sign up</router-link>
+        </li>
+    </ul>
+    <ul v-show="isAuth" class="nav navbar-nav pull-right">
+        <li>
+            <router-link to="/signout">Sign out</router-link>
+        </li>
+    </ul>
+</div>
