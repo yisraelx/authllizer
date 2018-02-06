@@ -1,7 +1,7 @@
 {
     "name": "authllizer-server-example",
     "private": true,
-    "version": "0.0.0-PLACEHOLDER",
+    "version": "0.1.0",
     "description": "Authllizer Server Example",
     "license": "MIT",
     "homepage": "https://github.com/yisraelx/authllizer#readme",

@@ -1,6 +1,6 @@
 {
     "name": "@authllizer/vue",
-    "version": "0.0.0-PLACEHOLDER",
+    "version": "0.1.0",
     "description": "Vue Authllizer Plugin",
     "main": "./es5/index.js",
     "es2015": "./es2015/index.js",
@@ -53,11 +53,11 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@authllizer/core": "0.0.0-PLACEHOLDER",
+        "@authllizer/core": "^0.1.0",
         "vue": "^2.5.3"
     },
     "devDependencies": {
-        "@authllizer/core": "0.0.0-PLACEHOLDER",
+        "@authllizer/core": "^0.1.0",
         "npm-run-all": "^4.1.2",
         "rimraf": "^2.6.2",
         "rollup": "^0.55.3",

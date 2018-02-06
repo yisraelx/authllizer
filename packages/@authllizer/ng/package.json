@@ -1,6 +1,6 @@
 {
     "name": "@authllizer/ng",
-    "version": "0.0.0-PLACEHOLDER",
+    "version": "0.1.0",
     "description": "AngularJs Authllizer Module",
     "main": "./es5/index.js",
     "es2015": "./es2015/index.js",
@@ -54,11 +54,11 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@authllizer/core": "0.0.0-PLACEHOLDER",
+        "@authllizer/core": "^0.1.0",
         "angular": "^1.6.9"
     },
     "devDependencies": {
-        "@authllizer/core": "0.0.0-PLACEHOLDER",
+        "@authllizer/core": "^0.1.0",
         "@types/angular": "^1.6.42",
         "@types/jquery": "^3.3.0",
         "angular": "^1.6.9",

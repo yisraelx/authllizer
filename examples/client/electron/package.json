@@ -1,7 +1,7 @@
 {
     "name": "authllizer-electron-example",
     "private": true,
-    "version": "0.0.0-PLACEHOLDER",
+    "version": "0.1.0",
     "description": "Authllizer Electron Example",
     "main": "main.ts",
     "license": "MIT",
@@ -27,11 +27,11 @@
         "web": "webpack-dev-server --target web --open"
     },
     "dependencies": {
-        "@authllizer/core": "0.0.0-PLACEHOLDER",
-        "authllizer-electron-dialog": "0.0.0-PLACEHOLDER",
-        "authllizer-facebook-oauth2": "0.0.0-PLACEHOLDER",
-        "authllizer-google-oauth2": "0.0.0-PLACEHOLDER",
-        "authllizer-twitter-oauth1": "0.0.0-PLACEHOLDER",
+        "@authllizer/core": "^0.1.0",
+        "authllizer-electron-dialog": "^0.1.0",
+        "authllizer-facebook-oauth2": "^0.1.0",
+        "authllizer-google-oauth2": "^0.1.0",
+        "authllizer-twitter-oauth1": "^0.1.0",
         "bootstrap": "^3.3.7",
         "concurrently": "^3.5.1",
         "font-awesome": "^4.7.0",

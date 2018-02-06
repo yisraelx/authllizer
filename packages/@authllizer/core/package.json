@@ -1,6 +1,6 @@
 {
     "name": "@authllizer/core",
-    "version": "0.0.0-PLACEHOLDER",
+    "version": "0.1.0",
     "description": "Authllizer is a authentication framework for the client-side of javascript applications, written in typescript.",
     "main": "./es5/index.js",
     "es2015": "./es2015/index.js",
