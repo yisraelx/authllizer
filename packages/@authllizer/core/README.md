@@ -52,8 +52,8 @@ authllizer.config({
             }
         }
     }),
-    dialog: BrowserDialog,
-    httpClient: new FetchHttpClient(),
+    dialog: BrowserDialog, // this is the default
+    httpClient: new FetchHttpClient(), // this is the default
     interceptList: ['https://example.com'],
     providers: {
         some: OAuth2Provider.extend({
@@ -62,8 +62,8 @@ authllizer.config({
             //...
         }
     },
-    storage: new LocalStorage(),
-    token: JWT;
+    storage: new LocalStorage(), // this is the default
+    token: JWT // this is the default
 } as IConfigOptions);
 ```
 
@@ -104,7 +104,7 @@ let authllizer: Authllizer = new Authllizer({
 ## Credits
 This library is based on AngularJs [Satellizer](https://github.com/sahat/satellizer) library developed by [Sahat Yalkabov](https://github.com/sahat).
 
-# License
+## License
 Copyright © 2017 [Yisrael Eliav](https://github.com/yisraelx),
 Licensed under the [MIT license](https://github.com/yisraelx/authllizer/blob/master/LICENSE).
 

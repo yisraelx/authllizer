@@ -6,7 +6,7 @@ new Authllizer({
     // ...
 });
 ```
-*Note: It requires global "fetch" and is not supported by older browsers, if you need support for older browsers then you can be use "fetch-polyfill".
+*Note: It requires global "fetch" and is not supported by older browsers, if you need support for older browsers then you can be use "fetch-polyfill".*
 
 Example of creating a http client adapter for Axios
 ```ts

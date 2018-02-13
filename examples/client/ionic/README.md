@@ -15,7 +15,7 @@ in the repo root
 ```sh
 $ npm run bootstrap
 ```
-and then
+and then in the app root
 ```sh
-$ npm run workspaces
+$ npm run ws:start
 ```

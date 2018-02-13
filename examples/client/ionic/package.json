@@ -20,8 +20,8 @@
   "scripts": {
     "start": "ionic-app-scripts serve --port 8080",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
-    "workspaces": "yarn start --angularDir \"../../../node_modules/@angular/core\" --typescriptDir \"../../../node_modules/typescript\" --ionicAngularDir \"../../../node_modules/ionic-angular\""
+    "ws:start": "yarn start --angularDir \"../../../node_modules/@angular/core\" --typescriptDir \"../../../node_modules/typescript\" --ionicAngularDir \"../../../node_modules/ionic-angular\"",
+    "ws:build": "yarn build --angularDir \"../../../node_modules/@angular/core\" --typescriptDir \"../../../node_modules/typescript\" --ionicAngularDir \"../../../node_modules/ionic-angular\""
   },
   "dependencies": {
     "@angular/common": "5.2.3",

@@ -1,7 +1,7 @@
 # Authllizer
 [![Travis build](https://travis-ci.org/yisraelx/authllizer.svg?branch=master)](https://travis-ci.org/yisraelx/authllizer)
 [![Codecov](https://codecov.io/gh/yisraelx/authllizer/branch/master/graph/badge.svg)](https://codecov.io/gh/yisraelx/authllizer)
-[![MIT License](https://img.shields.io/github/yisraelx/authllizer.svg)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/github/license/yisraelx/authllizer.svg)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ### Authllizer is a authentication framework for the client-side of javascript applications, written in typescript.
@@ -21,7 +21,7 @@
   * [Electron](https://github.com/yisraelx/authllizer/blob/master/examples/client/electron)
 
 ## Docs
-There is [docs and examples](https://github.com/yisraelx/authllizer/blob/master/docs) but it is very limited hope that it will change later and welcome to help with the matter.
+There is [docs and examples](https://github.com/yisraelx/authllizer/blob/master/docs) but it is very limited hope that it will change later (help wanted).
 
 ## Scripts
   * bootstrap - for install and link all the dependencies in all packages in the repo (with yarn workspace). 
@@ -30,7 +30,7 @@ There is [docs and examples](https://github.com/yisraelx/authllizer/blob/master/
   * test - run test on all packages. 
 
 ## Test
-There are partial tests, welcome to help add tests and improve existing tests (the goal is for full coverage).
+There are partial tests, the goal is for full coverage.
 ```sh
 $ npm install
 $ npm test

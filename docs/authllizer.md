@@ -204,10 +204,16 @@ onChange.remove(authChangeHandler);
 ```
 ```ts
 import authllizer from '@authllizer/core';
+
+let pevious: boolean = authllizer.isAuthenticated();
+
 setInterval(() => {
-    let token: IToken = authllizer.getToken();
-    if(!token){
-        authllizer.onChange.emit(false);
+    let current: boolean = authllizer.isAuthenticated();
+    
+    if(current !== pevious){
+        authllizer.onChange.emit(current);
     }
+    
+    pevious = current;
 }, 1000);
 ```
