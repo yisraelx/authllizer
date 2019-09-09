@@ -55,12 +55,12 @@
     },
     "peerDependencies": {
         "@authllizer/core": "^0.1.0",
-        "angular": "^1.6.9"
+        "angular": "^1.7.8"
     },
     "devDependencies": {
         "@authllizer/core": "^0.1.0",
-        "@types/angular": "^1.6.42",
-        "angular": "^1.6.9"
+        "@types/angular": "^1.6.56",
+        "angular": "^1.7.8"
     },
     "rollup": {
         "globals": {

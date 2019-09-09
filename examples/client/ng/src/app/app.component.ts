@@ -1,7 +1,8 @@
 import { Component } from 'angular-ts-decorators';
 
 @Component({
-  selector: 'app',
-  templateUrl: './app.component.html'
+    selector: 'app',
+    templateUrl: './app.component.html'
 })
-export class AppComponent {}
+export class AppComponent {
+}

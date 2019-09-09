@@ -6,11 +6,11 @@
         <li><a ui-sref="home" ui-sref-active="active">Home</a></li>
         <li ng-if="$ctrl.isAuthenticated()"><a ui-sref="profile" ui-sref-active="active">Profile</a></li>
     </ul>
-    <ul ng-if="!$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
+    <ul class="nav navbar-nav pull-right" ng-if="!$ctrl.isAuthenticated()">
         <li><a ui-sref="signin" ui-sref-active="active">Sign in</a></li>
         <li><a ui-sref="signup" ui-sref-active="active">Sign up</a></li>
     </ul>
-    <ul ng-if="$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
+    <ul class="nav navbar-nav pull-right" ng-if="$ctrl.isAuthenticated()">
         <li><a ui-sref="signout">Sign out</a></li>
     </ul>
 </div>

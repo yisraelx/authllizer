@@ -1,35 +1,38 @@
-import { Component } from 'angular-ts-decorators';
-import { IComponentController, IHttpService } from 'angular';
+import { Authllizer } from '@authllizer/core';
+import { IComponentController, IHttpResponse } from 'angular';
 import { IToastrService } from 'angular-toastr';
-import { Authllizer } from '@authllizer/core'
+import { Component } from 'angular-ts-decorators';
 
 export interface ISignUpUser {
-  displayName?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
+    displayName?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
 }
 
 @Component({
-  selector: 'signup',
-  templateUrl: './signup.component.html'
+    selector: 'signup',
+    templateUrl: './signup.component.html'
 })
 export class SignUpComponent implements IComponentController {
 
-  user: ISignUpUser;
+    user: ISignUpUser;
 
-  /*@ngInject*/
-  constructor(private $location, private $auth: Authllizer, private toastr: IToastrService) {
-  }
+    /*@ngInject*/
+    constructor(private $location, private $auth: Authllizer, private toastr: IToastrService) {
+    }
 
-  signUp() {
-    this.$auth.signUp(this.user, true)
-      .then((response) => {
-        this.$location.path('/');
-        this.toastr.info('You have successfully created a new account and have been signed-in');
-      })
-      .catch((response) => {
-        this.toastr.error(response.data.message);
-      });
-  }
+    signUp() {
+        this
+            .$auth
+            .signUp(this.user, true)
+            .then(() => {
+                this.$location.path('/');
+                this.toastr.info('You have successfully created a new account and have been signed-in!');
+            })
+            .catch((response: IHttpResponse<{message: string}> | Error | any) => {
+                this.toastr.error((response.data && response.data.message) || (response.statusText || response.message));
+            });
+    }
+
 }

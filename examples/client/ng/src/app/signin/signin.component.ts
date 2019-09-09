@@ -1,7 +1,7 @@
-import {Component} from 'angular-ts-decorators';
-import {IComponentController, IHttpResponse} from 'angular';
-import {IToastrService} from 'angular-toastr';
-import {Authllizer} from '@authllizer/core';
+import { Authllizer } from '@authllizer/core';
+import { IComponentController, IHttpResponse } from 'angular';
+import { IToastrService } from 'angular-toastr';
+import { Component } from 'angular-ts-decorators';
 
 export interface ISignInUser {
     email?: string;
@@ -21,32 +21,28 @@ export class SignInComponent implements IComponentController {
     }
 
     signIn() {
-        this.$auth.signIn(this.user)
+        this
+            .$auth
+            .signIn(this.user)
             .then(() => {
                 this.toastr.success('You have successfully signed in!');
                 this.$location.path('/');
             })
-            .catch((response: IHttpResponse<{ message: string }>) => {
-                this.toastr.error(response.data ? response.data.message : response.statusText, response.status as any);
+            .catch((response: IHttpResponse<{message: string}> | Error | any) => {
+                this.toastr.error((response.data && response.data.message) || (response.statusText || response.message));
             });
     }
 
     authenticate(provider: string) {
-        this.$auth.authenticate(provider)
+        this
+            .$auth
+            .authenticate(provider)
             .then(() => {
-                this.toastr.success('You have successfully signed in with ' + provider + '!');
+                this.toastr.success(`You have successfully signed in with ${ provider }!`);
                 this.$location.path('/');
             })
-            .catch((error: Error | IHttpResponse<{ message: string }>) => {
-                if ((error as Error).message) {
-                    // Authllizer promise reject error.
-                    this.toastr.error((error as Error).message);
-                } else if ((error as IHttpResponse<any>).data) {
-                    // HTTP response error from server
-                    this.toastr.error((error as IHttpResponse<any>).data.message, (error as IHttpResponse<any>).status as any);
-                } else {
-                    this.toastr.error(error as any);
-                }
+            .catch((response: IHttpResponse<{message: string}> | Error | any) => {
+                this.toastr.error((response.data && response.data.message) || (response.statusText || response.message));
             });
     }
 

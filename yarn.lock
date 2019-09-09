@@ -841,15 +841,35 @@
   dependencies:
     typescript "~2.6.2"
 
-"@types/angular-toastr@^1.6.33":
-  version "1.6.33"
-  resolved "https://registry.yarnpkg.com/@types/angular-toastr/-/angular-toastr-1.6.33.tgz#0a9f4acf44be01b76e7cb0140c9202ebae2e4585"
+"@types/angular-animate@^1.5.10":
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/@types/angular-animate/-/angular-animate-1.5.10.tgz#b94b45358c61163f1478768e8b081c76439c515f"
+  integrity sha512-MnYYvTHAPUbtT6gqwrnl6k3a03A5BlNz1nVlwVGxyS+MeWCX4DC14SJ/pgJUa8wj+J04wZ2prMxFsOfp6cyjjQ==
   dependencies:
     "@types/angular" "*"
 
-"@types/angular@*", "@types/angular@^1.6.42":
+"@types/angular-resource@^1.5.15":
+  version "1.5.15"
+  resolved "https://registry.yarnpkg.com/@types/angular-resource/-/angular-resource-1.5.15.tgz#5afad92af99b74884ca788fc48d47ebe4be32413"
+  integrity sha512-9YZwDxh+YMYtVvgEtW8oVQXKDJf0QcLrvR5hS9NMi/faDm2V+87TuHBtQBMPKEgMo0SyyVxKzhg8gsscNVMFUw==
+  dependencies:
+    "@types/angular" "*"
+
+"@types/angular-toastr@^1.6.34":
+  version "1.6.34"
+  resolved "https://registry.yarnpkg.com/@types/angular-toastr/-/angular-toastr-1.6.34.tgz#425c1932b6ddb5cb665d9bd3eb5c92b32c1fd5bd"
+  integrity sha512-nLLLun6OtP1BFop416Lye68IjmeJ2ANkETqocQIINprgBQ+qYpGEaOGewcoNMcCanMC8SmhlRJN57hlplmVb7A==
+  dependencies:
+    "@types/angular" "*"
+
+"@types/angular@*":
   version "1.6.42"
   resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.6.42.tgz#8d587afeccff635900ffb04a10a0cae894704ef2"
+
+"@types/angular@^1.6.56":
+  version "1.6.56"
+  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.6.56.tgz#20124077bd44061e018c7283c0bb83f4b00322dd"
+  integrity sha512-HxtqilvklZ7i6XOaiP7uIJIrFXEVEhfbSY45nfv2DeBRngncI58Y4ZOUMiUkcT8sqgLL1ablmbfylChUg7A3GA==
 
 "@types/anymatch@*":
   version "1.3.1"
@@ -963,10 +983,6 @@
   integrity sha512-l+s0IoxSHqhLFJPDHRfO235kgrCkvFD8JmdV/T9C4BKBYPIjrQopGFH4r7h2e3jQqgJRCthRCAZIxDoFnj1zwQ==
   dependencies:
     "@types/node" "*"
-
-"@types/jquery@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.0.tgz#6316ac20a1a13c5d521a2dc661befc7184f73f5b"
 
 "@types/jsonwebtoken@^7.2.4":
   version "7.2.5"
@@ -1120,15 +1136,17 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@uirouter/angularjs@^1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.14.tgz#00e6b4652d6df9a4fbdffff9c31e0d17b4841d78"
+"@uirouter/angularjs@^1.0.22":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.22.tgz#581ab38794a2d7c2790851087072c4066b2b6c46"
+  integrity sha512-d0SvdbXAav+Z6gCJd7gmn2eXEUtO3RvYcSLwtPaE8+7QiWHpSKNfGdD4D3noXhO2yUTz/AwaxsiRFMCwgVI0UQ==
   dependencies:
-    "@uirouter/core" "5.0.16"
+    "@uirouter/core" "5.0.23"
 
-"@uirouter/core@5.0.16":
-  version "5.0.16"
-  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.16.tgz#c6f9e2041df1b6ad3bc28b089e55241a1cb4610f"
+"@uirouter/core@5.0.23":
+  version "5.0.23"
+  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.23.tgz#363b4bea635a1b48900dc7e65793a65a3b58a79e"
+  integrity sha512-rwFOH++z/KY8y+h0IOpQ5uC8Nim6E0EBCQrIjhVCr+XKYXgpK+VdtuOLFdogvbJ3AAi5Z7ei00qdEr7Did5CAg==
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -1415,28 +1433,32 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular-animate@^1.6.9:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.6.9.tgz#a0f926c1ba3190bd8929ef966a7fa79760682622"
+angular-animate@^1.7.8:
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/angular-animate/-/angular-animate-1.7.8.tgz#c95f237efe7ecfe0e6003adb5e2c7ef0e5a2b9d4"
+  integrity sha512-bINtzizq7TbJzfVrDpwLfTxVl0Qd7fRNWFb5jKYI1vaFZobQNX/QONXlLow6ySsDbZ6eLECycB7mvWtfh1YYaw==
 
-angular-messages@^1.6.9:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/angular-messages/-/angular-messages-1.6.9.tgz#c6958a32ab49316af36e3e5ac6f94c361571fa72"
+angular-messages@^1.7.8:
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/angular-messages/-/angular-messages-1.7.8.tgz#746da9c955f855ef6ceac34b2a5eb8b1b12e6a78"
+  integrity sha512-e7Oq4ugdTcAp4kLP9TNOh6mfSsYO2Uwf7NavLuNWqahDGRHYXilo2gcI/vxmFjPBOwAmreXrhYlpGLlJdzxfQg==
 
-angular-resource@^1.6.9:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.6.9.tgz#d02334b7cb96353e245966ad044c0c673df7b685"
+angular-resource@^1.7.8:
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.7.8.tgz#9577dbcc02cdbb76398febc5fc7ee103c86c5c50"
+  integrity sha512-zuPQ0ZX9Q8WnZ0KMtJlKYUSIXWRQSbFzMkRV9zG8cYYSsMAZlXar5Hqmd5gzxC3O28AGM7BCEJ+iYs3UNL4qdA==
 
 angular-toastr@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/angular-toastr/-/angular-toastr-2.1.1.tgz#9f8350ca482145a44d011a755b8fb3623d60544c"
 
-angular-ts-decorators@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/angular-ts-decorators/-/angular-ts-decorators-2.1.0.tgz#8c2727d7a577ed29c9daaf57cf4a48ff9fbdad2b"
+angular-ts-decorators@^3.7.8:
+  version "3.7.8"
+  resolved "https://registry.yarnpkg.com/angular-ts-decorators/-/angular-ts-decorators-3.7.8.tgz#1c94e6aa6b98996e11156309c53b5ba0462b2112"
+  integrity sha512-2RQoK/Hn393bxHxj261tQQke+zt0gzSiwgxLh1kf+qxnFXAqmEFOy1lmUgTcZjCY3kY+03/lG7E01xAiLgLrqQ==
   dependencies:
-    reflect-metadata "^0.1.10"
-    tslib "^1.7.1"
+    reflect-metadata "0.1.13"
+    tslib "1.9.3"
 
 angular2-template-loader@^0.6.2:
   version "0.6.2"
@@ -1444,9 +1466,10 @@ angular2-template-loader@^0.6.2:
   dependencies:
     loader-utils "^0.2.15"
 
-angular@^1.6.9:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.9.tgz#bc812932e18909038412d594a5990f4bb66c0619"
+angular@^1.7.8:
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.8.tgz#b77ede272ce1b261e3be30c1451a0b346905a3c9"
+  integrity sha512-wtef/y4COxM7ZVhddd7JtAAhyYObq9YXKar9tsW7558BImeVYteJiTxCKeJOL45lJ/+7B4wrAC49j8gTFYEthg==
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -9709,6 +9732,11 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+reflect-metadata@0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
+
 reflect-metadata@^0.1.10, reflect-metadata@^0.1.2:
   version "0.1.12"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.12.tgz#311bf0c6b63cd782f228a81abe146a2bfa9c56f2"
@@ -11516,6 +11544,11 @@ tsickle@^0.26.0:
     mkdirp "^0.5.1"
     source-map "^0.5.6"
     source-map-support "^0.4.2"
+
+tslib@1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
+  integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
 tslib@^1.0.0, tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.0"

@@ -1,5 +1,5 @@
-import { Component } from 'angular-ts-decorators';
 import { IComponentController, IHttpService } from 'angular';
+import { Component } from 'angular-ts-decorators';
 
 @Component({
     selector: 'home',
@@ -12,11 +12,14 @@ export class HomeComponent implements IComponentController {
     issues: number;
 
     /*@ngInject*/
-    constructor(private $http: IHttpService) { }
+    constructor(private $http: IHttpService) {
+    }
 
     $onInit() {
-        this.$http.get('https://api.github.com/repos/yisraelx/authllizer')
-            .then(({ data }: any) => {
+        this
+            .$http
+            .get('https://api.github.com/repos/yisraelx/authllizer')
+            .then(({data}: any) => {
                 if (data) {
                     if (data.stargazers_count) {
                         this.stars = data.stargazers_count;

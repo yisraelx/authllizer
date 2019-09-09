@@ -3,22 +3,29 @@
         <div class="panel-heading">Profile</div>
         <div class="panel-body">
             <legend><i class="fa fa-clipboard"></i> Edit My Profile</legend>
-            <form ng-submit="$ctrl.updateProfile()" name="profileForm">
+            <form name="profileForm" ng-submit="$ctrl.updateProfile()">
                 <div class="form-group">
                     <label class="control-label">Profile Picture</label>
                     <img class="profile-picture" ng-src="{{$ctrl.user.picture || 'https://placehold.it/100x100'}}">
                 </div>
-                <div class="form-group has-feedback" ng-class="{ 'has-error' : profileForm.displayName.$invalid && profileForm.displayName.$dirty }">
+                <div class="form-group has-feedback"
+                     ng-class="{ 'has-error' : profileForm.displayName.$invalid && profileForm.displayName.$dirty }">
                     <label class="control-label"><i class="fa fa-user"></i> Display Name</label>
-                    <input type="text" class="form-control" ng-model="$ctrl.user.displayName" name="displayName" id="displayName" required />
-                    <div class="help-block text-danger" ng-if="profileForm.displayName.$dirty" ng-messages="profileForm.displayName.$error">
+                    <input class="form-control" id="displayName" name="displayName" ng-model="$ctrl.user.displayName"
+                           required
+                           type="text"/>
+                    <div class="help-block text-danger" ng-if="profileForm.displayName.$dirty"
+                         ng-messages="profileForm.displayName.$error">
                         <div ng-message="required">You must enter your name.</div>
                     </div>
                 </div>
-                <div class="form-group has-feedback" ng-class="{ 'has-error' : profileForm.email.$invalid && profileForm.email.$dirty }">
+                <div class="form-group has-feedback"
+                     ng-class="{ 'has-error' : profileForm.email.$invalid && profileForm.email.$dirty }">
                     <label class="control-label"><i class="fa fa-at"></i> Email Address</label>
-                    <input type="email" class="form-control" ng-model="$ctrl.user.email" name="email" id="email" required/>
-                    <div class="help-block text-danger" ng-if="profileForm.email.$dirty" ng-messages="profileForm.email.$error">
+                    <input class="form-control" id="email" name="email" ng-model="$ctrl.user.email" required
+                           type="email"/>
+                    <div class="help-block text-danger" ng-if="profileForm.email.$dirty"
+                         ng-messages="profileForm.email.$error">
                         <div ng-message="required">Your email address is required.</div>
                         <div ng-message="email">Your email address is invalid.</div>
                     </div>
@@ -33,49 +40,64 @@
         <div class="panel-body">
             <legend><i class="fa fa-link"></i> Linked Accounts</legend>
             <div class="btn-group-vertical">
-                <button class="btn btn-sm" ng-class="$ctrl.user.bitbucket ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.bitbucket ? $ctrl.unlink('bitbucket') : $ctrl.link('bitbucket')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.bitbucket ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.bitbucket ? $ctrl.unlink('bitbucket') : $ctrl.link('bitbucket')">
                     <i class="fa fa-bitbucket"></i> {{$ctrl.user.bitbucket ? 'Unlink' : 'Link'}} Bitbucket Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.facebook ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.facebook ? $ctrl.unlink('facebook') : $ctrl.link('facebook')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.facebook ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.facebook ? $ctrl.unlink('facebook') : $ctrl.link('facebook')">
                     <i class="fa fa-facebook"></i> {{$ctrl.user.facebook ? 'Unlink' : 'Link'}} Facebook Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.foursquare ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.foursquare ? $ctrl.unlink('foursquare') : $ctrl.link('foursquare')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.foursquare ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.foursquare ? $ctrl.unlink('foursquare') : $ctrl.link('foursquare')">
                     <i class="fa fa-foursquare"></i> {{$ctrl.user.foursquare ? 'Unlink' : 'Link'}} Foursquare Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.github ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.github ? $ctrl.unlink('github') : $ctrl.link('github')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.github ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.github ? $ctrl.unlink('github') : $ctrl.link('github')">
                     <i class="fa fa-github"></i> {{$ctrl.user.github ? 'Unlink' : 'Link'}} GitHub Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.google ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.google ? $ctrl.unlink('google') : $ctrl.link('google')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.google ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.google ? $ctrl.unlink('google') : $ctrl.link('google')">
                     <i class="fa fa-google"></i>{{$ctrl.user.google ? 'Unlink' : 'Link'}} Google Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.instagram ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.instagram ? $ctrl.unlink('instagram') : $ctrl.link('instagram')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.instagram ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.instagram ? $ctrl.unlink('instagram') : $ctrl.link('instagram')">
                     <i class="fa fa-instagram"></i> {{$ctrl.user.instagram ? 'Unlink' : 'Link'}} Instagram Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.linkedin ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.linkedin ? $ctrl.unlink('linkedin') : $ctrl.link('linkedin')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.linkedin ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.linkedin ? $ctrl.unlink('linkedin') : $ctrl.link('linkedin')">
                     <i class="fa fa-linkedin"></i> {{$ctrl.user.linkedin ? 'Unlink' : 'Link'}} LinkedIn Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.live ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.live ? $ctrl.unlink('live') : $ctrl.link('live')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.live ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.live ? $ctrl.unlink('live') : $ctrl.link('live')">
                     <i class="fa fa-windows"></i> {{$ctrl.user.live ? 'Unlink' : 'Link'}} Windows Live Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.reddit ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.reddit ? $ctrl.unlink('reddit') : $ctrl.link('reddit')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.reddit ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.reddit ? $ctrl.unlink('reddit') : $ctrl.link('reddit')">
                     <i class="fa fa-reddit"></i> {{$ctrl.user.reddit ? 'Unlink' : 'Link'}} Reddit Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.spotify ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.spotify ? $ctrl.unlink('spotify') : $ctrl.link('spotify')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.spotify ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.spotify ? $ctrl.unlink('spotify') : $ctrl.link('spotify')">
                     <i class="fa fa-spotify"></i> {{$ctrl.user.spotify ? 'Unlink' : 'Link'}} Spotify Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.twitch ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.twitch ? $ctrl.unlink('twitch') : $ctrl.link('twitch')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.twitch ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.twitch ? $ctrl.unlink('twitch') : $ctrl.link('twitch')">
                     <i class="fa fa-twitch"></i> {{$ctrl.user.twitch ? 'Unlink' : 'Link'}} Twitch Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.twitter ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.twitter ? $ctrl.unlink('twitter') : $ctrl.link('twitter')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.twitter ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.twitter ? $ctrl.unlink('twitter') : $ctrl.link('twitter')">
                     <i class="fa fa-twitter"></i> {{$ctrl.user.twitter ? 'Unlink' : 'Link'}} Twitter Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.vk ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.vk ? $ctrl.unlink('vk') : $ctrl.link('vk')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.vk ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.vk ? $ctrl.unlink('vk') : $ctrl.link('vk')">
                     <i class="fa fa-vk"></i> {{$ctrl.user.vk ? 'Unlink' : 'Link'}} Vk Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.wordpress ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.wordpress ? $ctrl.unlink('wordpress') : $ctrl.link('wordpress')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.wordpress ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.wordpress ? $ctrl.unlink('wordpress') : $ctrl.link('wordpress')">
                     <i class="fa fa-wordpress"></i> {{$ctrl.user.wordpress ? 'Unlink' : 'Link'}} Wordpress Account
                 </button>
-                <button class="btn btn-sm" ng-class="$ctrl.user.yahoo ? 'btn-danger' : 'btn-primary'" ng-click="$ctrl.user.yahoo ? $ctrl.unlink('yahoo') : $ctrl.link('yahoo')">
+                <button class="btn btn-sm" ng-class="$ctrl.user.yahoo ? 'btn-danger' : 'btn-primary'"
+                        ng-click="$ctrl.user.yahoo ? $ctrl.unlink('yahoo') : $ctrl.link('yahoo')">
                     <i class="fa fa-yahoo"></i> {{$ctrl.user.yahoo ? 'Unlink' : 'Link'}} Yahoo Account
                 </button>
             </div>

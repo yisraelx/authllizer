@@ -1,6 +1,6 @@
-import {Injectable} from 'angular-ts-decorators';
-import {IHttpService} from 'angular';
-import {environment} from '../../environments/environment';
+import { IHttpService } from 'angular';
+import { Injectable } from 'angular-ts-decorators';
+import environment from '../../environments/environment';
 
 @Injectable('Account')
 export class AccountService {
@@ -10,11 +10,11 @@ export class AccountService {
     }
 
     getProfile() {
-        return this.$http.get(`${environment.backendUrl}/api/me`);
+        return this.$http.get(`${ environment.backendUrl }/api/me`);
     }
 
     updateProfile(profileData) {
-        return this.$http.put(`${environment.backendUrl}/api/me`, profileData);
+        return this.$http.put(`${ environment.backendUrl }/api/me`, profileData);
     }
 
 }

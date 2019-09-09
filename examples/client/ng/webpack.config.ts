@@ -7,10 +7,11 @@ import * as webpack from 'webpack';
 const ROOT: string = __dirname;
 const SRC: string = join(ROOT, 'src');
 const DEST: string = join(ROOT, 'dist');
+const ENV: string = process.env.NODE_ENV || 'development';
 
 export default {
 
-    mode: process.env.NODE_ENV || 'development',
+    mode: ENV,
 
     devtool: 'inline-source-map',
 
@@ -80,10 +81,7 @@ export default {
             to: 'assets'
         }]),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NormalModuleReplacementPlugin(/\.\/\environments\/environment/, (result) => {
-            let env: string = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
-            result.request = result.request.replace(/\.\/\environments\/environment/, `./environments/environment.${ env }.ts`);
-        })
+        new webpack.NormalModuleReplacementPlugin(/environments\/environment/gi, (res) => void (ENV !== 'development' && (res.request += `.${ ENV }`)))
     ],
 
     optimization: {

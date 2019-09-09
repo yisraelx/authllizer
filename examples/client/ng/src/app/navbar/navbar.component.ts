@@ -1,6 +1,6 @@
-import { Component } from 'angular-ts-decorators';
-import { IComponentController } from 'angular';
 import { Authllizer } from '@authllizer/core';
+import { IComponentController } from 'angular';
+import { Component } from 'angular-ts-decorators';
 
 @Component({
     selector: 'navbar',
@@ -9,9 +9,11 @@ import { Authllizer } from '@authllizer/core';
 export class NavbarComponent implements IComponentController {
 
     /*@ngInject*/
-    constructor(private $auth: Authllizer) { }
+    constructor(private $auth: Authllizer) {
+    }
 
     isAuthenticated() {
         return this.$auth.isAuthenticated();
     }
+
 }

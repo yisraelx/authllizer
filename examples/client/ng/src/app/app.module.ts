@@ -1,15 +1,12 @@
-import {NgModule} from 'angular-ts-decorators';
-import {IWindowService, IQService, IHttpProvider} from 'angular';
-import {UrlService, StateProvider} from '@uirouter/angularjs';
+import { BackendAdapter, OAuth2Provider } from '@authllizer/core';
 
-import * as NgResourceModule from 'angular-resource';
-import * as NgMessageseModule from 'angular-messages';
-import * as NgAnimateModule from 'angular-animate';
-import 'angular-toastr';
-import UiRouterModule from '@uirouter/angularjs';
-
-import AuthllizerModule, {AuthProvider, TokenInterceptor} from '@authllizer/ng';
-import {BackendAdapter, OAuth2Provider} from '@authllizer/core';
+import AuthllizerModule, { AuthProvider } from '@authllizer/ng';
+import { IHttpProvider, IQService, IWindowService } from 'angular';
+import NgAnimateModule from 'angular-animate';
+import NgMessagesModule from 'angular-messages';
+import NgResourceModule from 'angular-resource';
+import NgToastrModule from 'angular-toastr';
+import { NgModule } from 'angular-ts-decorators';
 
 import BitbucketOAuth2 from 'authllizer-bitbucket-oauth2';
 import FacebookOAuth2 from 'authllizer-facebook-oauth2';
@@ -26,29 +23,29 @@ import VkOAuth2 from 'authllizer-vk-oauth2';
 import WordpressOAuth2 from 'authllizer-wordpress-oauth2';
 import YahooOAuth2 from 'authllizer-yahoo-oauth2';
 
-import {AppComponent} from './app.component';
-import {NavbarComponent} from './navbar/navbar.component';
-import {STATES} from './app.routes';
-import {HomeComponent} from './home/home.component';
-import {SignInComponent} from './signin/signin.component';
-import {SignUpComponent} from './signup/signup.component';
-import {SignOutComponent} from './signout/signout.component';
-import {PasswordMatchDirective} from './signup/password-match.direcive';
-import {PasswordStrengthDirective} from './signup/password-strength.directive';
-import {ProfileComponent} from './profile/profile.component';
-import {AccountService} from './common/account.service';
+import environment from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 
-import {environment} from '../environments/environment';
+import { AppComponent } from './app.component';
+import { AccountService } from './common/account.service';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SignInComponent } from './signin/signin.component';
+import { SignOutComponent } from './signout/signout.component';
+import { PasswordMatchDirective } from './signup/password-match.direcive';
+import { PasswordStrengthDirective } from './signup/password-strength.directive';
+import { SignUpComponent } from './signup/signup.component';
 
 @NgModule({
     id: 'AppModule',
     imports: [
         NgResourceModule,
-        NgMessageseModule,
+        NgMessagesModule,
         NgAnimateModule,
-        'toastr',
-        UiRouterModule,
-        AuthllizerModule
+        NgToastrModule,
+        AuthllizerModule,
+        AppRoutingModule
     ],
     declarations: [
         AppComponent,
@@ -68,62 +65,60 @@ import {environment} from '../environments/environment';
 export class AppModule {
 
     /*@ngInject*/
-    static config($urlServiceProvider: UrlService, $stateProvider: StateProvider, $authProvider: AuthProvider, $httpProvider) {
-        STATES.forEach(state => $stateProvider.state(state));
-        $urlServiceProvider.rules.otherwise({state: 'home'});
+    static config($authProvider: AuthProvider, $httpProvider: IHttpProvider) {
 
         $authProvider.config({
             adapter: BackendAdapter.extend({
-                baseUrl: `${environment.backendUrl}/auth`
+                baseUrl: `${ environment.backendUrl }/auth`
             }),
             interceptList: [environment.backendUrl],
             providers: {
                 bitbucket: BitbucketOAuth2.extend({
-                  clientId: 'YOUR_BITBUCKET_CLIENT_ID'
+                    clientId: environment.bitbucketClientId
                 }),
                 facebook: FacebookOAuth2.extend({
-                  clientId: 'YOUR_FACEBOOK_CLIENT_ID'
+                    clientId: environment.facebookClientId
                 }),
                 foursquare: OAuth2Provider.extend({
-                  name: 'foursquare',
-                  clientId: 'YOUR_FOURSQUARE_CLIENT_ID',
-                  authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate'
+                    name: 'foursquare',
+                    clientId: environment.foursquareClientId,
+                    authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate'
                 }),
                 github: GithubOAuth2.extend({
-                  clientId: 'YOUR_GITHUB_CLIENT_ID'
+                    clientId: environment.githubClientId
                 }),
                 google: GoogleOAuth2.extend({
-                  clientId: 'YOUR_GOOGLE_CLIENT_ID'
+                    clientId: environment.googleClientId
                 }),
                 instagram: InstagramOAuth2.extend({
-                  clientId: 'YOUR_INSTAGRAM_CLIENT_ID'
+                    clientId: environment.instagramClientId
                 }),
                 linkedin: LinkedinOAuth2.extend({
-                  clientId: 'YOUR_LINKEDIN_CLIENT_ID'
+                    clientId: environment.linkedinClientId
                 }),
                 live: LiveOAuth2.extend({
-                  clientId: 'YOUR_LIVE_CLIENT_ID'
+                    clientId: environment.liveClientId
                 }),
                 reddit: RedditOAuth2.extend({
-                  clientId: 'YOUR_REDDIT_CLIENT_ID'
+                    clientId: environment.redditClientId
                 }),
                 spotify: SpotifyOAuth2.extend({
-                  clientId: 'YOUR_SPOTIFY_CLIENT_ID'
+                    clientId: environment.spotifyClientId
                 }),
                 twitch: TwitchOAuth2.extend({
-                  clientId: 'YOUR_TWITCH_CLIENT_ID'
+                    clientId: environment.twitchClientId
                 }),
                 twitter: TwitterOAuth1,
                 vk: VkOAuth2.extend({
-                  clientId: 'YOUR_VK_CLIENT_ID'
+                    clientId: environment.vkClientId
                 }),
                 wordpress: WordpressOAuth2.extend({
-                  clientId: 'YOUR_WORDPRESS_CLIENT_ID'
+                    clientId: environment.wordpressClientId
                 }),
                 yahoo: YahooOAuth2.extend({
-                  clientId: 'YOUR_YAHOO_CLIENT_ID'
+                    clientId: environment.yahooClientId
                 })
-              }
+            }
         });
 
         $httpProvider.interceptors.push('tokenInterceptor');
