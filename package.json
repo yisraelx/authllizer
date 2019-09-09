@@ -2,6 +2,9 @@
     "private": true,
     "name": "authllizer-repository",
     "version": "0.0.0-PLACEHOLDER",
+    "engines": {
+        "node": ">=10"
+    },
     "description": "Authllizer library repository",
     "scripts": {
         "bootstrap": "yarn install && lerna run prepublish",
@@ -49,7 +52,7 @@
         "@commitlint/prompt": "^6.1.0",
         "@types/jsonwebtoken": "^7.2.4",
         "@types/lodash": "^4.14.101",
-        "@types/node": "^9.4.0",
+        "@types/node": "^10.14.17",
         "codecov": "^3.0.0",
         "commitizen": "^2.9.6",
         "cz-conventional-changelog": "^2.1.0",
