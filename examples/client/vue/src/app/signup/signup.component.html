@@ -3,32 +3,44 @@
         <div class="center-form panel">
             <div class="panel-body">
                 <h2 class="text-center">Sign up</h2>
-                <form v-on:submit.prevent="signUp()" name="signupForm">
-                    <div class="form-group has-feedback" v-bind:class="{ 'has-error' : errors.has('displayName') }">
-                        <input class="form-control input-lg" type="text" name="displayName" v-model="user.displayName" placeholder="Name" v-validate="{ required: true }"
-                            autofocus>
+                <form @submit.prevent="signUp()" name="signupForm">
+                    <div :class="{ 'has-error' : errors.has('displayName') }" class="form-group has-feedback">
+                        <input autofocus class="form-control input-lg" name="displayName" placeholder="Name"
+                               type="text" v-model="user.displayName"
+                               v-validate="{ required: true }">
                         <span class="fa fa-user form-control-feedback"></span>
-                        <div class="help-block text-danger" v-if="errors.has('displayName')">{{ errors.first('displayName') }}</div>
+                        <div class="help-block text-danger"
+                             v-show="errors.has('displayName')">{{ errors.first('displayName') }}</div>
                     </div>
-                    <div class="form-group has-feedback" v-bind:class="{ 'has-error' :errors.has('email') }">
-                        <input class="form-control input-lg" type="email" id="email" name="email" v-model="user.email" placeholder="Email" v-validate="{ required: true, email: true }">
+                    <div :class="{ 'has-error' :errors.has('email') }" class="form-group has-feedback">
+                        <input class="form-control input-lg" id="email" name="email" placeholder="Email" type="email"
+                               v-model="user.email" v-validate="{ required: true, email: true }">
                         <span class="fa fa-at form-control-feedback"></span>
-                        <div class="help-block text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</div>
+                        <div class="help-block text-danger"
+                             v-show="errors.has('email')">{{ errors.first('email') }}</div>
                     </div>
-                    <div class="form-group has-feedback" v-bind:class="{ 'has-error' : errors.has('password') }">
-                        <input v-password-strength class="form-control input-lg" type="password" name="password" v-model="user.password" placeholder="Password"
-                            v-validate="{ required: true }">
+                    <div :class="{ 'has-error' : errors.has('password') }" class="form-group has-feedback">
+                        <input class="form-control input-lg" name="password" placeholder="Password" ref="password"
+                               type="password" v-model="user.password"
+                               v-password-strength v-validate="{ required: true }">
                         <span class="fa fa-key form-control-feedback"></span>
-                        <div class="help-block text-danger" v-if="errors.has('password')">{{ errors.first('password') }}</div>
+                        <div class="help-block text-danger"
+                             v-show="errors.has('password')">{{ errors.first('password') }}</div>
                     </div>
-                    <div class="form-group has-feedback" v-bind:class="{ 'has-error' : errors.has('confirmPassword') }">
-                        <input class="form-control input-lg" type="password" name="confirmPassword" v-model="confirmPassword" placeholder="Confirm Password"
-                            v-validate="{ required: true, confirmed: 'password' }">
+                    <div :class="{ 'has-error' : errors.has('confirmPassword') }" class="form-group has-feedback">
+                        <input class="form-control input-lg" data-vv-as="password" name="confirmPassword"
+                               placeholder="Confirm Password"
+                               type="password"
+                               v-model="confirmPassword" v-validate="{ required: true, confirmed: 'password' }">
                         <span class="fa fa-key form-control-feedback"></span>
-                        <div class="help-block text-danger" v-if="errors.has('confirmPassword')">{{ errors.first('confirmPassword') }}</div>
+                        <div class="help-block text-danger"
+                             v-show="errors.has('confirmPassword')">{{ errors.first('confirmPassword') }}</div>
                     </div>
-                    <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>
-                    <button type="submit" v-bind:disabled="!!errors.count()" class="btn btn-lg btn-block btn-primary">Sign up</button>
+                    <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms &
+                        conditions</a> and <a href="#">privacy policy</a></small></p>
+                    <button :disabled="!!errors.count()" class="btn btn-lg btn-block btn-primary" type="submit">Sign
+                        up
+                    </button>
                     <br/>
                     <p class="text-center text-muted">Already have an account?
                         <router-link to="/signin">Sign in now</router-link>

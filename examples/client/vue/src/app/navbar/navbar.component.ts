@@ -7,12 +7,15 @@ import { Component } from 'vue-property-decorator';
 export class NavbarComponent extends Vue {
 
     isAuth: boolean;
-    
+
     mounted() {
-        this.$auth.onChange.on(() => {
-            let isAuth = this.$auth.isAuthenticated();
-            this.$set(this, 'isAuth', isAuth);
-        });
+        this
+            .$auth
+            .onChange
+            .on(() => {
+                let isAuth = this.$auth.isAuthenticated();
+                this.$set(this, 'isAuth', isAuth);
+            });
     }
 
     data() {
@@ -20,4 +23,5 @@ export class NavbarComponent extends Vue {
             isAuth: this.$auth.isAuthenticated()
         };
     }
+
 }

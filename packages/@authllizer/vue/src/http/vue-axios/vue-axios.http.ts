@@ -1,4 +1,4 @@
-import {BaseHttpClient, IHttpRequestOptions} from '@authllizer/core';
+import { BaseHttpClient, IHttpRequestOptions } from '@authllizer/core';
 import Vue from 'vue';
 
 export class VueAxiosHttpClient extends BaseHttpClient {
@@ -11,6 +11,10 @@ export class VueAxiosHttpClient extends BaseHttpClient {
 
     public request<T>(url: string, config: IHttpRequestOptions): Promise<T> {
         (config as any).url = url;
-        return this._client(config).then((response) => response.data) as any;
+
+        return this
+            ._client(config)
+            .then((response) => response.data) as any;
     }
+
 }

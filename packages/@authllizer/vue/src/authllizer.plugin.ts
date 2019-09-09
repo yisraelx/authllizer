@@ -1,8 +1,8 @@
+import { Authllizer, IAuthllizerOptions } from '@authllizer/core';
 import 'vue';
-import {Authllizer, IAuthllizerOptions} from '@authllizer/core';
 
 declare module 'vue/types/vue' {
-
+    /* eslint-disable @typescript-eslint/interface-name-prefix */
     interface Vue {
         $auth: Authllizer;
     }

@@ -1,7 +1,7 @@
+import { AxiosError } from 'axios';
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {passwordStrengthDirective} from './password-strength.directive';
-import {AxiosError} from 'axios';
+import { passwordStrengthDirective } from './password-strength.directive';
 
 export interface ISignUpUser {
     displayName?: string;
@@ -25,23 +25,23 @@ export class SignUpComponent extends Vue {
     };
     confirmPassword: string = '';
 
-    mounted() {
-
-    }
-
     async signUp() {
-        let valid = await this.$validator.validateAll();
+        let valid: boolean = await this.$validator.validateAll();
         if (!valid) {
             return;
         }
-        this.$auth.signUp(this.user, true)
+
+        this
+            .$auth
+            .signUp(this.user, true)
             .then(() => {
                 this.$router.push('/');
-                this.$snotify.info('You have successfully created a new account and have been signed-in');
+                this.$toasted.info('You have successfully created a new account and have been signed-in!');
             })
-            .catch(({response}: AxiosError) => {
-                this.$snotify.error(response.data && response.data.message ? response.data.message : response.statusText, response.status);
+            .catch((error: AxiosError) => {
+                let {response, message}: AxiosError = error;
+                this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
-
     }
+
 }

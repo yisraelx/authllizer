@@ -3,22 +3,25 @@
         <div class="panel-heading">Profile</div>
         <div class="panel-body">
             <legend><i class="fa fa-clipboard"></i> Edit My Profile</legend>
-            <form v-on:submit.prevent="updateProfile()" name="profileForm">
+            <form @submit.prevent="updateProfile()" name="profileForm">
                 <div class="form-group">
                     <label class="control-label">Profile Picture</label>
-                    <img class="profile-picture" v-bind:src="user.picture || 'https://placehold.it/100x100'">
+                    <img :src="user.picture || 'https://placehold.it/100x100'" class="profile-picture">
                 </div>
-                <div class="form-group  has-feedback" v-bind:class="{ 'has-error' : errors.has('displayName') }">
+                <div :class="{ 'has-error' : errors.has('displayName') }" class="form-group  has-feedback">
                     <label class="control-label"><i class="fa fa-user"></i> Display Name</label>
-                    <input class="form-control" type="text" name="displayName" v-model="user.displayName" v-validate="{ required: true }" />
-                    <div class="help-block text-danger" v-if="errors.has('displayName')">{{ errors.first('displayName') }}</div>
+                    <input class="form-control" name="displayName" type="text" v-model="user.displayName"
+                           v-validate="{ required: true }"/>
+                    <div class="help-block text-danger"
+                         v-show="errors.has('displayName')">{{ errors.first('displayName') }}</div>
                 </div>
-                <div class="form-group has-feedback" v-bind:class="{ 'has-error' : errors.has('email') }">
+                <div :class="{ 'has-error' : errors.has('email') }" class="form-group has-feedback">
                     <label class="control-label"><i class="fa fa-at"></i> Email Address</label>
-                    <input class="form-control" type="email" name="email" v-model="user.email" v-validate="{ required: true, email: true }" />
-                    <div class="help-block text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</div>
+                    <input class="form-control" name="email" type="email" v-model="user.email"
+                           v-validate="{ required: true, email: true }"/>
+                    <div class="help-block text-danger" v-show="errors.has('email')">{{ errors.first('email') }}</div>
                 </div>
-                <button class="btn btn-lg btn-success" v-bind:disabled="!!errors.count()">Update Information</button>
+                <button :disabled="!!errors.count()" class="btn btn-lg btn-success">Update Information</button>
             </form>
         </div>
     </div>
@@ -28,49 +31,78 @@
         <div class="panel-body">
             <legend><i class="fa fa-link"></i> Linked Accounts</legend>
             <div class="btn-group-vertical">
-                <button class="btn btn-sm" v-bind:class="user.bitbucket ? 'btn-danger' : 'btn-primary'" v-on:click="user.bitbucket ? unlink('bitbucket') : link('bitbucket')">
+                <button :class="user.bitbucket ? 'btn-danger' : 'btn-primary'"
+                        @click="user.bitbucket ? unlink('bitbucket') : link('bitbucket')"
+                        class="btn btn-sm">
                     <i class="fa fa-bitbucket"></i> {{user.bitbucket ? 'Unlink' : 'Link'}} Bitbucket Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.facebook ? 'btn-danger' : 'btn-primary'" v-on:click="user.facebook ? unlink('facebook') : link('facebook')">
+                <button :class="user.facebook ? 'btn-danger' : 'btn-primary'"
+                        @click="user.facebook ? unlink('facebook') : link('facebook')"
+                        class="btn btn-sm">
                     <i class="fa fa-facebook"></i> {{user.facebook ? 'Unlink' : 'Link'}} Facebook Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.foursquare ? 'btn-danger' : 'btn-primary'" v-on:click="user.foursquare ? unlink('foursquare') : link('foursquare')">
+                <button :class="user.foursquare ? 'btn-danger' : 'btn-primary'"
+                        @click="user.foursquare ? unlink('foursquare') : link('foursquare')"
+                        class="btn btn-sm">
                     <i class="fa fa-foursquare"></i> {{user.foursquare ? 'Unlink' : 'Link'}} Foursquare Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.github ? 'btn-danger' : 'btn-primary'" v-on:click="user.github ? unlink('github') : link('github')">
+                <button :class="user.github ? 'btn-danger' : 'btn-primary'"
+                        @click="user.github ? unlink('github') : link('github')"
+                        class="btn btn-sm">
                     <i class="fa fa-github"></i> {{user.github ? 'Unlink' : 'Link'}} GitHub Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.google ? 'btn-danger' : 'btn-primary'" v-on:click="user.google ? unlink('google') : link('google')">
+                <button :class="user.google ? 'btn-danger' : 'btn-primary'"
+                        @click="user.google ? unlink('google') : link('google')"
+                        class="btn btn-sm">
                     <i class="fa fa-google"></i>{{user.google ? 'Unlink' : 'Link'}} Google Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.instagram ? 'btn-danger' : 'btn-primary'" v-on:click="user.instagram ? unlink('instagram') : link('instagram')">
+                <button :class="user.instagram ? 'btn-danger' : 'btn-primary'"
+                        @click="user.instagram ? unlink('instagram') : link('instagram')"
+                        class="btn btn-sm">
                     <i class="fa fa-instagram"></i> {{user.instagram ? 'Unlink' : 'Link'}} Instagram Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.linkedin ? 'btn-danger' : 'btn-primary'" v-on:click="user.linkedin ? unlink('linkedin') : link('linkedin')">
+                <button :class="user.linkedin ? 'btn-danger' : 'btn-primary'"
+                        @click="user.linkedin ? unlink('linkedin') : link('linkedin')"
+                        class="btn btn-sm">
                     <i class="fa fa-linkedin"></i> {{user.linkedin ? 'Unlink' : 'Link'}} LinkedIn Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.live ? 'btn-danger' : 'btn-primary'" v-on:click="user.live ? unlink('live') : link('live')">
+                <button :class="user.live ? 'btn-danger' : 'btn-primary'"
+                        @click="user.live ? unlink('live') : link('live')"
+                        class="btn btn-sm">
                     <i class="fa fa-windows"></i> {{user.live ? 'Unlink' : 'Link'}} Windows Live Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.reddit ? 'btn-danger' : 'btn-primary'" v-on:click="user.reddit ? unlink('reddit') : link('reddit')">
+                <button :class="user.reddit ? 'btn-danger' : 'btn-primary'"
+                        @click="user.reddit ? unlink('reddit') : link('reddit')"
+                        class="btn btn-sm">
                     <i class="fa fa-reddit"></i> {{user.reddit ? 'Unlink' : 'Link'}} Reddit Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.spotify ? 'btn-danger' : 'btn-primary'" v-on:click="user.spotify ? unlink('spotify') : link('spotify')">
+                <button :class="user.spotify ? 'btn-danger' : 'btn-primary'"
+                        @click="user.spotify ? unlink('spotify') : link('spotify')"
+                        class="btn btn-sm">
                     <i class="fa fa-spotify"></i> {{user.spotify ? 'Unlink' : 'Link'}} Spotify Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.twitch ? 'btn-danger' : 'btn-primary'" v-on:click="user.twitch ? unlink('twitch') : link('twitch')">
+                <button :class="user.twitch ? 'btn-danger' : 'btn-primary'"
+                        @click="user.twitch ? unlink('twitch') : link('twitch')"
+                        class="btn btn-sm">
                     <i class="fa fa-twitch"></i> {{user.twitch ? 'Unlink' : 'Link'}} Twitch Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.twitter ? 'btn-danger' : 'btn-primary'" v-on:click="user.twitter ? unlink('twitter') : link('twitter')">
+                <button :class="user.twitter ? 'btn-danger' : 'btn-primary'"
+                        @click="user.twitter ? unlink('twitter') : link('twitter')"
+                        class="btn btn-sm">
                     <i class="fa fa-twitter"></i> {{user.twitter ? 'Unlink' : 'Link'}} Twitter Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.vk ? 'btn-danger' : 'btn-primary'" v-on:click="user.vk ? unlink('vk') : link('vk')">
+                <button :class="user.vk ? 'btn-danger' : 'btn-primary'" @click="user.vk ? unlink('vk') : link('vk')"
+                        class="btn btn-sm">
                     <i class="fa fa-vk"></i> {{user.vk ? 'Unlink' : 'Link'}} Vk Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.wordpress ? 'btn-danger' : 'btn-primary'" v-on:click="user.wordpress ? unlink('wordpress') : link('wordpress')">
+                <button :class="user.wordpress ? 'btn-danger' : 'btn-primary'"
+                        @click="user.wordpress ? unlink('wordpress') : link('wordpress')"
+                        class="btn btn-sm">
                     <i class="fa fa-wordpress"></i> {{user.wordpress ? 'Unlink' : 'Link'}} Wordpress Account
                 </button>
-                <button class="btn btn-sm" v-bind:class="user.yahoo ? 'btn-danger' : 'btn-primary'" v-on:click="user.yahoo ? unlink('yahoo') : link('yahoo')">
+                <button :class="user.yahoo ? 'btn-danger' : 'btn-primary'"
+                        @click="user.yahoo ? unlink('yahoo') : link('yahoo')"
+                        class="btn btn-sm">
                     <i class="fa fa-yahoo"></i> {{user.yahoo ? 'Unlink' : 'Link'}} Yahoo Account
                 </button>
             </div>

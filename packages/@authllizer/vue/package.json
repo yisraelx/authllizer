@@ -54,11 +54,11 @@
     },
     "peerDependencies": {
         "@authllizer/core": "^0.1.0",
-        "vue": "^2.5.3"
+        "vue": "^2.6.10"
     },
     "devDependencies": {
         "@authllizer/core": "^0.1.0",
-        "vue": "^2.5.3"
+        "vue": "^2.6.10"
     },
     "rollup": {
         "globals": {

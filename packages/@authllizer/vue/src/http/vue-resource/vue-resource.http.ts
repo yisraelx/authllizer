@@ -1,4 +1,4 @@
-import {BaseHttpClient, IHttpRequestOptions} from '@authllizer/core';
+import { BaseHttpClient, IHttpRequestOptions } from '@authllizer/core';
 import Vue from 'vue';
 
 export class VueResourceHttpClient extends BaseHttpClient {
@@ -20,6 +20,9 @@ export class VueResourceHttpClient extends BaseHttpClient {
             credentials: withCredentials
         };
 
-        return this._client(requestOptions).then((response) => response.json());
+        return this
+            ._client(requestOptions)
+            .then((response) => response.json());
     }
+
 }

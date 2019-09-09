@@ -1,7 +1,7 @@
+import { AxiosError, AxiosResponse } from 'axios';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import Account from '../common/account.service';
-import {AxiosResponse, AxiosError} from 'axios';
 
 export interface IProfileUser {
     picture?: string;
@@ -20,14 +20,11 @@ export class ProfileComponent extends Vue {
         this.getProfile();
     }
 
-
     getProfile() {
-        Account.getProfile()
+        Account
+            .getProfile()
             .then(({data}: AxiosResponse) => {
                 this.$set(this, 'user', data);
-            })
-            .catch(({response}: AxiosError) => {
-                this.$snotify.error(response.data && response.data.message ? response.data.message : response.statusText, response.status);
             });
     }
 
@@ -36,45 +33,44 @@ export class ProfileComponent extends Vue {
         if (!valid) {
             return;
         }
-        Account.updateProfile(this.user)
-            .then(async () => {
-                await this.getProfile();
-                this.$snotify.success('Profile has been updated');
+        Account
+            .updateProfile(this.user)
+            .then(() => this.getProfile())
+            .then(() => {
+                this.$toasted.success('Profile has been updated.');
             })
-            .catch(({response}: AxiosError) => {
-                this.$snotify.error(response.data && response.data.message ? response.data.message : response.statusText, response.status);
+            .catch((error: AxiosError) => {
+                let {response, message}: AxiosError = error;
+                this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
     }
 
     link(provider: string) {
-        this.$auth.link(provider)
-            .then(async () => {
-                await this.getProfile();
-                this.$snotify.success('You have successfully linked a ' + provider + ' account');
+        this
+            .$auth
+            .link(provider)
+            .then(() => this.getProfile())
+            .then(() => {
+                this.$toasted.success(`You have successfully linked a ${ provider } account.`);
             })
-            .catch((error: Error | AxiosError) => {
-                if ((error as AxiosError).response) {
-                    let response: AxiosResponse = (error as AxiosError).response;
-                    // HTTP response error from server
-                    this.$snotify.error(response.data && response.data.message ? response.data.message : response.statusText, response.status as any);
-                } else if ((error as Error).message) {
-                    // Authllizer promise reject error.
-                    this.$snotify.error((error as Error).message);
-                } else {
-                    this.$snotify.error(error as any);
-                }
+            .catch((error: AxiosError) => {
+                let {response, message}: AxiosError = error;
+                this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
     }
 
     unlink(provider: string) {
-
-        this.$auth.unlink(provider)
-            .then(async () => {
-                await this.getProfile();
-                this.$snotify.info('You have unlinked a ' + provider + ' account');
+        this
+            .$auth
+            .unlink(provider)
+            .then(() => this.getProfile())
+            .then(() => {
+                this.$toasted.info(`You have unlinked a ${ provider } account.`);
             })
-            .catch(({response}: AxiosError) => {
-                this.$snotify.error(response.data && response.data.message ? response.data.message : 'Could not unlink ' + provider + ' account', response.status);
+            .catch((error: AxiosError) => {
+                let {response}: AxiosError = error;
+                this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || `Could not unlink ${ provider } account.`);
             });
     }
+
 }
