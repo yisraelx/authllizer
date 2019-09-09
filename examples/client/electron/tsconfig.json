@@ -1,24 +1,25 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false,
-    "jsx": "react",
-    "lib": [
-      "es2015",
-      "dom"
-    ],
-    "outDir": "./build"
-  },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "inlineSources": true,
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "downlevelIteration": true,
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "outDir": "./dist"
+    },
+    "include": [
+        "./src/**/*.ts",
+        "./src/**/*.tsx"
+    ]
 }

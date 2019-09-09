@@ -1,24 +1,22 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "module": "esnext",
         "target": "es2015",
+        "moduleResolution": "node",
         "sourceMap": true,
-        "declaration": true,
+        "inlineSources": true,
+        "declaration": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "downlevelIteration": true,
         "removeComments": false,
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "noUnusedLocals": true,
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "stripInternal": true,
         "lib": [
-            "dom",
-            "es5",
-            "es2015"
+            "es2018",
+            "dom"
         ]
-    },
-    "exclude": [
-        "node_modules"
-    ]
+    }
 }

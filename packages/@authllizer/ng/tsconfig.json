@@ -1,10 +1,13 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-      "outDir": "./es2015",
-      "declarationDir": "./typings"
-  },
-  "files": [
-    "./src/index.ts"
-  ]
+    "extends": "../../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./es2015",
+        "declarationDir": "./typings",
+        "types": [
+            "angular"
+        ]
+    },
+    "files": [
+        "./src/index.ts"
+    ]
 }

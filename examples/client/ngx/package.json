@@ -22,7 +22,6 @@
     "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "dependencies": {
@@ -78,8 +77,6 @@
     "protractor": "~5.3.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.55.3",
-    "ts-node": "~4.1.0",
-    "tslint": "~5.9.1",
-    "typescript": "^2.7.1"
+    "typescript": "~3.5.3"
   }
 }

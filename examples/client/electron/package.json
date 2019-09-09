@@ -23,7 +23,6 @@
         "clear": "rimraf build",
         "start": "concurrently \"webpack-dev-server\" \"wait-on http://localhost:8080 && yarn electron\" -k",
         "electron": "electron -r ts-node/register .",
-        "lint": "tslint src/**/*.ts",
         "web": "webpack-dev-server --target web --open"
     },
     "dependencies": {
@@ -64,9 +63,8 @@
         "rimraf": "^2.6.2",
         "rollup": "^0.55.3",
         "style-loader": "^0.20.1",
-        "ts-node": "^4.0.2",
-        "tslint": "^5.9.1",
-        "typescript": "^2.7.1",
+        "ts-node": "^8.3.0",
+        "typescript": "~3.5.3",
         "webpack": "^3.8.1",
         "webpack-dev-server": "^2.11.1"
     }

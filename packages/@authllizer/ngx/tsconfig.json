@@ -2,7 +2,8 @@
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
         "outDir": "./es2015",
-        "declarationDir": "./typings"
+        "declarationDir": "./typings",
+        "types": []
     },
     "files": [
         "./src/index.ts"

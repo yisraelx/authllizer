@@ -55,8 +55,7 @@
         "jsonwebtoken": "^8.1.1",
         "npm-run-all": "^4.1.2",
         "rimraf": "^2.6.2",
-        "rollup": "^0.55.3",
-        "typescript": "^2.7.1"
+        "rollup": "^0.55.3"
     },
     "rollup": {
         "globals": {}
