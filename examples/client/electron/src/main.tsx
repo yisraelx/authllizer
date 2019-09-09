@@ -1,11 +1,13 @@
+import authllizer from '@authllizer/core';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App from './app/app.component';
 
-import './authllizer.config';
+import { AUTHLLIZER_CONFIG } from './authllizer.config';
 
 import './styles.css';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+authllizer.config(AUTHLLIZER_CONFIG);
+ReactDOM.render(<App/>, document.getElementById('app'));
 

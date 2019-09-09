@@ -1,7 +1,8 @@
-import authllizer, {BackendAdapter, BrowserDialog, OAuth2Provider} from '@authllizer/core';
-import ElectronDialog, {isElectron} from 'authllizer-electron-dialog';
+import { BackendAdapter, BrowserDialog, OAuth2Provider } from '@authllizer/core';
+import { IConfigOptions } from '@authllizer/core/src';
 
 import BitbucketOAuth2 from 'authllizer-bitbucket-oauth2';
+import ElectronDialog, { isElectron } from 'authllizer-electron-dialog';
 import FacebookOAuth2 from 'authllizer-facebook-oauth2';
 import GithubOAuth2 from 'authllizer-github-oauth2';
 import GoogleOAuth2 from 'authllizer-google-oauth2';
@@ -16,80 +17,79 @@ import VkOAuth2 from 'authllizer-vk-oauth2';
 import WordpressOAuth2 from 'authllizer-wordpress-oauth2';
 import YahooOAuth2 from 'authllizer-yahoo-oauth2';
 
-import {environment} from './environments/environment';
+import environment from './environments/environment';
 
-export let PROVIDERS = {
+export const AUTHLLIZER_PROVIDERS = {
     bitbucket: BitbucketOAuth2.extend({
-        clientId: 'YOUR_BITBUCKET_CLIENT_ID',
+        clientId: environment.bitbucketClientId,
         redirectUri: environment.redirectUri
     }),
     facebook: FacebookOAuth2.extend({
-        clientId: 'YOUR_FACEBOOK_CLIENT_ID',
-        redirectUri: `${environment.redirectUri}/`
+        clientId: environment.facebookClientId,
+        redirectUri: `${ environment.redirectUri }/`
     }),
     foursquare: OAuth2Provider.extend({
         name: 'foursquare',
-        clientId: 'YOUR_FOURSQUARE_CLIENT_ID',
+        clientId: environment.foursquareClientId,
         authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate',
         redirectUri: environment.redirectUri
     }),
     github: GithubOAuth2.extend({
-        clientId: 'YOUR_GITHUB_CLIENT_ID',
+        clientId: environment.githubClientId,
         redirectUri: environment.redirectUri
     }),
     google: GoogleOAuth2.extend({
-        clientId: 'YOUR_GOOGLE_CLIENT_ID',
+        clientId: environment.googleClientId,
         redirectUri: environment.redirectUri
     }),
     instagram: InstagramOAuth2.extend({
-        clientId: 'YOUR_INSTAGRAM_CLIENT_ID',
+        clientId: environment.instagramClientId,
         redirectUri: environment.redirectUri
     }),
     linkedin: LinkedinOAuth2.extend({
-        clientId: 'YOUR_LINKEDIN_CLIENT_ID',
+        clientId: environment.linkedinClientId,
         redirectUri: environment.redirectUri
     }),
     live: LiveOAuth2.extend({
-        clientId: 'YOUR_LIVE_CLIENT_ID',
+        clientId: environment.liveClientId,
         redirectUri: environment.redirectUri
     }),
     reddit: RedditOAuth2.extend({
-        clientId: 'YOUR_REDDIT_CLIENT_ID',
+        clientId: environment.redditClientId,
         redirectUri: environment.redirectUri
     }),
     spotify: SpotifyOAuth2.extend({
-        clientId: 'YOUR_SPOTIFY_CLIENT_ID',
+        clientId: environment.spotifyClientId,
         redirectUri: environment.redirectUri
     }),
     twitch: TwitchOAuth2.extend({
-        clientId: 'YOUR_TWITCH_CLIENT_ID',
+        clientId: environment.twitchClientId,
         redirectUri: environment.redirectUri
     }),
     twitter: TwitterOAuth1.extend({
         redirectUri: environment.redirectUri
     }),
     vk: VkOAuth2.extend({
-        clientId: 'YOUR_VK_CLIENT_ID',
+        clientId: environment.vkClientId,
         redirectUri: environment.redirectUri
     }),
     wordpress: WordpressOAuth2.extend({
-        clientId: 'YOUR_WORDPRESS_CLIENT_ID',
+        clientId: environment.wordpressClientId,
         redirectUri: environment.redirectUri
     }),
     yahoo: YahooOAuth2.extend({
-        clientId: 'YOUR_YAHOO_CLIENT_ID',
+        clientId: environment.yahooClientId,
         redirectUri: environment.redirectUri
     })
 };
 
-
-authllizer.config({
+export const AUTHLLIZER_CONFIG: IConfigOptions = {
     adapter: BackendAdapter.extend({
-        baseUrl: `${environment.backendUrl}/auth`
+        baseUrl: `${ environment.backendUrl }/auth`
     }),
     dialog: isElectron() ? ElectronDialog.extend({displayOptions: {useContentSize: true}}) : BrowserDialog,
     interceptList: [
         environment.backendUrl
     ],
-    providers: PROVIDERS
-});
+    providers: AUTHLLIZER_PROVIDERS
+};
