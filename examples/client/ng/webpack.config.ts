@@ -1,23 +1,34 @@
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { join } from 'path';
 import * as webpack from 'webpack';
-import * as path from 'path';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as CopyWebpackPlugin from 'copy-webpack-plugin';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 
-export = {
-    devtool: 'source-map',
-    context: root('src'),
+const ROOT: string = __dirname;
+const SRC: string = join(ROOT, 'src');
+const DEST: string = join(ROOT, 'dist');
+
+export default {
+
+    mode: process.env.NODE_ENV || 'development',
+
+    devtool: 'inline-source-map',
+
+    context: SRC,
+
     entry: {
-        'main': root('src', 'main.ts')
+        main: './main.ts'
     },
+
     output: {
-        path: root('build'),
+        path: DEST,
         filename: '[name].bundle.js'
     },
+
     resolve: {
-        extensions: ['.ts', '.js', '.html'],
-        alias: {}
+        extensions: ['.ts', '.js']
     },
+
     module: {
         rules: [
             {
@@ -38,84 +49,62 @@ export = {
             },
             {
                 test: /\.html$/,
-                loader: 'raw-loader',
-                exclude: [root('src', 'index.html')]
+                exclude: [join(SRC, 'index.html')],
+                loader: 'html-loader'
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 loader: 'file-loader',
                 options: {
-                    outputPath: 'assets/images'
+                    outputPath: 'assets/fonts'
                 }
             },
             {
                 test: /\.(jpg|png|gif)$/,
                 loader: 'file-loader',
                 options: {
-                    outputPath: 'assets/fonts'
+                    outputPath: 'assets/images'
                 }
             }
         ]
     },
+
     plugins: [
-        new CleanWebpackPlugin(['build'], {
-            root: root(),
-            verbose: false,
-            dry: false
-        }),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            inject: true,
-            template: root('src', 'index.html'),
-            favicon: root('src', 'favicon.ico')
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: Infinity,
-            filename: 'vendor.bundle.js'
+            template: 'index.html',
+            favicon: 'favicon.ico'
         }),
         new CopyWebpackPlugin([{
-            from: root('src', 'assets'),
-            to: './assets'
+            from: 'assets',
+            to: 'assets'
         }]),
-        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NormalModuleReplacementPlugin(/\.\/\environments\/environment/, (result) => {
-            let env = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
-            result.request = result.request.replace(/\.\/\environments\/environment/, `./environments/environment.${env}.ts`);
+            let env: string = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
+            result.request = result.request.replace(/\.\/\environments\/environment/, `./environments/environment.${ env }.ts`);
         })
     ],
 
-    stats: {
-        colors: {
-            green: '\u001b[32m'
+    optimization: {
+        namedModules: true,
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    name: 'vendor',
+                    test: /node_modules/,
+                    chunks: 'all'
+                }
+            }
         }
     },
 
     devServer: {
-        contentBase: root('src'),
+        contentBase: DEST,
         historyApiFallback: true,
         port: 8080,
         open: true,
-        compress: false,
-        inline: true,
-        hot: true,
-        stats: {
-            assets: true,
-            children: false,
-            chunks: false,
-            hash: false,
-            modules: false,
-            publicPath: false,
-            timings: true,
-            version: false,
-            warnings: true,
-            colors: {
-                green: '\u001b[32m'
-            }
-        }
+        hot: true
     }
-};
 
-function root(...args) {
-    return path.join(__dirname, ...args);
-}
+} as webpack.Configuration;
