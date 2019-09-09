@@ -54,10 +54,7 @@
     },
     "devDependencies": {
         "@authllizer/core": "^0.1.0",
-        "@types/cordova": "0.0.34",
-        "npm-run-all": "^4.1.2",
-        "rimraf": "^2.6.2",
-        "rollup": "^0.55.3"
+        "@types/cordova": "0.0.34"
     },
     "rollup": {
         "globals": {

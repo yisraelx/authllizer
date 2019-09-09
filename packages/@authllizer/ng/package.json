@@ -60,11 +60,7 @@
     "devDependencies": {
         "@authllizer/core": "^0.1.0",
         "@types/angular": "^1.6.42",
-        "@types/jquery": "^3.3.0",
-        "angular": "^1.6.9",
-        "npm-run-all": "^4.1.2",
-        "rimraf": "^2.6.2",
-        "rollup": "^0.55.3"
+        "angular": "^1.6.9"
     },
     "rollup": {
         "globals": {
