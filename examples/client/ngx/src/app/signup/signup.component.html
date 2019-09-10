@@ -1,48 +1,64 @@
 <div class="container">
-  <div class="row">
-    <div class="center-form panel">
-      <div class="panel-body">
-        <h2 class="text-center">Sign up</h2>
-        <form (ngSubmit)="signUp()" #signupForm="ngForm">
-          <div class="form-group has-feedback" [class.has-error]="displayName.invalid && displayName.dirty">
-            <input class="form-control input-lg" type="text" name="displayName" [(ngModel)]="user.displayName" #displayName="ngModel"
-              placeholder="Name" required autofocus>
-            <span class="fa fa-user form-control-feedback"></span>
-            <div class="help-block text-danger" *ngIf="displayName.invalid && (displayName.dirty || displayName.touched)">
-              <div *ngIf="displayName.errors.required">You must enter your name.</div>
+    <div class="row">
+        <div class="center-form panel">
+            <div class="panel-body">
+                <h2 class="text-center">Sign up</h2>
+                <form #signupForm="ngForm" (ngSubmit)="signUp()">
+                    <div [class.has-error]="displayName.invalid && displayName.dirty" class="form-group has-feedback">
+                        <input #displayName="ngModel" [(ngModel)]="user.displayName" autofocus
+                               class="form-control input-lg"
+                               name="displayName"
+                               placeholder="Name" required type="text">
+                        <span class="fa fa-user form-control-feedback"></span>
+                        <div *ngIf="displayName.invalid && (displayName.dirty || displayName.touched)"
+                             class="help-block text-danger">
+                            <div *ngIf="displayName.errors.required">You must enter your name.</div>
+                        </div>
+                    </div>
+                    <div [class.has-error]="email.invalid && email.dirty" class="form-group has-feedback">
+                        <input #email="ngModel" [(ngModel)]="user.email" class="form-control input-lg" email id="email"
+                               name="email" placeholder="Email"
+                               required type="email">
+                        <span class="fa fa-at form-control-feedback"></span>
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="help-block text-danger">
+                            <div *ngIf="email.errors.required">Your email address is required.</div>
+                            <div *ngIf="email.errors.email">Your email address is invalid.</div>
+                        </div>
+                    </div>
+                    <div [class.has-error]="password.invalid && password.dirty" class="form-group has-feedback">
+                        <input #password="ngModel" [(ngModel)]="user.password" class="form-control input-lg"
+                               name="password"
+                               passwordStrength placeholder="Password"
+                               required type="password">
+                        <span class="fa fa-key form-control-feedback"></span>
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                             class="help-block text-danger">
+                            <div *ngIf="password.errors.required">Password is required.</div>
+                        </div>
+                    </div>
+                    <div [class.has-error]="confirmPassword.invalid && confirmPassword.dirty"
+                         class="form-group has-feedback">
+                        <input #confirmPassword="ngModel" [(ngModel)]="user.confirmPassword"
+                               [passwordMatch]="user.password" class="form-control input-lg"
+                               name="confirmPassword"
+                               placeholder="Confirm Password" type="password">
+                        <span class="fa fa-key form-control-feedback"></span>
+                        <div
+                            *ngIf="password.valid && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+                            class="help-block text-danger">
+                            <div *ngIf="confirmPassword.errors?.compareTo">Password must match.</div>
+                        </div>
+                    </div>
+                    <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms &
+                        conditions</a> and <a href="#">privacy policy</a></small></p>
+                    <button [disabled]="signupForm.form.invalid" class="btn btn-lg btn-block btn-primary" type="submit">
+                        Sign up
+                    </button>
+                    <br/>
+                    <p class="text-center text-muted">Already have an account? <a routerLink="/signin">Sign in now</a>
+                    </p>
+                </form>
             </div>
-          </div>
-          <div class="form-group has-feedback" [class.has-error]="email.invalid && email.dirty">
-            <input class="form-control input-lg" type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" placeholder="Email"
-              required email>
-            <span class="fa fa-at form-control-feedback"></span>
-            <div class="help-block text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
-              <div *ngIf="email.errors.required">Your email address is required.</div>
-              <div *ngIf="email.errors.email">Your email address is invalid.</div>
-            </div>
-          </div>
-          <div class="form-group has-feedback" [class.has-error]="password.invalid && password.dirty">
-            <input passwordStrength class="form-control input-lg" type="password" name="password" [(ngModel)]="user.password" #password="ngModel"
-              placeholder="Password" required>
-            <span class="fa fa-key form-control-feedback"></span>
-            <div class="help-block text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
-              <div *ngIf="password.errors.required">Password is required.</div>
-            </div>
-          </div>
-          <div class="form-group has-feedback" [class.has-error]="confirmPassword.invalid && confirmPassword.dirty">
-            <input [passwordMatch]="user.password" class="form-control input-lg" type="password" name="confirmPassword" [(ngModel)]="user.confirmPassword"
-              #confirmPassword="ngModel" placeholder="Confirm Password">
-            <span class="fa fa-key form-control-feedback"></span>
-            <div class="help-block text-danger" *ngIf="password.valid && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
-              <div *ngIf="confirmPassword.errors?.compareTo">Password must match.</div>
-            </div>
-          </div>
-          <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>
-          <button type="submit" [disabled]="signupForm.form.invalid" class="btn btn-lg btn-block btn-primary">Sign up</button>
-          <br/>
-          <p class="text-center text-muted">Already have an account? <a routerLink="/signin">Sign in now</a></p>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </div>

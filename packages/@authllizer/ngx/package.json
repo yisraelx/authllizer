@@ -53,26 +53,23 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@angular/common": "^5.2.3",
-        "@angular/core": "^5.2.3",
+        "@angular/common": "^8.2.6",
+        "@angular/core": "^8.2.6",
         "@authllizer/core": "^0.1.0"
     },
     "devDependencies": {
-        "@angular/common": "^5.2.3",
-        "@angular/compiler": "^5.2.3",
-        "@angular/compiler-cli": "^5.2.3",
-        "@angular/core": "^5.2.3",
+        "@angular/common": "^8.2.6",
+        "@angular/compiler": "^8.2.6",
+        "@angular/compiler-cli": "^8.2.6",
+        "@angular/core": "^8.2.6",
         "@authllizer/core": "^0.1.0",
-        "rxjs": "^5.5.0",
-        "typescript": "~3.5.3"
+        "rxjs": "^6.5.3"
     },
     "rollup": {
         "globals": {
             "@authllizer/core": "authllizer.core",
-            "rxjs/Observable": "Rx",
             "@angular/core": "ng.core",
-            "@angular/common": "ng.common",
-            "@angular/common/http": "ng.common"
+            "@angular/common/http": "ng.common.http"
         }
     },
     "publishConfig": {

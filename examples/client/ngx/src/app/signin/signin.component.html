@@ -1,82 +1,87 @@
 <div class="container">
-  <div class="row">
-    <div class="center-form panel">
-      <div class="panel-body">
-        <h2 class="text-center">Sign in</h2>
-        <form method="post" (ngSubmit)="signIn()" #loginForm="ngForm">
-          <div class="form-group has-feedback" [class.has-error]="email.invalid && email.dirty">
-            <input class="form-control input-lg" type="email" name="email" id="email" [(ngModel)]="user.email" #email placeholder="Email"
-              required email autofocus>
-            <span class="fa fa-at form-control-feedback"></span>
-            <div class="help-block text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
-              <div *ngIf="email.errors.required">Your email address is required.</div>
-              <div *ngIf="email.errors.email">Your email address is invalid.</div>
+    <div class="row">
+        <div class="center-form panel">
+            <div class="panel-body">
+                <h2 class="text-center">Sign in</h2>
+                <form #loginForm="ngForm" (ngSubmit)="signIn()" method="post">
+                    <div [class.has-error]="email.invalid && email.dirty" class="form-group has-feedback">
+                        <input #email [(ngModel)]="user.email" autofocus class="form-control input-lg" email id="email"
+                               name="email"
+                               placeholder="Email" required type="email">
+                        <span class="fa fa-at form-control-feedback"></span>
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="help-block text-danger">
+                            <div *ngIf="email.errors.required">Your email address is required.</div>
+                            <div *ngIf="email.errors.email">Your email address is invalid.</div>
+                        </div>
+                    </div>
+                    <div [class.has-error]="password.invalid && password.dirty" class="form-group has-feedback">
+                        <input #password [(ngModel)]="user.password" class="form-control input-lg" id="password"
+                               name="password" placeholder="Password"
+                               required type="password">
+                        <span class="fa fa-key form-control-feedback"></span>
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                             class="help-block text-danger">
+                            <div *ngIf="password.errors.required">Password is required.</div>
+                        </div>
+                    </div>
+                    <button [disabled]="loginForm.form.invalid" class="btn btn-lg  btn-block btn-success" type="submit">
+                        Sign in
+                    </button>
+                    <br/>
+                    <p class="text-center text-muted">
+                        <small>Don't have an account yet? <a routerLink="/signup">Sign up</a></small>
+                    </p>
+                    <div class="signup-or-separator">
+                        <h6 class="text">or</h6>
+                        <hr>
+                    </div>
+                </form>
+                <button (click)="authenticate('bitbucket')" class="btn btn-block btn-bitbucket">
+                    <i class="fa fa-bitbucket"></i> Sign in with Bitbucket
+                </button>
+                <button (click)="authenticate('facebook')" class="btn btn-block btn-facebook">
+                    <i class="fa fa-facebook"></i> Sign in with Facebook
+                </button>
+                <button (click)="authenticate('foursquare')" class="btn btn-block btn-foursquare">
+                    <i class="fa fa-foursquare"></i> Sign in with Foursquare
+                </button>
+                <button (click)="authenticate('github')" class="btn btn-block btn-github">
+                    <i class="fa fa-github"></i> Sign in with GitHub
+                </button>
+                <button (click)="authenticate('google')" class="btn btn-block btn-google">
+                    <i class="fa fa-google"></i>Sign in with Google
+                </button>
+                <button (click)="authenticate('instagram')" class="btn btn-block btn-instagram">
+                    <i class="fa fa-instagram"></i> Sign in with Instagram
+                </button>
+                <button (click)="authenticate('linkedin')" class="btn btn-block btn-linkedin">
+                    <i class="fa fa-linkedin"></i> Sign in with LinkedIn
+                </button>
+                <button (click)="authenticate('live')" class="btn btn-block btn-live">
+                    <i class="fa fa-windows"></i> Sign in with Windows Live
+                </button>
+                <button (click)="authenticate('reddit')" class="btn btn-block btn-reddit">
+                    <i class="fa fa-reddit"></i> Sign in with Reddit
+                </button>
+                <button (click)="authenticate('spotify')" class="btn btn-block btn-spotify">
+                    <i class="fa fa-spotify"></i> Sign in with Spotify
+                </button>
+                <button (click)="authenticate('twitch')" class="btn btn-block btn-twitch">
+                    <i class="fa fa-twitch"></i> Sign in with Twitch
+                </button>
+                <button (click)="authenticate('twitter')" class="btn btn-block btn-twitter">
+                    <i class="fa fa-twitter"></i> Sign in with Twitter
+                </button>
+                <button (click)="authenticate('vk')" class="btn btn-block btn-vk">
+                    <i class="fa fa-vk"></i> Sign in with Vk
+                </button>
+                <button (click)="authenticate('wordpress')" class="btn btn-block btn-wordpress">
+                    <i class="fa fa-wordpress"></i> Sign in with Wordpress
+                </button>
+                <button (click)="authenticate('yahoo')" class="btn btn-block btn-yahoo">
+                    <i class="fa fa-yahoo"></i> Sign in with Yahoo
+                </button>
             </div>
-          </div>
-          <div class="form-group has-feedback" [class.has-error]="password.invalid && password.dirty">
-            <input class="form-control input-lg" type="password" name="password" id="password" [(ngModel)]="user.password" #password
-              placeholder="Password" required>
-            <span class="fa fa-key form-control-feedback"></span>
-            <div class="help-block text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
-              <div *ngIf="password.errors.required">Password is required.</div>
-            </div>
-          </div>
-          <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-lg  btn-block btn-success">Sign in</button>
-          <br/>
-          <p class="text-center text-muted">
-            <small>Don't have an account yet? <a routerLink="/signup">Sign up</a></small>
-          </p>
-          <div class="signup-or-separator">
-            <h6 class="text">or</h6>
-            <hr>
-          </div>
-        </form>
-        <button class="btn btn-block btn-bitbucket" (click)="authenticate('bitbucket')">
-          <i class="fa fa-bitbucket"></i> Sign in with Bitbucket
-        </button>
-        <button class="btn btn-block btn-facebook" (click)="authenticate('facebook')">
-          <i class="fa fa-facebook"></i> Sign in with Facebook
-        </button>
-        <button class="btn btn-block btn-foursquare" (click)="authenticate('foursquare')">
-          <i class="fa fa-foursquare"></i> Sign in with Foursquare
-        </button>
-        <button class="btn btn-block btn-github" (click)="authenticate('github')">
-          <i class="fa fa-github"></i> Sign in with GitHub
-        </button>
-        <button class="btn btn-block btn-google" (click)="authenticate('google')">
-          <i class="fa fa-google"></i>Sign in with Google
-        </button>
-        <button class="btn btn-block btn-instagram" (click)="authenticate('instagram')">
-          <i class="fa fa-instagram"></i> Sign in with Instagram
-        </button>
-        <button class="btn btn-block btn-linkedin" (click)="authenticate('linkedin')">
-          <i class="fa fa-linkedin"></i> Sign in with LinkedIn
-        </button>
-        <button class="btn btn-block btn-live" (click)="authenticate('live')">
-          <i class="fa fa-windows"></i> Sign in with Windows Live
-        </button>
-        <button class="btn btn-block btn-reddit" (click)="authenticate('reddit')">
-          <i class="fa fa-reddit"></i> Sign in with Reddit
-        </button>
-        <button class="btn btn-block btn-spotify" (click)="authenticate('spotify')">
-          <i class="fa fa-spotify"></i> Sign in with Spotify
-        </button>
-        <button class="btn btn-block btn-twitch" (click)="authenticate('twitch')">
-          <i class="fa fa-twitch"></i> Sign in with Twitch
-        </button>
-        <button class="btn btn-block btn-twitter" (click)="authenticate('twitter')">
-          <i class="fa fa-twitter"></i> Sign in with Twitter
-        </button>
-        <button class="btn btn-block btn-vk" (click)="authenticate('vk')">
-          <i class="fa fa-vk"></i> Sign in with Vk
-        </button>
-        <button class="btn btn-block btn-wordpress" (click)="authenticate('wordpress')">
-          <i class="fa fa-wordpress"></i> Sign in with Wordpress
-        </button>
-        <button class="btn btn-block btn-yahoo" (click)="authenticate('yahoo')">
-          <i class="fa fa-yahoo"></i> Sign in with Yahoo
-        </button>
-      </div>
+        </div>
     </div>
-  </div>
 </div>

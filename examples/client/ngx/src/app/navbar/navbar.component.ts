@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Authllizer } from '@authllizer/core';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor(private auth: Authllizer) { }
+    constructor(private auth: Authllizer) {
+    }
 
-  ngOnInit() {
-  }
-
-  isAuthenticated() {
-    return this.auth.isAuthenticated();
-  }
+    isAuthenticated() {
+        return this.auth.isAuthenticated();
+    }
 
 }

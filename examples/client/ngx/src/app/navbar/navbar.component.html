@@ -1,16 +1,16 @@
 <div class="navbar navbar-default navbar-static-top">
-  <div class="navbar-header">
-    <a class="navbar-brand" routerLink="/"><i class="ion-ios7-pulse-strong"></i> Authllizer</a>
-  </div>
-  <ul class="nav navbar-nav">
-    <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-    <li *ngIf="isAuthenticated()"><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
-  </ul>
-  <ul *ngIf="!isAuthenticated()" class="nav navbar-nav pull-right">
-    <li><a routerLink="/signin" routerLinkActive="active">Login</a></li>
-    <li><a routerLink="/signup" routerLinkActive="active">Sign up</a></li>
-  </ul>
-  <ul *ngIf="isAuthenticated()" class="nav navbar-nav pull-right">
-    <li><a routerLink="/signout">Logout</a></li>
-  </ul>
+    <div class="navbar-header">
+        <a class="navbar-brand" routerLink="/"><i class="ion-ios7-pulse-strong"></i> Authllizer</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+        <li *ngIf="isAuthenticated()"><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+    </ul>
+    <ul *ngIf="!isAuthenticated()" class="nav navbar-nav pull-right">
+        <li><a routerLink="/signin" routerLinkActive="active">Sign in</a></li>
+        <li><a routerLink="/signup" routerLinkActive="active">Sign up</a></li>
+    </ul>
+    <ul *ngIf="isAuthenticated()" class="nav navbar-nav pull-right">
+        <li><a routerLink="/signout">Sign out</a></li>
+    </ul>
 </div>

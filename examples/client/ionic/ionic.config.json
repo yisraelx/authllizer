@@ -1,8 +1,7 @@
 {
-  "name": "ionicx",
-  "app_id": "",
-  "type": "ionic-angular",
+  "name": "authllizer-ionic-example",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "angular"
 }

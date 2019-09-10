@@ -1,92 +1,91 @@
 {
-  "name": "authllizer-ionic-example",
-  "private": true,
-  "version": "0.1.0",
-  "description": "Authllizer Ionic Example",
-  "license": "MIT",
-  "author": {
-    "email": "yisraelx@gmail.com",
-    "name": "Yisrael Eliav",
-    "url": "https://github.com/yisraelx"
-  },
-  "homepage": "https://github.com/yisraelx/authllizer#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yisraelx/authllizer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yisraelx/authllizer/issues"
-  },
-  "scripts": {
-    "start": "ionic-app-scripts serve --port 8080",
-    "build": "ionic-app-scripts build",
-    "ws:start": "yarn start --angularDir \"../../../node_modules/@angular/core\" --typescriptDir \"../../../node_modules/typescript\" --ionicAngularDir \"../../../node_modules/ionic-angular\"",
-    "ws:build": "yarn build --angularDir \"../../../node_modules/@angular/core\" --typescriptDir \"../../../node_modules/typescript\" --ionicAngularDir \"../../../node_modules/ionic-angular\""
-  },
-  "dependencies": {
-    "@angular/common": "5.2.3",
-    "@angular/compiler": "5.2.3",
-    "@angular/compiler-cli": "5.2.3",
-    "@angular/core": "5.2.3",
-    "@angular/forms": "5.2.3",
-    "@angular/http": "5.2.3",
-    "@angular/platform-browser": "5.2.3",
-    "@angular/platform-browser-dynamic": "5.2.3",
-    "@authllizer/core": "^0.1.0",
-    "@authllizer/ngx": "^0.1.0",
-    "@ionic-native/core": "4.5.3",
-    "@ionic-native/splash-screen": "4.5.3",
-    "@ionic-native/status-bar": "4.5.3",
-    "@ionic/storage": "2.1.3",
-    "authllizer-bitbucket-oauth2": "^0.1.0",
-    "authllizer-cordova-dialog": "^0.1.0",
-    "authllizer-facebook-oauth2": "^0.1.0",
-    "authllizer-github-oauth2": "^0.1.0",
-    "authllizer-google-oauth2": "^0.1.0",
-    "authllizer-instagram-oauth2": "^0.1.0",
-    "authllizer-linkedin-oauth2": "^0.1.0",
-    "authllizer-live-oauth2": "^0.1.0",
-    "authllizer-reddit-oauth2": "^0.1.0",
-    "authllizer-spotify-oauth2": "^0.1.0",
-    "authllizer-twitch-oauth2": "^0.1.0",
-    "authllizer-twitter-oauth1": "^0.1.0",
-    "authllizer-vk-oauth2": "^0.1.0",
-    "authllizer-wordpress-oauth2": "^0.1.0",
-    "authllizer-yahoo-oauth2": "^0.1.0",
-    "cordova-plugin-device": "^2.0.1",
-    "cordova-plugin-inappbrowser": "^2.0.2",
-    "cordova-plugin-ionic-webview": "^1.1.16",
-    "cordova-plugin-splashscreen": "^5.0.2",
-    "cordova-plugin-statusbar": "^2.4.1",
-    "cordova-plugin-whitelist": "^1.3.1",
-    "font-awesome": "^4.7.0",
-    "ionic-angular": "3.9.2",
-    "ionic-plugin-keyboard": "^2.2.1",
-    "ionicons": "3.0.0",
-    "rxjs": "5.5.6",
-    "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.20"
-  },
-  "devDependencies": {
-    "@ionic/app-scripts": "^3.1.7",
-    "awesome-typescript-loader": "^3.4.1",
-    "typescript": "~3.5.3"
-  },
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-splashscreen": {},
-      "ionic-plugin-keyboard": {},
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-ionic-webview": {}
+    "name": "authllizer-ionic-example",
+    "private": true,
+    "version": "0.1.0",
+    "description": "Authllizer Ionic Example",
+    "license": "MIT",
+    "author": {
+        "email": "yisraelx@gmail.com",
+        "name": "Yisrael Eliav",
+        "url": "https://github.com/yisraelx"
     },
-    "platforms": []
-  },
-  "config": {
-    "ionic_copy": "./config/copy.config.js",
-    "ionic_sass": "./config/sass.config.js",
-    "ionic_webpack": "config/webpack.config.js"
-  }
+    "homepage": "https://github.com/yisraelx/authllizer#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yisraelx/authllizer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yisraelx/authllizer/issues"
+    },
+    "scripts": {
+        "build": "ng build",
+        "start": "ng serve"
+    },
+    "dependencies": {
+        "@angular/animations": "^8.2.6",
+        "@angular/common": "^8.2.6",
+        "@angular/compiler": "^8.2.6",
+        "@angular/core": "^8.2.6",
+        "@angular/forms": "^8.2.6",
+        "@angular/platform-browser": "^8.2.6",
+        "@angular/platform-browser-dynamic": "^8.2.6",
+        "@angular/router": "^8.2.6",
+        "@authllizer/core": "^0.1.0",
+        "@authllizer/ngx": "^0.1.0",
+        "@ionic-native/core": "^5.14.0",
+        "@ionic-native/splash-screen": "^5.14.0",
+        "@ionic-native/status-bar": "^5.14.0",
+        "@ionic/angular": "^4.9.0",
+        "authllizer-bitbucket-oauth2": "^0.1.0",
+        "authllizer-cordova-dialog": "^0.1.0",
+        "authllizer-facebook-oauth2": "^0.1.0",
+        "authllizer-github-oauth2": "^0.1.0",
+        "authllizer-google-oauth2": "^0.1.0",
+        "authllizer-instagram-oauth2": "^0.1.0",
+        "authllizer-linkedin-oauth2": "^0.1.0",
+        "authllizer-live-oauth2": "^0.1.0",
+        "authllizer-reddit-oauth2": "^0.1.0",
+        "authllizer-spotify-oauth2": "^0.1.0",
+        "authllizer-twitch-oauth2": "^0.1.0",
+        "authllizer-twitter-oauth1": "^0.1.0",
+        "authllizer-vk-oauth2": "^0.1.0",
+        "authllizer-wordpress-oauth2": "^0.1.0",
+        "authllizer-yahoo-oauth2": "^0.1.0",
+        "cordova-plugin-device": "^2.0.3",
+        "cordova-plugin-inappbrowser": "^3.1.0",
+        "cordova-plugin-ionic-keyboard": "^2.2.0",
+        "cordova-plugin-ionic-webview": "^4.1.1",
+        "cordova-plugin-splashscreen": "^5.0.3",
+        "cordova-plugin-statusbar": "^2.4.3",
+        "cordova-plugin-whitelist": "^1.3.4",
+        "font-awesome": "^4.7.0",
+        "ionicons": "^4.6.3",
+        "rxjs": "^6.5.3",
+        "zone.js": "^0.9.1"
+    },
+    "devDependencies": {
+        "@angular-devkit/architect": "^0.803.4",
+        "@angular-devkit/build-angular": "^0.803.4",
+        "@angular-devkit/core": "^8.3.4",
+        "@angular-devkit/schematics": "^8.3.4",
+        "@angular/cli": "^8.3.4",
+        "@angular/compiler-cli": "^8.2.6",
+        "@angular/language-service": "^8.2.6",
+        "@ionic/angular-toolkit": "^2.0.0",
+        "@types/node": "^10.14.17",
+        "ts-node": "^8.3.0",
+        "typescript": "~3.5.3"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-device": {},
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-ionic-keyboard": {},
+            "cordova-plugin-ionic-webview": {},
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-whitelist": {}
+        },
+        "platforms": []
+    }
 }

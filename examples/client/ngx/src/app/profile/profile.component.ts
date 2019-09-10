@@ -1,77 +1,69 @@
-import {Component, OnInit} from '@angular/core';
-import {AccountService} from '../common/account.service';
-import {ToastsManager} from 'ng2-toastr';
-import {Authllizer} from '@authllizer/core';
-import {HttpErrorResponse} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Authllizer } from '@authllizer/core';
+import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '../common/account.service';
 
 export interface IProfileUser {
-  picture?: string;
-  displayName?: string;
-  email?: string;
+    picture?: string;
+    displayName?: string;
+    email?: string;
 }
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
 
-  user: IProfileUser = {
-    displayName: '',
-    email: ''
-  };
+    user: IProfileUser = {
+        displayName: '',
+        email: ''
+    };
 
-  constructor(private account: AccountService, private auth: Authllizer, private toastr: ToastsManager) {
-  }
+    constructor(private account: AccountService, private auth: Authllizer, private toastr: ToastrService) {
+    }
 
-  ngOnInit() {
-    this.getProfile();
-  }
+    ngOnInit() {
+        this.getProfile();
+    }
 
-  getProfile() {
-    this.account.getProfile()
-      .then((user: IProfileUser) => {
-        this.user = user;
-      })
-  }
+    async getProfile() {
+        this.user = await this.account.getProfile();
+    }
 
-  updateProfile() {
-    this.account.updateProfile(this.user)
-      .then(async () => {
-        await this.getProfile();
-        this.toastr.success('Profile has been updated');
-      }).catch(({error, message, status}: HttpErrorResponse) => {
-      this.toastr.error(typeof error === 'object' && error.message ? error.message : message, status as any);
-    });
-  }
-
-  link(provider: string) {
-    this.auth.link(provider)
-      .then(async () => {
-        await this.getProfile();
-        this.toastr.success(`You have successfully linked a ${provider} account`);
-      })
-      .catch((response: Error | HttpErrorResponse) => {
-        if ((response as HttpErrorResponse).error) {
-          let {error} = (response as HttpErrorResponse);
-          this.toastr.error(error.message ? error.message : error);
-        } else if (!(response as HttpErrorResponse).message) {
-          this.toastr.error(response.message);
-        } else {
-          this.toastr.error(response as any);
+    async updateProfile() {
+        try {
+            await this.account.updateProfile(this.user);
+            await this.getProfile();
+            this.toastr.success('Profile has been updated.');
+        } catch (response) {
+            let {error, message}: HttpErrorResponse = response;
+            this.toastr.error((error && error.message) || message);
         }
-      });
-  }
+    }
 
-  unlink(provider: string) {
-    this.auth.unlink(provider)
-      .then(async () => {
-        await this.getProfile();
-        this.toastr.info(`You have unlinked a ${provider} account`);
-      })
-      .catch(({error, status}: HttpErrorResponse) => {
-        this.toastr.error(typeof error === 'object' && error.message ? error.message : `Could not unlink ${provider} account`, status as any);
-      });
-  }
+    async link(provider: string) {
+        try {
+            await this.auth.link(provider);
+            await this.getProfile();
+            this.toastr.success(`You have successfully linked a ${ provider } account.`);
+        } catch (response) {
+            let {error, message}: HttpErrorResponse = response;
+            this.toastr.error((error && error.message) || message);
+        }
+    }
+
+    async unlink(provider: string) {
+        try {
+            await this.auth.unlink(provider);
+            await this.getProfile();
+            this.toastr.info(`You have unlinked a ${ provider } account.`);
+        } catch (response) {
+            let {error, message}: HttpErrorResponse = response;
+            this.toastr.error((error && error.message) || message);
+        }
+    }
+
 }

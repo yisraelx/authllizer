@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button routerDirection="back" routerLink="/">
+                <ion-icon class="ion-md-arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Sign Up</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <form (ngSubmit)="signUp()" [formGroup]="signUpForm">
+        <ion-list>
+            <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input formControlName="displayName" type="text"></ion-input>
+            </ion-item>
+            <ion-text
+                *ngIf="signUpForm.get('displayName').invalid && (signUpForm.get('displayName').dirty || signUpForm.get('displayName').touched)"
+                color="danger">
+                <p *ngIf="signUpForm.hasError('required', 'displayName')" class="ion-padding-start">
+                    You must enter your name.
+                </p>
+            </ion-text>
+            <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <ion-text
+                *ngIf="signUpForm.get('email').invalid && (signUpForm.get('email').dirty || signUpForm.get('email').touched)"
+                color="danger">
+                <p *ngIf="signUpForm.hasError('required', 'email')" class="ion-padding-start">You must enter your name
+                    email address.</p>
+                <p *ngIf="signUpForm.hasError('email', 'email')" class="ion-padding-start">Your email address is
+                    invalid.</p>
+            </ion-text>
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input formControlName="password" type="password"></ion-input>
+            </ion-item>
+            <ion-text
+                *ngIf="signUpForm.get('password').invalid && (signUpForm.get('password').dirty || signUpForm.get('password').touched)"
+                color="danger">
+                <p *ngIf="signUpForm.hasError('required', 'password')" class="ion-padding-start">Password is
+                    required.</p>
+            </ion-text>
+            <ion-item>
+                <ion-label position="floating">Confirm</ion-label>
+                <ion-input formControlName="confirmPassword" type="password"></ion-input>
+            </ion-item>
+            <ion-text
+                *ngIf="signUpForm.get('confirmPassword').invalid && (signUpForm.get('confirmPassword').dirty || signUpForm.get('confirmPassword').touched)"
+                color="danger">
+                <p *ngIf="signUpForm.hasError('compareTo', 'confirmPassword')" class="ion-padding-start">Password must
+                    match.</p>
+            </ion-text>
+            <ion-button [disabled]="signUpForm.invalid" expand="block" type="submit">Sign up</ion-button>
+        </ion-list>
+    </form>
+</ion-content>

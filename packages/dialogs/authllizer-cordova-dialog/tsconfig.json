@@ -3,7 +3,9 @@
     "compilerOptions": {
         "outDir": "./es2015",
         "declarationDir": "./typings",
-        "types": []
+        "types": [
+            "cordova"
+        ]
     },
     "files": [
         "./src/index.ts"

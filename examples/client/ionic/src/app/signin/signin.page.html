@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Sign In</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <ion-card>
+        <ion-card-content>
+            <form (ngSubmit)="signIn()" [formGroup]="signInForm">
+                <ion-item>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input formControlName="email" type="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input formControlName="password" type="password"></ion-input>
+                </ion-item>
+                <ion-button [disabled]="signInForm.invalid" expand="block" type="submit">Sign in</ion-button>
+                <ion-text>
+                    <p class="ion-padding-start">Don't have an account yet? <a routerDirection="forward"
+                                                                               routerLink="/signup">Sign
+                        up</a></p>
+                </ion-text>
+            </form>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <ion-button (click)="authenticate('bitbucket')" class="btn-bitbucket" expand="block">
+                <ion-icon class="fa fa-fw fa-bitbucket"></ion-icon>
+                Sign in with Bitbucket
+            </ion-button>
+            <ion-button (click)="authenticate('facebook')" class="btn-facebook" expand="block">
+                <ion-icon class="fa fa-fw fa-facebook"></ion-icon>
+                Sign in with Facebook
+            </ion-button>
+            <ion-button (click)="authenticate('foursquare')" class="btn-foursquare" expand="block">
+                <ion-icon class="fa fa-fw fa-foursquare"></ion-icon>
+                Sign in with Foursquare
+            </ion-button>
+            <ion-button (click)="authenticate('github')" class="btn-github" expand="block">
+                <ion-icon class="fa fa-fw fa-github"></ion-icon>
+                Sign in with GitHub
+            </ion-button>
+            <ion-button (click)="authenticate('google')" class="btn-google" expand="block">
+                <ion-icon class="fa fa-fw fa-google"></ion-icon>
+                Sign in with Google
+            </ion-button>
+            <ion-button (click)="authenticate('instagram')" class="btn-instagram" expand="block">
+                <ion-icon class="fa fa-fw fa-instagram"></ion-icon>
+                Sign in with Instagram
+            </ion-button>
+            <ion-button (click)="authenticate('linkedin')" class="btn-linkedin" expand="block">
+                <ion-icon class="fa fa-fw fa-linkedin"></ion-icon>
+                Sign in with LinkedIn
+            </ion-button>
+            <ion-button (click)="authenticate('live')" class="btn-live" expand="block">
+                <ion-icon class="fa fa-fw fa-windows"></ion-icon>
+                Sign in with Windows Live
+            </ion-button>
+            <ion-button (click)="authenticate('reddit')" class="btn-reddit" expand="block">
+                <ion-icon class="fa fa-fw fa-reddit"></ion-icon>
+                Sign in with Reddit
+            </ion-button>
+            <ion-button (click)="authenticate('spotify')" class="btn-spotify" expand="block">
+                <ion-icon class="fa fa-fw fa-spotify"></ion-icon>
+                Sign in with Spotify
+            </ion-button>
+            <ion-button (click)="authenticate('twitch')" class="btn-twitch" expand="block">
+                <ion-icon class="fa fa-fw fa-twitch"></ion-icon>
+                Sign in with Twitch
+            </ion-button>
+            <ion-button (click)="authenticate('twitter')" class="btn-twitter" expand="block">
+                <ion-icon class="fa fa-fw fa-twitter"></ion-icon>
+                Sign in with Twitter
+            </ion-button>
+            <ion-button (click)="authenticate('vk')" class="btn-vk" expand="block">
+                <ion-icon class="fa fa-fw fa-vk"></ion-icon>
+                Sign in with Vk
+            </ion-button>
+            <ion-button (click)="authenticate('wordpress')" class="btn-wordpress" expand="block">
+                <ion-icon class="fa fa-fw fa-wordpress"></ion-icon>
+                Sign in with Wordpress
+            </ion-button>
+            <ion-button (click)="authenticate('yahoo')" class="btn-yahoo" expand="block">
+                <ion-icon class="fa fa-fw fa-yahoo"></ion-icon>
+                Sign in with Yahoo
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

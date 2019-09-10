@@ -1,44 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpErrorResponse} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng2-toastr';
 import { Authllizer } from '@authllizer/core';
+import { ToastrService } from 'ngx-toastr';
 
 export interface ISignUpUser {
-  displayName?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
+    displayName?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
 }
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
 
-  user: ISignUpUser = {
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  };
+    user: ISignUpUser = {
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    };
 
-  constructor(private auth: Authllizer, private toastr: ToastsManager, private router: Router) {
-  }
+    constructor(private auth: Authllizer, private toastr: ToastrService, private router: Router) {
+    }
 
-  ngOnInit() {
-  }
-
-  signUp() {
-    this.auth.signUp(this.user, true)
-      .then((response) => {
-        this.router.navigateByUrl('/');
-        this.toastr.info('You have successfully created a new account and have been signed-in');
-      })
-      .catch(({error,message,status}:HttpErrorResponse) => {
-        this.toastr.error(typeof error === 'object' && error.message ? error.message : message, status as any);
-      });
-  }
+    async signUp() {
+        try {
+            await this.auth.signUp(this.user, true);
+            await this.router.navigateByUrl('/');
+            this.toastr.info('You have successfully created a new account and have been signed-in!');
+        } catch (response) {
+            let {error, message}: HttpErrorResponse = response;
+            this.toastr.error((error && error.message) || message);
+        }
+    }
 }

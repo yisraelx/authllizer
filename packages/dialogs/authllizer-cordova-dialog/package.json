@@ -54,7 +54,7 @@
     },
     "devDependencies": {
         "@authllizer/core": "^0.1.0",
-        "@types/cordova": "0.0.34"
+        "@types/cordova": "^0.0.34"
     },
     "rollup": {
         "globals": {

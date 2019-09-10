@@ -1,54 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ToastsManager } from 'ng2-toastr';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Authllizer } from '@authllizer/core';
+import { ToastrService } from 'ngx-toastr';
 
 export interface ISignInUser {
-  email?: string;
-  password?: string;
+    email?: string;
+    password?: string;
 }
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+    selector: 'app-signin',
+    templateUrl: './signin.component.html',
+    styleUrls: ['./signin.component.css']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
 
-  user: ISignInUser = {};
+    user: ISignInUser = {};
 
-  constructor(private auth: Authllizer, private toastr: ToastsManager, private router: Router) { }
+    constructor(private auth: Authllizer, private toastr: ToastrService, private router: Router) {
+    }
 
-  ngOnInit() {
-  }
-
-  signIn() {
-    this.auth.signIn(this.user)
-      .then(() => {
-        this.toastr.success('You have successfully signed in!');
-        this.router.navigateByUrl('/');
-      })
-      .catch(({error,message,status}:HttpErrorResponse) => {
-        this.toastr.error(typeof error === 'object' && error.message ? error.message : message, status as any);
-      });
-  }
-
-  authenticate(provider: string) {
-    this.auth.authenticate(provider)
-      .then(() => {
-        this.toastr.success('You have successfully signed in with ' + provider + '!');
-        this.router.navigateByUrl('/');
-      })
-      .catch((response: Error | HttpErrorResponse) => {
-        if ((response as HttpErrorResponse).error) {
-          let {error} = (response as HttpErrorResponse);
-          this.toastr.error(typeof error === 'object' && error.message  ? error.message : error);
-        } else if (!(response as HttpErrorResponse).message) {
-          this.toastr.error(response.message);
-        } else {
-          this.toastr.error(response as any);
+    async signIn() {
+        try {
+            await this.auth.signIn(this.user);
+            await this.router.navigateByUrl('/');
+            this.toastr.success('You have successfully signed in!');
+        } catch (response) {
+            let {error, message}: HttpErrorResponse = response;
+            this.toastr.error((error && error.message) || message);
         }
-      });
-  };
+    }
+
+    async authenticate(provider: string) {
+        try {
+            await this.auth.authenticate(provider);
+            await this.router.navigateByUrl('/');
+            this.toastr.success(`You have successfully signed in with ${ provider }!`);
+        } catch (response) {
+            let {error, message}: HttpErrorResponse = response;
+            this.toastr.error((error && error.message) || message);
+        }
+    }
+
 }

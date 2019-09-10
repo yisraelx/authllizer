@@ -1,0 +1,33 @@
+<ion-app>
+    <ion-menu contentId="content" side="start" swipeGesture="false">
+        <ion-header translucent>
+            <ion-toolbar>
+                <ion-title>Menu</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-menu-toggle auto-hide="true">
+                    <ion-item routerDirection="root" routerLink="/home">
+                        <ion-icon class="ion-md-home"></ion-icon>
+                        <ion-label>Home</ion-label>
+                    </ion-item>
+                </ion-menu-toggle>
+                <ion-menu-toggle auto-hide="true">
+                    <ion-item routerDirection="root" routerLink="/profile">
+                        <ion-icon class="ion-md-person"></ion-icon>
+                        <ion-label>Profile</ion-label>
+                    </ion-item>
+                </ion-menu-toggle>
+                <ion-menu-toggle auto-hide="true">
+                    <ion-item (click)="signOut()">
+                        <ion-icon class="ion-md-log-out"></ion-icon>
+                        <ion-label>Sign out</ion-label>
+                    </ion-item>
+                </ion-menu-toggle>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="content"></ion-router-outlet>
+</ion-app>
