@@ -13,17 +13,8 @@ lerna-debug.log*
 node_modules/
 
 ### Build
-lib/
-build/
 dist/
-old/
-tmp/
-.tmp
 .rpt2_cache/
-es5/
-es2015/
-bundles/
-typings/
 coverage/
 packages/**/LICENSE
 examples/**/LICENSE

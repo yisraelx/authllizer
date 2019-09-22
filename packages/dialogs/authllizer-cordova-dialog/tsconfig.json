@@ -1,8 +1,6 @@
 {
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "./es2015",
-        "declarationDir": "./typings",
         "types": [
             "cordova"
         ]
