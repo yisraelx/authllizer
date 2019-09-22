@@ -1,49 +1,47 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import sourceMaps from 'rollup-plugin-sourcemaps';
-import typescript from 'rollup-plugin-typescript2';
-import minify from 'rollup-plugin-minify';
-import * as _ from 'lodash';
-import {join} from 'path';
+import { join } from 'path';
+import resolvePlugin from 'rollup-plugin-node-resolve';
+import { terser as terserPlugin } from 'rollup-plugin-terser';
+import tsPlugin from 'rollup-plugin-typescript2';
 
 let PKG = require(join(process.cwd(), 'package.json'));
 
-let banner = `/**
-* ${PKG.name} (${PKG.homepage})
-* @version ${PKG.version}
-* @license ${PKG.license}
-* @copyright ${PKG.author.name} <${PKG.author.email}> (${PKG.author.url})
+let banner = `/*!
+* ${ PKG.name } (${ PKG.homepage })
+* @version ${ PKG.version }
+* @license ${ PKG.license }
+* @copyright ${ PKG.author.name } <${ PKG.author.email }> (${ PKG.author.url })
 */`;
 
-let globals = _.get(PKG, 'rollup.globals', {});
+let {rollup: {globals}} = PKG;
+
+let createOutputConfig = (minify = false) => ({
+    file: minify ? PKG.browser.replace('.js', '.min.js') : PKG.browser,
+    name: PKG.name,
+    format: 'umd',
+    exports: 'named',
+    banner,
+    sourcemap: true,
+    globals
+});
 
 export default {
     input: `./src/index.ts`,
     output: [
-        {
-            file: PKG.browser,
-            name: `authllizer.${_.camelCase(PKG.name.replace(/@?authllizer[-\/]?/g, ''))}`,
-            format: 'umd',
-            exports: 'named',
-            banner,
-            sourcemap: true,
-            globals
-        }
+        createOutputConfig(),
+        createOutputConfig(true)
     ],
-    external: _.keys(globals),
+    external: Object.keys(globals),
     plugins: [
-        typescript({
+        resolvePlugin(),
+        tsPlugin({
+            typescript: require('typescript'),
             tsconfigOverride: {
                 compilerOptions: {
                     target: 'es5'
                 }
             },
-            useTsconfigDeclarationDir: true,
             clean: true
         }),
-        commonjs(),
-        resolve(),
-        sourceMaps(),
-        minify({umd: PKG.browser.replace('.js', '.min.js')})
+        terserPlugin({include: /.*\.min\.js$/, sourcemap: true, output: {comments: false}})
     ]
 };

@@ -67,7 +67,7 @@
     },
     "rollup": {
         "globals": {
-            "@authllizer/core": "authllizer.core",
+            "@authllizer/core": "@authllizer/core",
             "@angular/core": "ng.core",
             "@angular/common/http": "ng.common.http"
         }

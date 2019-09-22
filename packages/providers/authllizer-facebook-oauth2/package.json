@@ -58,7 +58,7 @@
     },
     "rollup": {
         "globals": {
-            "@authllizer/core": "authllizer.core"
+            "@authllizer/core": "@authllizer/core"
         }
     }
 }
