@@ -1,21 +1,22 @@
-import { ModuleWithProviders, NgModule, Optional } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Authllizer, IAuthllizerOptions } from '@authllizer/core';
-import { NgxHttpClient } from './ngx.http';
+import { ModuleWithProviders, NgModule} from '@angular/core';
+import { IAuthllizerOptions } from '@authllizer/core';
+import { AUTHLLIZER_OPTIONS, AUTHLLIZER_PROVIDER } from './authllizer.provider';
 
-@NgModule({})
+
+@NgModule({
+    providers: [
+        AUTHLLIZER_PROVIDER
+    ]
+})
 export class AuthllizerModule {
+
     static forRoot(options: IAuthllizerOptions): ModuleWithProviders {
         return {
             ngModule: AuthllizerModule,
-            providers: [{
-                provide: Authllizer,
-                useFactory(http: HttpClient) {
-                    options.httpClient = options.httpClient || new NgxHttpClient(http);
-                    return new Authllizer(options);
-                },
-                deps: [[new Optional(), HttpClient]]
-            }]
+            providers: [
+                {provide: AUTHLLIZER_OPTIONS, useValue: options}
+            ]
         };
     }
+
 }
