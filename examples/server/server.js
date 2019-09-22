@@ -6,12 +6,13 @@
 
 var path = require('path');
 var qs = require('querystring');
-require('es6-promise').polyfill();
+
+require('colors');
+require('es6-promise');
 
 var async = require('async');
 var bcrypt = require('bcryptjs');
 var bodyParser = require('body-parser');
-var colors = require('colors');
 var cors = require('cors');
 var express = require('express');
 var logger = require('morgan');
@@ -44,7 +45,9 @@ var userSchema = new mongoose.Schema({
     vk: String,
     wordpress: String,
     yahoo: String
-}, {timestamps: true});
+}, {
+    timestamps: true
+});
 
 userSchema.pre('save', function (next) {
     var user = this;
@@ -72,17 +75,23 @@ var User = mongoose.model('User', userSchema);
  | Connect to mongodb
  |--------------------------------------------------------------------------
  */
-mongoose.connect(config.MONGO_URI, {promiseLibrary: global.Promise}).then(function () {
-    console.log(('Mongoose successfully connected to MongoDB ' + config.MONGO_URI).yellow);
-}).catch(function (err) {
-    console.log(('Error: Mongoose fail to connect to ' + config.MONGO_URI).red);
-    console.log('Did you forget to set MONGO_URI or run `mongod`?'.blue);
-});
+mongoose
+    .connect(config.mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(function () {
+        console.log(('Mongoose successfully connected to MongoDB ' + config.mongoURI).yellow);
+    })
+    .catch(function (err) {
+        console.log(('Error: Mongoose fail to connect to ' + config.mongoURI).red);
+        console.log('Did you forget to set MONGO_URI or run `mongod`?'.blue);
+    });
 
 var app = express();
 
-app.set('port', config.NODE_PORT);
-app.set('host', config.NODE_IP);
+app.set('port', config.port);
+app.set('host', config.host);
 app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -109,9 +118,8 @@ function ensureAuthenticated(req, res, next) {
 
     var payload = null;
     try {
-        payload = jwt.decode(token, config.TOKEN_SECRET);
-    }
-    catch (err) {
+        payload = jwt.decode(token, config.tokenSecret);
+    } catch (err) {
         return res.status(401).send({message: err.message});
     }
 
@@ -133,7 +141,7 @@ function createJWT(user) {
         iat: moment().unix(),
         exp: moment().add(14, 'days').unix()
     };
-    return jwt.encode(payload, config.TOKEN_SECRET);
+    return jwt.encode(payload, config.tokenSecret);
 }
 
 /*
@@ -161,7 +169,7 @@ app.put('/api/me', ensureAuthenticated, function (req, res) {
             return res.status(400).send({message: 'User not found'});
         }
 
-        User.findOne({email: req.body.email}).then(function(existingUser){
+        User.findOne({email: req.body.email}).then(function (existingUser) {
             if (req.body.email && user.email !== req.body.email && existingUser) {
                 return res.status(409).send({message: 'This email is already linked to another account.'});
             }
@@ -249,7 +257,7 @@ app.post('/auth/bitbucket', function (req, res) {
     var emailApiUrl = 'https://bitbucket.org/api/2.0/user/emails';
 
     var headers = {
-        Authorization: 'Basic ' + new Buffer(req.body.client_id + ':' + config.BITBUCKET_SECRET).toString('base64')
+        Authorization: 'Basic ' + new Buffer(req.body.client_id + ':' + config.bitbucketClientSecret).toString('base64')
     };
 
     var formData = {
@@ -282,7 +290,7 @@ app.post('/auth/bitbucket', function (req, res) {
                             return res.status(409).send({message: 'There is already a Bitbucket account that belongs to you'});
                         }
                         var token = req.header('Authorization').split(' ')[1];
-                        var payload = jwt.decode(token, config.TOKEN_SECRET);
+                        var payload = jwt.decode(token, config.tokenSecret);
                         User.findById(payload.sub, function (err, user) {
                             if (!user) {
                                 return res.status(400).send({message: 'User not found'});
@@ -325,12 +333,12 @@ app.post('/auth/bitbucket', function (req, res) {
  */
 app.post('/auth/facebook', function (req, res) {
     var fields = ['id', 'email', 'first_name', 'last_name', 'link', 'name'];
-    var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
-    var graphApiUrl = 'https://graph.facebook.com/v2.5/me?fields=' + fields.join(',');
+    var accessTokenUrl = 'https://graph.facebook.com/v4.0/oauth/access_token';
+    var graphApiUrl = 'https://graph.facebook.com/v4.0/me?fields=' + fields.join(',');
     var params = {
         code: req.body.code,
         client_id: req.body.client_id,
-        client_secret: config.FACEBOOK_SECRET,
+        client_secret: config.facebookClientSecret,
         redirect_uri: req.body.redirect_uri
     };
 
@@ -351,13 +359,13 @@ app.post('/auth/facebook', function (req, res) {
                         return res.status(409).send({message: 'There is already a Facebook account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
                         }
                         user.facebook = profile.id;
-                        user.picture = user.picture || 'https://graph.facebook.com/v2.3/' + profile.id + '/picture?type=large';
+                        user.picture = user.picture || 'https://graph.facebook.com/v4.0/' + profile.id + '/picture?type=large';
                         user.displayName = user.displayName || profile.name;
                         user.save(function () {
                             var token = createJWT(user);
@@ -397,7 +405,7 @@ app.post('/auth/foursquare', function (req, res) {
     var formData = {
         code: req.body.code,
         client_id: req.body.client_id,
-        client_secret: config.FOURSQUARE_SECRET,
+        client_secret: config.foursquareClientSecret,
         redirect_uri: req.body.redirect_uri,
         grant_type: 'authorization_code'
     };
@@ -420,7 +428,7 @@ app.post('/auth/foursquare', function (req, res) {
                         return res.status(409).send({message: 'There is already a Foursquare account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -466,7 +474,7 @@ app.post('/auth/github', function (req, res) {
     var params = {
         code: req.body.code,
         client_id: req.body.client_id,
-        client_secret: config.GITHUB_SECRET,
+        client_secret: config.githubClientSecret,
         redirect_uri: req.body.redirect_uri
     };
 
@@ -490,7 +498,7 @@ app.post('/auth/github', function (req, res) {
                         return res.status(409).send({message: 'There is already a GitHub account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -533,11 +541,11 @@ app.post('/auth/github', function (req, res) {
  */
 app.post('/auth/google', function (req, res) {
     var accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
-    var peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
+    var peopleApiUrl = 'https://www.googleapis.com/userinfo/v2/me';
     var params = {
         code: req.body.code,
         client_id: req.body.client_id,
-        client_secret: config.GOOGLE_SECRET,
+        client_secret: config.googleClientSecret,
         redirect_uri: req.body.redirect_uri,
         grant_type: 'authorization_code'
     };
@@ -554,18 +562,18 @@ app.post('/auth/google', function (req, res) {
             }
             // Step 3a. Link user accounts.
             if (req.header('Authorization')) {
-                User.findOne({google: profile.sub}, function (err, existingUser) {
+                User.findOne({google: profile.id}, function (err, existingUser) {
                     if (existingUser) {
                         return res.status(409).send({message: 'There is already a Google account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
                         }
-                        user.google = profile.sub;
-                        user.picture = user.picture || profile.picture.replace('sz=50', 'sz=200');
+                        user.google = profile.id;
+                        user.picture = user.picture || (profile.picture && (profile.picture + '=s200'))
                         user.displayName = user.displayName || profile.name;
                         user.save(function () {
                             var token = createJWT(user);
@@ -575,13 +583,13 @@ app.post('/auth/google', function (req, res) {
                 });
             } else {
                 // Step 3b. Create a new user account or return an existing one.
-                User.findOne({google: profile.sub}, function (err, existingUser) {
+                User.findOne({google: profile.id}, function (err, existingUser) {
                     if (existingUser) {
                         return res.send({access_token: createJWT(existingUser)});
                     }
                     var user = new User();
-                    user.google = profile.sub;
-                    user.picture = profile.picture.replace('sz=50', 'sz=200');
+                    user.google = profile.id;
+                    user.picture = profile.picture && (profile.picture + '=s200');
                     user.displayName = profile.name;
                     user.save(function (err) {
                         var token = createJWT(user);
@@ -604,7 +612,7 @@ app.post('/auth/instagram', function (req, res) {
     var params = {
         client_id: req.body.client_id,
         redirect_uri: req.body.redirect_uri,
-        client_secret: config.INSTAGRAM_SECRET,
+        client_secret: config.instagramClientSecret,
         code: req.body.code,
         grant_type: 'authorization_code'
     };
@@ -620,7 +628,7 @@ app.post('/auth/instagram', function (req, res) {
                 }
 
                 var token = req.header('Authorization').split(' ')[1];
-                var payload = jwt.decode(token, config.TOKEN_SECRET);
+                var payload = jwt.decode(token, config.tokenSecret);
 
                 User.findById(payload.sub, function (err, user) {
                     if (!user) {
@@ -668,7 +676,7 @@ app.post('/auth/linkedin', function (req, res) {
     var params = {
         code: req.body.code,
         client_id: req.body.client_id,
-        client_secret: config.LINKEDIN_SECRET,
+        client_secret: config.linkedinClientSecret,
         redirect_uri: req.body.redirect_uri,
         grant_type: 'authorization_code'
     };
@@ -693,7 +701,7 @@ app.post('/auth/linkedin', function (req, res) {
                         return res.status(409).send({message: 'There is already a LinkedIn account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -740,7 +748,7 @@ app.post('/auth/live', function (req, res) {
             var params = {
                 code: req.body.code,
                 client_id: req.body.client_id,
-                client_secret: config.LIVE_SECRET,
+                client_secret: config.liveClientSecret,
                 redirect_uri: req.body.redirect_uri,
                 grant_type: 'authorization_code'
             };
@@ -763,7 +771,7 @@ app.post('/auth/live', function (req, res) {
                         return res.status(409).send({message: 'There is already a Windows Live account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, existingUser) {
                         if (!existingUser) {
                             return res.status(400).send({message: 'User not found'});
@@ -811,7 +819,7 @@ app.post('/auth/reddit', function (req, res) {
     };
 
     var headers = {
-        Authorization: 'Basic ' + new Buffer(req.body.client_id + ':' + config.REDDIT_SECRET).toString('base64')
+        Authorization: 'Basic ' + new Buffer(req.body.client_id + ':' + config.redditClientSecret).toString('base64')
     };
 
     request.post(tokenUrl, {json: true, form: params, headers: headers}, function (err, response, body) {
@@ -827,7 +835,7 @@ app.post('/auth/reddit', function (req, res) {
                         return res.status(409).send({message: 'There is already a Reddit account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -855,7 +863,6 @@ app.post('/auth/reddit', function (req, res) {
                     });
 
                     user.save(function (err) {
-                        console.log(err)
                         var token = createJWT(user);
                         res.send({access_token: token});
                     });
@@ -881,7 +888,7 @@ app.post('/auth/spotify', function (req, res) {
     };
 
     var headers = {
-        Authorization: 'Basic ' + new Buffer(req.body.client_id + ':' + config.SPOTIFY_SECRET).toString('base64')
+        Authorization: 'Basic ' + new Buffer(req.body.client_id + ':' + config.spotifyClientSecret).toString('base64')
     };
 
     request.post(tokenUrl, {json: true, form: params, headers: headers}, function (err, response, body) {
@@ -900,7 +907,7 @@ app.post('/auth/spotify', function (req, res) {
                         return res.status(409).send({message: 'There is already a Spotify account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -947,7 +954,7 @@ app.post('/auth/twitch', function (req, res) {
     var formData = {
         code: req.body.code,
         client_id: req.body.client_id,
-        client_secret: config.TWITCH_SECRET,
+        client_secret: config.twitchClientSecret,
         redirect_uri: req.body.redirect_uri,
         grant_type: 'authorization_code'
     };
@@ -967,7 +974,7 @@ app.post('/auth/twitch', function (req, res) {
                         return res.status(409).send({message: 'There is already a Twitch account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -1019,8 +1026,8 @@ app.post('/auth/twitter', function (req, res) {
     // Part 1 of 2: Initial request from Authllizer.
     if (!req.body.oauth_token || !req.body.oauth_verifier) {
         var requestTokenOauth = {
-            consumer_key: config.TWITTER_KEY,
-            consumer_secret: config.TWITTER_SECRET,
+            consumer_key: config.twitterClientKey,
+            consumer_secret: config.twitterClientSecret,
             callback: req.body.callback
         };
 
@@ -1033,8 +1040,8 @@ app.post('/auth/twitter', function (req, res) {
     } else {
         // Part 2 of 2: Second request after Authorize app is clicked.
         var accessTokenOauth = {
-            consumer_key: config.TWITTER_KEY,
-            consumer_secret: config.TWITTER_SECRET,
+            consumer_key: config.twitterClientKey,
+            consumer_secret: config.twitterClientSecret,
             token: req.body.oauth_token,
             verifier: req.body.oauth_verifier
         };
@@ -1045,8 +1052,8 @@ app.post('/auth/twitter', function (req, res) {
             accessToken = qs.parse(accessToken);
 
             var profileOauth = {
-                consumer_key: config.TWITTER_KEY,
-                consumer_secret: config.TWITTER_SECRET,
+                consumer_key: config.twitterClientKey,
+                consumer_secret: config.twitterClientSecret,
                 token: accessToken.oauth_token,
                 token_secret: accessToken.oauth_token_secret,
             };
@@ -1067,7 +1074,7 @@ app.post('/auth/twitter', function (req, res) {
                         }
 
                         var token = req.header('Authorization').split(' ')[1];
-                        var payload = jwt.decode(token, config.TOKEN_SECRET);
+                        var payload = jwt.decode(token, config.tokenSecret);
 
                         User.findById(payload.sub, function (err, user) {
                             if (!user) {
@@ -1117,7 +1124,7 @@ app.post('/auth/vk', function (req, res) {
     var params = {
         client_id: req.body.client_id,
         redirect_uri: req.body.redirect_uri,
-        client_secret: config.VK_SECRET,
+        client_secret: config.vkClientSecret,
         code: req.body.code,
         grant_type: 'authorization_code'
     };
@@ -1136,7 +1143,7 @@ app.post('/auth/vk', function (req, res) {
                         return res.status(409).send({message: 'There is already a Vk account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -1185,7 +1192,7 @@ app.post('/auth/wordpress', function (req, res) {
     var params = {
         client_id: req.body.client_id,
         redirect_uri: req.body.redirect_uri,
-        client_secret: config.WORDPRESS_SECRET,
+        client_secret: config.wordpressClientSecret,
         code: req.body.code,
         grant_type: 'authorization_code'
     };
@@ -1203,7 +1210,7 @@ app.post('/auth/wordpress', function (req, res) {
                         return res.status(409).send({message: 'There is already a Wordpress account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -1231,7 +1238,7 @@ app.post('/auth/wordpress', function (req, res) {
                     });
 
                     user.save(function (err) {
-                        console.log(err)
+                        console.log(err);
                         var token = createJWT(user);
                         res.send({access_token: token});
                     });
@@ -1249,7 +1256,7 @@ app.post('/auth/wordpress', function (req, res) {
 app.post('/auth/yahoo', function (req, res) {
     var accessTokenUrl = 'https://api.login.yahoo.com/oauth2/get_token';
     var clientId = req.body.client_id;
-    var clientSecret = config.YAHOO_SECRET;
+    var clientSecret = config.yahooClientSecret;
     var formData = {
         code: req.body.code,
         redirect_uri: req.body.redirect_uri,
@@ -1272,7 +1279,7 @@ app.post('/auth/yahoo', function (req, res) {
                         return res.status(409).send({message: 'There is already a Yahoo account that belongs to you'});
                     }
                     var token = req.header('Authorization').split(' ')[1];
-                    var payload = jwt.decode(token, config.TOKEN_SECRET);
+                    var payload = jwt.decode(token, config.tokenSecret);
                     User.findById(payload.sub, function (err, user) {
                         if (!user) {
                             return res.status(400).send({message: 'User not found'});
@@ -1335,5 +1342,5 @@ app.post('/auth/unlink', ensureAuthenticated, function (req, res) {
  |--------------------------------------------------------------------------
  */
 app.listen(app.get('port'), app.get('host'), function () {
-    console.log(('Express server listening on '+app.get('host')+':' + app.get('port')).yellow);
+    console.log(('Express server listening on ' + app.get('host') + ':' + app.get('port')).yellow);
 });
