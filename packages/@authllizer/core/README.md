@@ -79,14 +79,10 @@ authllizer.config({
 
 ## Compatibility
 This library are written in typescript and available in ES5 and ES6 standard.
+
 #### Promise
 This library requires ES6 Promise (native or polyfill) by default it uses the global "Promise".
-if you want to define specific Promise library then:
-```ts
-import { Config } from '@authllizer/core';
-import Promise from 'library';
-Config.Promise = Promise;
-```
+
 #### fetch
 By default [HttpClient] is FetchHttpClient and by default it uses the global "fetch" (native or polyfill).
 if you want to define specific fetch library then:

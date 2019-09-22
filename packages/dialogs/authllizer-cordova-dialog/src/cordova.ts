@@ -1,7 +1,7 @@
 /**
  * @resource https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-inappbrowser/
  */
-import {PopupDialog, IBaseDialogOptions, Config, Directory} from '@authllizer/core';
+import {PopupDialog, IBaseDialogOptions, Directory} from '@authllizer/core';
 
 export interface ICorodvaDisplayOptions {
     location?: 'yes' | 'no';
@@ -69,7 +69,7 @@ export class CordovaDialog extends PopupDialog {
     }
 
     private listen(): Promise<string> {
-        return new Config.Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             this._popup.addEventListener('loadstart', ({url}: { url: string }) => {
                 if (url.indexOf(this.redirectUri) === 0) {
                     this.close();

@@ -28,11 +28,7 @@ export interface IConfigOptions {
     token?: ITokenConstructor;
 }
 
-declare let ES6Promise: typeof Promise;
-
 export class Config {
-
-    static Promise: typeof Promise = (typeof Promise !== 'undefined' && Promise) || (typeof ES6Promise !== 'undefined' && ES6Promise) as typeof Promise;
 
     protected _options: Directory<any> = {
         adapter: BackendAdapter,

@@ -37,7 +37,7 @@ let appModule = angular.module('myApp',[ 'authllizer' ]);
         } as IAuthllizerOptions);
     });
 ```
-*Note: Authllizer auto config to use Angular Promise (Config.Promise = $q;) and also the $http as [HttpClient](https://github.com/yisraelx/authllizer/blob/master/packages/@authllizer/core/docs/http.md)* 
+*Note: Authllizer auto config to use $http as [HttpClient](https://github.com/yisraelx/authllizer/blob/master/packages/@authllizer/core/docs/http.md). authllizer required global es6 `Promise`, You can use AngularJs `$q` service (`$window.Promise = $q;`)* 
 
 ## Use
 ```ts

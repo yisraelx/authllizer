@@ -1,7 +1,7 @@
 /**
  * @resource https://github.com/electron/electron/blob/master/docs/api/browser-window.md
  */
-import {Config, PopupDialog, IBaseDialogOptions, Directory} from '@authllizer/core';
+import {PopupDialog, IBaseDialogOptions, Directory} from '@authllizer/core';
 import {BrowserWindowConstructorOptions} from 'electron';
 
 export interface IElectronDialogOptions extends IBaseDialogOptions {
@@ -25,7 +25,7 @@ export class ElectronDialog extends PopupDialog {
     }
 
     private listen(): Promise<string> {
-        return new Config.Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             let listener = (event: Event, url: string) => {
                 if (url.indexOf(this.redirectUri) === 0) {
                     event.preventDefault();

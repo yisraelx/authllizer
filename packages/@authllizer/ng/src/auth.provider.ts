@@ -1,5 +1,5 @@
-import { extend, IHttpService, IQService } from 'angular';
-import { Authllizer, IAuthllizerOptions, Config } from '@authllizer/core';
+import { extend, IHttpService } from 'angular';
+import { Authllizer, IAuthllizerOptions } from '@authllizer/core';
 import { NgHttpClient } from './ng.http';
 
 export class AuthProvider {
@@ -10,10 +10,8 @@ export class AuthProvider {
         extend(this._options, options);
     }
 
-    public $get($injector, $q: IQService): Authllizer {
+    public $get($injector): Authllizer {
         let { _options: options } = this;
-
-        Config.Promise = $q as any;
 
         let client = ((...args) => {
             return $injector.get('$http')(...args);

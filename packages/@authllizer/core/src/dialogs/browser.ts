@@ -1,5 +1,4 @@
 import normalizeLocation from '../utils/normalize-location';
-import { Config } from '../config';
 import { PopupDialog } from './popup';
 import { Directory } from '../interface';
 
@@ -54,7 +53,7 @@ export class BrowserDialog extends PopupDialog {
     }
 
     private listen(): Promise<string> {
-        return new Config.Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             let redirectUri = normalizeLocation(this.redirectUri, { path: true });
 
             let intervalId = setInterval(() => {

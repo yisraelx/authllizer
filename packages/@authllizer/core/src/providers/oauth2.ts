@@ -5,7 +5,6 @@ import extend from '../utils/extend';
 import forEach from '../utils/for-each';
 import randomString from '../utils/random-string';
 import camelCase from '../utils/camel-case';
-import { Config } from '../config';
 import { BaseProvider, IBaseProviderOptions } from './base';
 import { IAdapterResponse, IAdapterRequestOptions } from '../adapters/adapter';
 import { IProvider } from './provider';
@@ -106,7 +105,7 @@ export class OAuth2Provider extends BaseProvider implements IProvider {
 
         if (this.responseType === 'token') {
             let token = (oauthData as IOAuth2TokenDialogResponse).access_token;
-            return Config.Promise.resolve({ token, response: oauthData } as any);
+            return Promise.resolve({ token, response: oauthData } as any);
         }
 
         let { authenticateParams } = this;
