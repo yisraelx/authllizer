@@ -5,16 +5,16 @@ describe('merge()', () => {
         () => {
             let object = {
                 foo: 'bar',
-                data: {a: 1}
+                data: { a: 1 }
             };
             let other = {
                 foo: 'bob',
-                data: {b: 2}
+                data: { b: 2 }
             };
             merge(object, other);
             expect(object).toEqual({
                 foo: 'bob',
-                data: {a: 1, b: 2}
+                data: { a: 1, b: 2 }
             });
         }
     );
@@ -23,24 +23,24 @@ describe('merge()', () => {
         () => {
             let object = {
                 foo: 'bar',
-                data: {a: 1}
+                data: { a: 1 }
             };
             let other = {
                 foo: 'bob',
-                data: {b: 2}
+                data: { b: 2 }
             };
             let result = merge({}, object, other);
             expect(object).toEqual({
                 foo: 'bar',
-                data: {a: 1}
+                data: { a: 1 }
             });
             expect(other).toEqual({
                 foo: 'bob',
-                data: {b: 2}
+                data: { b: 2 }
             });
             expect(result).toEqual({
                 foo: 'bob',
-                data: {a: 1, b: 2}
+                data: { a: 1, b: 2 }
             });
         }
     );

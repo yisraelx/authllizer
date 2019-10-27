@@ -1,4 +1,4 @@
-import {MemoryStorage} from '../../src/storages/memory';
+import { MemoryStorage } from '../../src/storages/memory';
 
 describe('MemoryStorage', () => {
     describe('getToken()', () => {

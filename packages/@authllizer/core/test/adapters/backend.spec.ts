@@ -1,5 +1,5 @@
-import {BackendAdapter} from '../../src/adapters/backend';
-import {IAdapterRequestOptions, AdapterRequestType} from '../../src/adapters/adapter';
+import { AdapterRequestType, IAdapterRequestOptions } from '../../src/adapters/adapter';
+import { BackendAdapter } from '../../src/adapters/backend';
 
 function createHttpClientMock(requestUrl, requestOptions, responseOptions) {
     return {
@@ -14,9 +14,9 @@ function createHttpClientMock(requestUrl, requestOptions, responseOptions) {
 describe('Backend', () => {
     describe('request()', () => {
         it('should make authenticate request successfully and return token', () => {
-            let data = {foo: 'bar'};
+            let data = { foo: 'bar' };
             let responseToken = 'token.foo.bar';
-            let responseOptions = {access_token: responseToken, color: 'red'};
+            let responseOptions = { access_token: responseToken, color: 'red' };
             let httpClient = createHttpClientMock('/auth/example', {
                 method: 'POST',
                 params: {},
@@ -31,19 +31,19 @@ describe('Backend', () => {
                 data,
                 provider: 'example'
             };
-            backend.request(options).then(({token, response}) => {
+            backend.request(options).then(({ token, response }) => {
                 expect(token).toBe(responseToken);
                 expect(response).toBe(responseOptions);
             });
         });
 
         it('should make signIn request successfully and return token', () => {
-            let data = {email: 'foo@example.com', password: 'Pa$$w0rd'};
+            let data = { email: 'foo@example.com', password: 'Pa$$w0rd' };
             let responseOptions = 'token.foo.bar';
             let httpClient = createHttpClientMock('/auth/login', {
                 method: 'POST',
-                params: {apiKey: '***'},
-                headers: {foo: 'bar'},
+                params: { apiKey: '***' },
+                headers: { foo: 'bar' },
                 data,
                 withCredentials: false
             }, responseOptions);
@@ -51,8 +51,8 @@ describe('Backend', () => {
                 signIn: '/login',
                 tokenPath: '',
                 defaultHttpOptions: {
-                    params: {apiKey: '***'},
-                    headers: {foo: 'bar'}
+                    params: { apiKey: '***' },
+                    headers: { foo: 'bar' }
                 }
             });
             let backend = new MyBackend(httpClient);
@@ -61,20 +61,20 @@ describe('Backend', () => {
                 data,
                 extractToken: true
             };
-            backend.request(options).then(({token, response}) => {
+            backend.request(options).then(({ token, response }) => {
                 expect(token).toBe(responseOptions);
                 expect(response).toBe(responseOptions);
             });
         });
 
         it('should make signUp request successfully and return token', () => {
-            let data = {name: 'John Lennon', email: 'john.lennon@gmail.com', password: 'Pa$$w0rd'};
+            let data = { name: 'John Lennon', email: 'john.lennon@gmail.com', password: 'Pa$$w0rd' };
             let tokenResponse = 'token.foo.bar';
-            let responseOptions = {data: {access_token: tokenResponse}};
+            let responseOptions = { data: { access_token: tokenResponse } };
             let httpClient = createHttpClientMock('/signup', {
                 method: 'POST',
                 params: {},
-                headers: {foo: 'bar'},
+                headers: { foo: 'bar' },
                 data,
                 withCredentials: false
             }, responseOptions);
@@ -83,7 +83,7 @@ describe('Backend', () => {
                 signUp: {
                     url: '/signup',
                     httpOptions: {
-                        headers: {foo: 'bar'}
+                        headers: { foo: 'bar' }
                     }
                 },
                 tokenPath: 'data.access_token'
@@ -94,7 +94,7 @@ describe('Backend', () => {
                 data,
                 extractToken: true
             };
-            myAdapter.request(options).then(({token, response}) => {
+            myAdapter.request(options).then(({ token, response }) => {
                 expect(token).toBe(tokenResponse);
                 expect(response).toBe(responseOptions);
             });
@@ -105,7 +105,7 @@ describe('Backend', () => {
             let httpClient = createHttpClientMock('/auth/signout', {
                 method: 'POST',
                 params: {},
-                headers: {'Authorization': token},
+                headers: { 'Authorization': token },
                 withCredentials: false
             }, void 0);
             let backend = new BackendAdapter(httpClient);
@@ -117,7 +117,7 @@ describe('Backend', () => {
                     }
                 } as any
             };
-            backend.request(options).then(({response, token}) => {
+            backend.request(options).then(({ response, token }) => {
                 expect(token).toBeUndefined();
                 expect(response).toBeUndefined();
             });
@@ -125,11 +125,11 @@ describe('Backend', () => {
 
         it('should be unlink successfully', () => {
             let token = '***';
-            let data = {provider: 'some'};
+            let data = { provider: 'some' };
             let httpClient = createHttpClientMock('/auth/unlink', {
                 method: 'POST',
                 params: {},
-                headers: {'Authorization': token},
+                headers: { 'Authorization': token },
                 data,
                 withCredentials: false
             }, void 0);
@@ -143,7 +143,7 @@ describe('Backend', () => {
                     }
                 } as any
             };
-            backend.request(options).then(({response, token}) => {
+            backend.request(options).then(({ response, token }) => {
                 expect(response).toBeUndefined();
                 expect(token).toBeUndefined();
             });
@@ -160,7 +160,7 @@ describe('Backend', () => {
             let httpClient = createHttpClientMock('/auth/refresh', {
                 method: 'POST',
                 params: {},
-                headers: {'Authorization': token},
+                headers: { 'Authorization': token },
                 withCredentials: false
             }, responseOptions);
             let backend = new BackendAdapter(httpClient);
@@ -174,7 +174,7 @@ describe('Backend', () => {
                 extractToken: true
             };
 
-            backend.request(options).then(({response, token}) => {
+            backend.request(options).then(({ response, token }) => {
                 expect(response).toEqual(responseOptions);
                 expect(token).toBe('new.token');
             });
@@ -185,9 +185,9 @@ describe('Backend', () => {
                 baseUrl = 'https://example.com';
                 defaultHttpOptions = {
                     method: 'GET',
-                    data: {name: 'bob'},
-                    params: {color: 'blue'},
-                    headers: {age: 120},
+                    data: { name: 'bob' },
+                    params: { color: 'blue' },
+                    headers: { age: 120 },
                     withCredentials: true
                 };
             }
@@ -195,16 +195,16 @@ describe('Backend', () => {
             let responseOptions = 'My Response!';
             let httpClient = createHttpClientMock('https://example.com/some', {
                 method: 'GET',
-                params: {color: 'blue', foo: 'bar', name: 'bob'},
-                headers: {age: 120},
+                params: { color: 'blue', foo: 'bar', name: 'bob' },
+                headers: { age: 120 },
                 withCredentials: true
             }, responseOptions);
             let backend = new MyBackendAdapter(httpClient);
             let options: IAdapterRequestOptions = {
                 type: 'some' as any,
-                data: {foo: 'bar'}
+                data: { foo: 'bar' }
             };
-            backend.request(options).then(({response, token}) => {
+            backend.request(options).then(({ response, token }) => {
                 expect(token).toBeUndefined();
                 expect(response).toBe(responseOptions);
             });
@@ -215,20 +215,20 @@ describe('Backend', () => {
         it('should return the routeUrl join with the baseUrl', () => {
             let baseUrl = 'https://test.com';
             let routeUrl = '/foo';
-            let url = (BackendAdapter.prototype as any).prepareUrl.call({baseUrl}, {}, {url: routeUrl});
-            expect(url).toBe(`${baseUrl}${routeUrl}`);
+            let url = (BackendAdapter.prototype as any).prepareUrl.call({ baseUrl }, {}, { url: routeUrl });
+            expect(url).toBe(`${ baseUrl }${ routeUrl }`);
         });
 
         it('should return the routeUrl is full url', () => {
             let baseUrl = 'https://test.com';
             let routeUrl = 'https://example.com/foo';
-            let url = (BackendAdapter.prototype as any).prepareUrl.call({baseUrl}, {}, {url: routeUrl});
+            let url = (BackendAdapter.prototype as any).prepareUrl.call({ baseUrl }, {}, { url: routeUrl });
             expect(url).toBe(routeUrl);
         });
 
         it('should return the routeUrl if no baseUrl', () => {
             let routeUrl = '/foo';
-            let url = (BackendAdapter.prototype as any).prepareUrl.call({}, {}, {url: routeUrl});
+            let url = (BackendAdapter.prototype as any).prepareUrl.call({}, {}, { url: routeUrl });
             expect(url).toBe(routeUrl);
         });
 

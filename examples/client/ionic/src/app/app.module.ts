@@ -134,7 +134,7 @@ import { SignUpPage } from './signup/signup.page';
     providers: [
         StatusBar,
         SplashScreen,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         AccountProvider,
         AuthGuard,
         {

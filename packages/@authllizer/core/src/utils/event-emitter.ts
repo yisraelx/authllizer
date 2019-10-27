@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 import forEach from './for-each';
 import isFunction from './is-function';
 
@@ -38,4 +39,5 @@ export default class EventEmitter<T> {
         });
         return this;
     }
+
 }

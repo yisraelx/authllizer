@@ -1,4 +1,3 @@
-
 import extendUrlQuery from '../../src/utils/extend-url-query';
 
 describe('extendUrlQuery()', () => {

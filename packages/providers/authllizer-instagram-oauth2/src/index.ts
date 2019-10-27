@@ -1,13 +1,13 @@
-/**
- * @resource https://www.instagram.com/developer/authentication/
- * @resource https://www.instagram.com/developer/authorization/
- */
-import { OAuth2Provider, IOAuth2ProviderOptions } from '@authllizer/core';
+import { IOAuth2ProviderOptions, OAuth2Provider } from '@authllizer/core';
 
 export interface IInstagramOAuth2Options extends IOAuth2ProviderOptions {
 
 }
 
+/**
+ * @resource https://www.instagram.com/developer/authentication/
+ * @resource https://www.instagram.com/developer/authorization/
+ */
 export default class InstagramOAuth2 extends OAuth2Provider {
 
     static extend: (options: IInstagramOAuth2Options) => typeof OAuth2Provider;

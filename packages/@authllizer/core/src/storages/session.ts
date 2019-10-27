@@ -1,13 +1,13 @@
+import { IToken } from '../tokens/token';
 import { MemoryStorage } from './memory';
 import { IStorage } from './storage';
-import { IToken } from '../tokens/token';
 
 export class SessionStorage extends MemoryStorage implements IStorage {
 
     public getToken(): string {
         try {
             return sessionStorage.getItem(this.key) as string;
-        } catch (e) {
+        } catch {
             return super.getToken();
         }
     }
@@ -15,7 +15,7 @@ export class SessionStorage extends MemoryStorage implements IStorage {
     public setToken(token: IToken): void {
         try {
             sessionStorage.setItem(this.key, token.toString());
-        } catch (e) {
+        } catch {
             super.setToken(token);
         }
     }
@@ -23,8 +23,9 @@ export class SessionStorage extends MemoryStorage implements IStorage {
     public removeToken(): void {
         try {
             sessionStorage.removeItem(this.key);
-        } catch (e) {
+        } catch {
             super.removeToken();
         }
     }
+
 }

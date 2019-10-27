@@ -1,5 +1,5 @@
-import {OAuth2Provider} from '../../src/providers/oauth2';
-import {AdapterRequestType} from '../../src/adapters';
+import { AdapterRequestType } from '../../src/adapters';
+import { OAuth2Provider } from '../../src/providers/oauth2';
 
 describe('OAuth2Provider', () => {
     describe('scope', () => {
@@ -18,7 +18,7 @@ describe('OAuth2Provider', () => {
         it('should return promise reject if state not match', () => {
             let someProvider = new (OAuth2Provider as any);
             spyOn(someProvider, 'getPermissions').and.callFake(async () => {
-                return {state: '***'};
+                return { state: '***' };
             });
 
             return someProvider.authenticate().catch((error) => {
@@ -33,12 +33,12 @@ describe('OAuth2Provider', () => {
             let someProvider = new (SomeProvider as any);
 
             spyOn(someProvider, 'getPermissions').and.callFake(async () => {
-                return {access_token: '***', state: someProvider.state};
+                return { access_token: '***', state: someProvider.state };
             });
 
-            return someProvider.authenticate().then(({token, response}) => {
+            return someProvider.authenticate().then(({ token, response }) => {
                 expect(token).toBe('***');
-                expect(response).toEqual({access_token: token, state: someProvider.state});
+                expect(response).toEqual({ access_token: token, state: someProvider.state });
             });
         });
         it('should return token if responseType is code', () => {
@@ -46,16 +46,16 @@ describe('OAuth2Provider', () => {
             let someProvider = new (OAuth2Provider as any);
 
             spyOn(someProvider, 'getPermissions').and.callFake(async () => {
-                return {code: '***', state: someProvider.state};
+                return { code: '***', state: someProvider.state };
             });
 
             spyOn(someProvider, 'getAccessToken').and.callFake(async (auth, user) => {
-                expect(auth).toEqual({code: '***', state: someProvider.state});
-                expect(user).toEqual({foo: 'bar'});
+                expect(auth).toEqual({ code: '***', state: someProvider.state });
+                expect(user).toEqual({ foo: 'bar' });
                 return 'data';
             });
 
-            return someProvider.authenticate({foo: 'bar'}).then((data) => {
+            return someProvider.authenticate({ foo: 'bar' }).then((data) => {
                 expect(data).toBe('data');
             });
         });
@@ -85,7 +85,7 @@ describe('OAuth2Provider', () => {
     describe('getAccessToken()', () => {
         it('should get access token', () => {
             class MockAdapter {
-                async request({data, token, provider, type}) {
+                async request({ data, token, provider, type }) {
                     expect(type).toBe(AdapterRequestType.link);
                     expect(token).toBe('***');
                     expect(provider).toBe('some');
@@ -110,11 +110,11 @@ describe('OAuth2Provider', () => {
             let myProvider = new (MyProvider as any)(new MockAdapter);
             let options = {
                 type: AdapterRequestType.link,
-                data: {color: 'red'},
+                data: { color: 'red' },
                 provider: 'some',
                 token: '***'
             };
-            return myProvider.getAccessToken({code: '***'}, options).then((token) => {
+            return myProvider.getAccessToken({ code: '***' }, options).then((token) => {
                 expect(token).toBe('token');
             });
         });

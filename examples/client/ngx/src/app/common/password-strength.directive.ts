@@ -22,7 +22,7 @@ export class PasswordStrengthDirective {
         this.element.nativeElement.parentNode.insertBefore(this.indicator, this.element.nativeElement.nextSibling);
 
         this.dots = Array
-            .from({length: 4})
+            .from({ length: 4 })
             .map(() => {
                 let dot = this.renderer.createElement('span');
                 this.indicator.appendChild(dot);
@@ -41,7 +41,7 @@ export class PasswordStrengthDirective {
     }
 
     @HostListener('keyup', ['$event.target'])
-    onKeyUp({value}) {
+    onKeyUp({ value }) {
         let matches: any = {
                 positive: {},
                 negative: {}

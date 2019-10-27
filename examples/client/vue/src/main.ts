@@ -29,13 +29,14 @@ import environment from './environments/environment';
 import './styles.css';
 
 declare module 'vue/types/options' {
+    /* eslint-disable @typescript-eslint/interface-name-prefix */
     interface ComponentOptions<V extends Vue> {
         templateUrl?: string;
     }
 }
 
-Vue.use(VueToasted, {position: 'top-right', duration: 5000});
-Vue.use(VeeValidate, {events: 'change'});
+Vue.use(VueToasted, { position: 'top-right', duration: 5000 });
+Vue.use(VeeValidate, { events: 'change' });
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(VueAuthllizer, {

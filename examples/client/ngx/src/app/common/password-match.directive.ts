@@ -3,7 +3,7 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorF
 
 export function compareToValidator(value: string): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} => {
-        return value !== '' && control.value !== value ? {'compareTo': control.value} : null;
+        return value !== '' && control.value !== value ? { 'compareTo': control.value } : null;
     };
 }
 
@@ -11,10 +11,11 @@ export function compareToValidator(value: string): ValidatorFn {
     selector: '[passwordMatch]',
     providers: [{
         provide: NG_VALIDATORS,
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         useExisting: forwardRef(() => PasswordMatchValidator),
         multi: true
     }],
-    host: {'[attr.passwordMatch]': 'passwordMatch ? passwordMatch : null'}
+    host: { '[attr.passwordMatch]': 'passwordMatch ? passwordMatch : null' }
 })
 export class PasswordMatchValidator implements Validator, OnChanges {
     @Input() passwordMatch: string;

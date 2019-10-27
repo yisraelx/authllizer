@@ -1,4 +1,3 @@
-
 import isObject from '../../src/utils/is-object';
 
 describe('isObject()', () => {

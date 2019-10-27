@@ -3,7 +3,7 @@ import extend from '../../src/utils/extend';
 describe('extend()', () => {
 
     it('should extend target without source ', () => {
-        let object = {foo: 'bar'};
+        let object = { foo: 'bar' };
         expect(extend(object)).toEqual(object);
     });
 
@@ -11,11 +11,11 @@ describe('extend()', () => {
         () => {
             let object = {
                 foo: 'bar',
-                data: {a: 1}
+                data: { a: 1 }
             };
             let other = {
                 foo: 'bob',
-                data: {b: 2}
+                data: { b: 2 }
             };
             expect(extend(object, other)).toEqual(other);
         }

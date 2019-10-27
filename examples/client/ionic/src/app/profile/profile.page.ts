@@ -27,8 +27,8 @@ export class ProfilePage implements OnInit {
     }
 
     async getProfile() {
-        let {email = '', displayName = ''} = this.user = await this.account.getProfile() as any;
-        this.profileForm.setValue({email, displayName});
+        let { email = '', displayName = '' } = this.user = await this.account.getProfile() as any;
+        this.profileForm.setValue({ email, displayName });
     }
 
     async updateProfile() {
@@ -42,7 +42,7 @@ export class ProfilePage implements OnInit {
             });
             await toast.present();
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             let alert = await this.alertCtrl.create({
                 message: (error && error.message) || message,
                 buttons: ['Dismiss']
@@ -62,7 +62,7 @@ export class ProfilePage implements OnInit {
             });
             await toast.present();
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             let alert = await this.alertCtrl.create({
                 message: (error && error.message) || message,
                 buttons: ['Dismiss']
@@ -82,7 +82,7 @@ export class ProfilePage implements OnInit {
             });
             await toast.present();
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             let alert = await this.alertCtrl.create({
                 message: (error && error.message) || message,
                 buttons: ['Dismiss']

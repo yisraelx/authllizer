@@ -8,7 +8,7 @@ describe('BrowserDialog', () => {
             let parseUrl = false;
             let listen = false;
 
-            let browserDialog = new BrowserDialog('test', 'https://test.com', {foo: 'bar'});
+            let browserDialog = new BrowserDialog('test', 'https://test.com', { foo: 'bar' });
             spyOn(window, 'open').and.callFake((url, name, features) => {
                 expect(url).toBe('https://example.com');
                 expect(name).toBe('test');

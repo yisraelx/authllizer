@@ -35,7 +35,7 @@ export default class SignInComponent extends React.Component<{history?: History}
                 this.props.history.push('/');
             })
             .catch((error: Error | Response | any) => {
-                let {body, statusText, message} = error;
+                let { body, statusText, message } = error;
                 alert((body && (body.message || statusText)) || message);
             });
     }
@@ -48,7 +48,7 @@ export default class SignInComponent extends React.Component<{history?: History}
                 .map((name: string, index: number) => {
                     let iconName = SignInComponent.providers[name];
                     return <button key={ index } className={ `btn btn-block btn-${ name }` }
-                                   onClick={ this.authenticate.bind(this, name) }>
+                        onClick={ this.authenticate.bind(this, name) }>
                         <i className={ `fa fa-${ iconName }` }></i> Sign in
                         with { name[0].toUpperCase() + name.substring(1) }
                     </button>;

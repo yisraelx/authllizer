@@ -1,13 +1,13 @@
-/**
- * @resource https://github.com/reddit/reddit/wiki/OAuth2
- * @resource https://www.reddit.com/dev/api/oauth
- */
-import {OAuth2Provider, IOAuth2ProviderOptions} from '@authllizer/core';
+import { IOAuth2ProviderOptions, OAuth2Provider } from '@authllizer/core';
 
 export interface IRedditOAuth2Options extends IOAuth2ProviderOptions {
     duration?: 'temporary' | 'permanent';
 }
 
+/**
+ * @resource https://github.com/reddit/reddit/wiki/OAuth2
+ * @resource https://www.reddit.com/dev/api/oauth
+ */
 export default class RedditOAuth2 extends OAuth2Provider {
 
     static extend: (options: IRedditOAuth2Options) => typeof RedditOAuth2;

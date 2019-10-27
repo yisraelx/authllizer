@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
     constructor(private auth: Authllizer, private router: Router) {
     }
 
-    canActivate({data: {auth}}: ActivatedRouteSnapshot): boolean {
+    canActivate({ data: { auth } }: ActivatedRouteSnapshot): boolean {
         if (this.auth.isAuthenticated() !== auth) {
             this.router.navigateByUrl(auth ? '/signin' : '/');
             return false;

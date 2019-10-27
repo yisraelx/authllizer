@@ -1,10 +1,10 @@
-import {Directory} from '../interface';
-import {IToken} from '../tokens/token';
-import {IHttpClient} from '../http/http';
+import { IHttpClient } from '../http/http';
+import { IDirectory } from '../interface';
+import { IToken } from '../tokens/token';
 
 export interface IAdapterRequestOptions {
     type?: AdapterRequestType;
-    data?: Directory<any>;
+    data?: IDirectory<any>;
     extractToken?: boolean;
     token?: IToken;
     provider?: string;
@@ -26,9 +26,8 @@ export interface IAdapterResponse<T> {
 }
 
 export interface IAdapterConstructor {
-    new(httpClient: IHttpClient): IAdapter;
-
     readonly prototype: IAdapter;
+    new(httpClient: IHttpClient): IAdapter;
 }
 
 export interface IAdapter {

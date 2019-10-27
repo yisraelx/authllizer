@@ -14,7 +14,7 @@ export class HomeComponent extends Vue {
     mounted() {
         axios
             .get('https://api.github.com/repos/yisraelx/authllizer')
-            .then(({data}: AxiosResponse) => {
+            .then(({ data }: AxiosResponse) => {
                 if (data) {
                     if (data.stargazers_count) {
                         this.stars = data.stargazers_count;

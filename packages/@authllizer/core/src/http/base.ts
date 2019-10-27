@@ -1,11 +1,10 @@
-import { Directory } from '../interface';
+import { IDirectory } from '../interface';
+import extendUrlQuery from '../utils/extend-url-query';
 import { IHttpClient, IHttpRequestOptions } from './http';
-import  extendUrlQuery  from '../utils/extend-url-query';
 
 export abstract class BaseHttpClient implements IHttpClient {
 
-
-    static extendUrlQuery(url: string, params: Directory<any>) {
+    static extendUrlQuery(url: string, params: IDirectory<any>) {
         return extendUrlQuery(url, params);
     }
 

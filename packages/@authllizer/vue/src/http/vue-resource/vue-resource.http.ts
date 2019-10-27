@@ -10,7 +10,7 @@ export class VueResourceHttpClient extends BaseHttpClient {
     }
 
     request<T>(url: string, options: IHttpRequestOptions): Promise<T> {
-        let {method, data, params, headers, withCredentials} = options;
+        let { method, data, params, headers, withCredentials } = options;
         let requestOptions = {
             method,
             url,

@@ -1,4 +1,3 @@
-
 import get from '../../src/utils/get';
 
 describe('get()', () => {
@@ -17,12 +16,12 @@ describe('get()', () => {
     });
 
     it('should return the object if no path', () => {
-        let object = {color: 'red'};
+        let object = { color: 'red' };
         expect(get(object)).toBe(object);
     });
 
     it('should return the default value if value id undefined', () => {
-        let object = {foo: void 0};
+        let object = { foo: void 0 };
         expect(get(object, 'foo', 'bar')).toBe('bar');
     });
 });

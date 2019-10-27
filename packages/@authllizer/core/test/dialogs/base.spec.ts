@@ -13,24 +13,24 @@ describe('BaseDialog', () => {
         });
         it('should return promise resolve with the data', () => {
             let data = BaseDialog.parseUrl('https://example.com?foo=bar#color=red');
-            expect(data).toEqual({foo: 'bar', color: 'red'});
+            expect(data).toEqual({ foo: 'bar', color: 'red' });
         });
     });
 
     describe('new', () => {
         it('should create new base dialog', () => {
-            let base = new (BaseDialog as any)('test', 'http://example.com', {foo: 'bar'});
+            let base = new (BaseDialog as any)('test', 'http://example.com', { foo: 'bar' });
             expect(base.name).toBe('test');
             expect(base.redirectUri).toBe('http://example.com');
-            expect(base.displayOptions).toEqual({foo: 'bar'});
+            expect(base.displayOptions).toEqual({ foo: 'bar' });
         });
     });
 
     describe('setDisplayOptions', () => {
         it('should be set display options', () => {
-            let base = new (BaseDialog as any)('', '', {foo: 'bar', color: 'red'});
-            base.setDisplayOptions({color: 'blue'});
-            expect(base.displayOptions).toEqual({foo: 'bar', color: 'blue'});
+            let base = new (BaseDialog as any)('', '', { foo: 'bar', color: 'red' });
+            base.setDisplayOptions({ color: 'blue' });
+            expect(base.displayOptions).toEqual({ foo: 'bar', color: 'blue' });
         });
     });
 

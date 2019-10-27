@@ -1,5 +1,5 @@
-import { extend, IHttpService } from 'angular';
 import { Authllizer, IAuthllizerOptions } from '@authllizer/core';
+import { extend, IHttpService } from 'angular';
 import { NgHttpClient } from './ng.http';
 
 export class AuthProvider {
@@ -21,6 +21,7 @@ export class AuthProvider {
 
         return new Authllizer(options);
     }
+
 }
 
 AuthProvider.prototype.$get.$inject = ['$injector', '$q'];

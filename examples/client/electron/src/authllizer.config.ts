@@ -87,7 +87,7 @@ export const AUTHLLIZER_CONFIG: IConfigOptions = {
     adapter: BackendAdapter.extend({
         baseUrl: `${ environment.backendUrl }/auth`
     }),
-    dialog: isElectron() ? ElectronDialog.extend({displayOptions: {useContentSize: true}}) : BrowserDialog,
+    dialog: isElectron() ? ElectronDialog.extend({ displayOptions: { useContentSize: true } }) : BrowserDialog,
     interceptList: [
         environment.backendUrl
     ],

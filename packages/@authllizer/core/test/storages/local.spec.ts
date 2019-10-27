@@ -1,27 +1,10 @@
 import { LocalStorage } from '../../src/storages/local';
 
-class MockLocalStorage {
-    static getItem(key) {
-        return this[key];
-    }
-
-    static setItem(key, value) {
-        this[key] = value;
-    }
-
-    static removeItem(key) {
-        delete this[key];
-    }
-}
-declare let global: any;
-global.localStorage = MockLocalStorage;
-
-
 describe('LocalStorage', () => {
     describe('getToken()', () => {
         it('should get token from localStorage', () => {
             let token: string = '*.*.*';
-            spyOn(localStorage, 'getItem').and.callFake((key: string) => {
+            spyOn(Storage.prototype, 'getItem').and.callFake((key: string) => {
                 expect(key).toBe('access_token');
                 return token;
             });
@@ -31,7 +14,7 @@ describe('LocalStorage', () => {
 
         it('should get token from memoryStorage', () => {
             let token: string = '*.*.*';
-            spyOn(localStorage, 'getItem').and.callFake((key: string) => {
+            spyOn(Storage.prototype, 'getItem').and.callFake((key: string) => {
                 throw new Error();
             });
             let storage = new LocalStorage;
@@ -43,7 +26,7 @@ describe('LocalStorage', () => {
     describe('setToken()', () => {
         it('should set token in localStorage', () => {
             let token: string = '*.*.*';
-            spyOn(localStorage, 'setItem').and.callFake((key: string, value: string) => {
+            spyOn(Storage.prototype, 'setItem').and.callFake((key: string, value: string) => {
                 expect(key).toBe('access_token');
                 expect(value).toBe(token);
             });
@@ -53,7 +36,7 @@ describe('LocalStorage', () => {
 
         it('should set token in memoryStorage', () => {
             let token: string = '*.*.*';
-            spyOn(localStorage, 'setItem').and.callFake((key: string) => {
+            spyOn(Storage.prototype, 'setItem').and.callFake((key: string) => {
                 throw new Error();
             });
             let storage = new LocalStorage;
@@ -69,15 +52,15 @@ describe('LocalStorage', () => {
             let storage = new LocalStorage;
             storage.setToken(token as any);
             storage.removeToken();
-            expect(storage.getToken()).toBeUndefined();
+            expect(storage.getToken()).toBeNull();
         });
 
         it('should remove token from memoryStorage', () => {
-            spyOn(localStorage, 'removeItem').and.callFake((key: string) => {
+            spyOn(Storage.prototype, 'removeItem').and.callFake((key: string) => {
                 throw new Error();
             });
             let storage = new LocalStorage;
-            storage.setToken('*.*.*'as any);
+            storage.setToken('*.*.*' as any);
             storage.removeToken();
             let value = (storage as any)._storage['access_token'];
             expect(value).toBeUndefined();

@@ -17,7 +17,7 @@ export default class AppRouter extends React.Component {
     }
 }
 
-const SignInRequiredRoute = ({component: Component, ...rest}) => {
+const SignInRequiredRoute = ({ component: Component, ...rest }) => {
     return <Route { ...rest } render={ (props) => {
         return authllizer.isAuthenticated()
             ? <Component { ...props } />
@@ -25,7 +25,7 @@ const SignInRequiredRoute = ({component: Component, ...rest}) => {
     } }/>;
 };
 
-const SignOutRequiredRoute = ({component: Component, ...rest}) => {
+const SignOutRequiredRoute = ({ component: Component, ...rest }) => {
     return <Route { ...rest } render={ (props) => {
         return !authllizer.isAuthenticated()
             ? <Component { ...props } />

@@ -2,8 +2,8 @@ export {
     CordovaDialog as default,
     ICordovaAndroidDialogOptions,
     ICordovaDialogOptions,
-    ICordovaIosdDialogOptions,
+    ICordovaIosDialogOptions,
     ICordovaWindowDialogOptions,
-    ICorodvaDisplayOptions
+    ICordovaDisplayOptions
 } from './cordova';
 export { default as isCordova } from './is-cordova';

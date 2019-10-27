@@ -9,7 +9,7 @@ export let passwordStrengthDirective: DirectiveOptions = {
         element.parentNode.insertBefore(indicator, element.nextSibling);
 
         dots = Array
-            .from({length: 4})
+            .from({ length: 4 })
             .map(() => {
                 let dot = document.createElement('span');
                 indicator.appendChild(dot);

@@ -1,7 +1,7 @@
-import { MemoryStorage, IMemoryStorageOptions } from './memory';
-import { IStorage } from './storage';
 import { IToken } from '../tokens/token';
 import isFunction from '../utils/is-function';
+import { IMemoryStorageOptions, MemoryStorage } from './memory';
+import { IStorage } from './storage';
 
 export interface ICookieStorageOptions extends IMemoryStorageOptions {
     expire: () => (Date | number) | Date | number;
@@ -29,7 +29,7 @@ export class CookieStorage extends MemoryStorage implements IStorage {
                     break;
                 }
             }
-        } catch (e) {
+        } catch {
             result = super.getToken();
         }
         return result;
@@ -47,12 +47,13 @@ export class CookieStorage extends MemoryStorage implements IStorage {
     private _setToken(token: IToken | string, expire?: Date | number): void {
         try {
             document.cookie = [
-                `${this.key}=${token}`,
-                expire ? `expires=${new Date(expire as any).toUTCString()}` : '',
-                this.path ? `path=${this.path}` : ''
+                `${ this.key }=${ token }`,
+                expire ? `expires=${ new Date(expire as any).toUTCString() }` : '',
+                this.path ? `path=${ this.path }` : ''
             ].join(';');
-        } catch (e) {
+        } catch {
             super.setToken(token as IToken);
         }
     }
+
 }

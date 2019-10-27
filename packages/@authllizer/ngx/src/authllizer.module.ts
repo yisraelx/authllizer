@@ -1,7 +1,6 @@
-import { ModuleWithProviders, NgModule} from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { IAuthllizerOptions } from '@authllizer/core';
 import { AUTHLLIZER_OPTIONS, AUTHLLIZER_PROVIDER } from './authllizer.provider';
-
 
 @NgModule({
     providers: [
@@ -14,7 +13,7 @@ export class AuthllizerModule {
         return {
             ngModule: AuthllizerModule,
             providers: [
-                {provide: AUTHLLIZER_OPTIONS, useValue: options}
+                { provide: AUTHLLIZER_OPTIONS, useValue: options }
             ]
         };
     }

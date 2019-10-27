@@ -1,5 +1,5 @@
-import {OAuth1Provider} from '../../src/providers/oauth1';
-import {AdapterRequestType} from '../../src/adapters';
+import { AdapterRequestType } from '../../src/adapters';
+import { OAuth1Provider } from '../../src/providers/oauth1';
 
 describe('OAuth1Provider', () => {
     describe('authenticate()', () => {
@@ -37,12 +37,12 @@ describe('OAuth1Provider', () => {
             });
 
             let mockAdapter = {
-                async request({type, data, provider, token}) {
+                async request({ type, data, provider, token }) {
                     expect(type).toBe(AdapterRequestType.link);
                     expect(provider).toBe('some');
                     expect(token).toBe('***');
-                    expect(data).toEqual({callback: 'https://example.com', some: 'bar'});
-                    return {response: 'data'};
+                    expect(data).toEqual({ callback: 'https://example.com', some: 'bar' });
+                    return { response: 'data' };
                 }
             };
 
@@ -95,8 +95,8 @@ describe('OAuth1Provider', () => {
             });
 
             let mockAdapter = {
-                async request({type, token, provider, data}) {
-                    expect(data).toEqual({some: 'red', foo: 'bar', callback: 'http://example.com'});
+                async request({ type, token, provider, data }) {
+                    expect(data).toEqual({ some: 'red', foo: 'bar', callback: 'http://example.com' });
                     expect(provider).toBe('some');
                     expect(token).toBe('***');
                     expect(type).toBe(AdapterRequestType.authenticate);
@@ -110,9 +110,9 @@ describe('OAuth1Provider', () => {
                 type: AdapterRequestType.authenticate,
                 token: '***',
                 provider: 'some',
-                data: {foo: 'bar'}
+                data: { foo: 'bar' }
             };
-            someProvider.getAccessToken({color: 'red'}, options).then((token) => {
+            someProvider.getAccessToken({ color: 'red' }, options).then((token) => {
                 expect(token).toBe('token');
             });
         });

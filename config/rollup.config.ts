@@ -3,6 +3,7 @@ import resolvePlugin from 'rollup-plugin-node-resolve';
 import { terser as terserPlugin } from 'rollup-plugin-terser';
 import tsPlugin from 'rollup-plugin-typescript2';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 let PKG = require(join(process.cwd(), 'package.json'));
 
 let banner = `/*!
@@ -12,7 +13,7 @@ let banner = `/*!
 * @copyright ${ PKG.author.name } <${ PKG.author.email }> (${ PKG.author.url })
 */`;
 
-let {rollup: {globals}} = PKG;
+let { rollup: { globals } } = PKG;
 
 let createOutputConfig = (minify = false) => ({
     file: minify ? PKG.browser.replace('.js', '.min.js') : PKG.browser,
@@ -42,6 +43,6 @@ export default {
             },
             clean: true
         }),
-        terserPlugin({include: /.*\.min\.js$/, sourcemap: true, output: {comments: false}})
+        terserPlugin({ include: /.*\.min\.js$/, sourcemap: true, output: { comments: false } })
     ]
 };

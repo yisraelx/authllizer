@@ -1,15 +1,12 @@
-/**
- * @resource https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-inappbrowser/
- */
-import {PopupDialog, IBaseDialogOptions, Directory} from '@authllizer/core';
+import { IBaseDialogOptions, PopupDialog } from '@authllizer/core';
 
-export interface ICorodvaDisplayOptions {
+export interface ICordovaDisplayOptions {
     location?: 'yes' | 'no';
 
     [key: string]: any;
 }
 
-export interface ICordovaAndroidDialogOptions extends ICorodvaDisplayOptions {
+export interface ICordovaAndroidDialogOptions extends ICordovaDisplayOptions {
     hidden?: 'yes' | 'no';
     clearcache?: 'yes' | 'no';
     clearsessioncache?: 'yes' | 'no';
@@ -20,7 +17,7 @@ export interface ICordovaAndroidDialogOptions extends ICorodvaDisplayOptions {
     useWideViewPort?: 'yes' | 'no';
 }
 
-export interface ICordovaIosdDialogOptions extends ICorodvaDisplayOptions {
+export interface ICordovaIosDialogOptions extends ICordovaDisplayOptions {
     closebuttoncaption?: string;
     disallowoverscroll?: 'yes' | 'no';
     clearcache?: 'yes' | 'no';
@@ -36,23 +33,35 @@ export interface ICordovaIosdDialogOptions extends ICorodvaDisplayOptions {
     toolbarposition?: 'top' | 'bottom';
 }
 
-export interface ICordovaWindowDialogOptions extends ICorodvaDisplayOptions {
+export interface ICordovaWindowDialogOptions extends ICordovaDisplayOptions {
     hidden?: 'yes' | 'no';
     fullscreen?: 'yes' | 'no';
     hardwareback?: 'yes' | 'no';
 }
 
 export interface ICordovaDialogOptions extends IBaseDialogOptions {
-    displayOptions?: ICorodvaDisplayOptions | ICordovaAndroidDialogOptions | ICordovaIosdDialogOptions | ICordovaWindowDialogOptions;
+    displayOptions?: ICordovaDisplayOptions | ICordovaAndroidDialogOptions | ICordovaIosDialogOptions | ICordovaWindowDialogOptions;
 }
 
+/**
+ * @resource https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-inappbrowser/
+ */
 export class CordovaDialog extends PopupDialog {
 
     static extend: (options: ICordovaDialogOptions) => typeof CordovaDialog;
 
-    protected displayOptions: ICorodvaDisplayOptions | ICordovaAndroidDialogOptions | ICordovaIosdDialogOptions | ICordovaWindowDialogOptions;
+    protected displayOptions: ICordovaDisplayOptions | ICordovaAndroidDialogOptions | ICordovaIosDialogOptions | ICordovaWindowDialogOptions;
 
-    protected setDisplayOptions(displayOptions: ICorodvaDisplayOptions) {
+    public open(url: string) {
+        this._popup = window.open(url, '_blank', this.stringDisplayOptions) as Window;
+        this.focus();
+
+        return this
+            .listen()
+            .then(CordovaDialog.parseUrl);
+    }
+
+    protected setDisplayOptions(displayOptions: ICordovaDisplayOptions) {
         delete displayOptions.width;
         delete displayOptions.height;
         super.setDisplayOptions({
@@ -60,30 +69,29 @@ export class CordovaDialog extends PopupDialog {
         }, displayOptions);
     }
 
-    public open(url: string): Promise<Directory<any>> {
-        this._popup = window.open(url, '_blank', this.stringDisplayOptions) as Window;
-        this.focus();
-        return this.listen().then((url) => {
-            return CordovaDialog.parseUrl(url);
-        });
-    }
-
     private listen(): Promise<string> {
         return new Promise((resolve, reject) => {
-            this._popup.addEventListener('loadstart', ({url}: { url: string }) => {
-                if (url.indexOf(this.redirectUri) === 0) {
-                    this.close();
-                    resolve(url);
-                }
-            });
+            this
+                ._popup
+                .addEventListener('loadstart', ({ url }: {url: string}) => {
+                    if (url.indexOf(this.redirectUri) === 0) {
+                        this.close();
+                        resolve(url);
+                    }
+                });
 
-            this._popup.addEventListener('loaderror', () => {
-                reject(new Error('Authorization failed'));
-            });
+            this
+                ._popup
+                .addEventListener('loaderror', () => {
+                    reject(new Error('Authorization failed'));
+                });
 
-            this._popup.addEventListener('exit', () => {
-                reject(new Error('The dialog was closed'));
-            });
+            this
+                ._popup
+                .addEventListener('exit', () => {
+                    reject(new Error('The dialog was closed'));
+                });
         });
     }
+
 }

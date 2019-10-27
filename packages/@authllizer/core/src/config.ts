@@ -1,36 +1,36 @@
-import isFunction from './utils/is-function';
-import isString from './utils/is-string';
-import isObject from './utils/is-object';
-import forEach from './utils/for-each';
-import normalizeLocation from './utils/normalize-location';
-import isRegExp from './utils/is-regexp';
-
-import { Directory } from './interface';
-import { IStorage } from './storages/storage';
-import { ITokenConstructor } from './tokens/token';
 import { IAdapter, IAdapterConstructor } from './adapters/adapter';
-import { IProvider, IProviderConstructor } from './providers/provider';
-import { IDialogConstructor } from './dialogs/dialog';
-import { LocalStorage } from './storages/local';
-import { JWT } from './tokens/jwt';
 import { BackendAdapter } from './adapters/backend';
 import { BrowserDialog } from './dialogs/browser';
-import { IHttpClient } from './http/http';
+import { IDialogConstructor } from './dialogs/dialog';
 import { FetchHttpClient } from './http/fetch';
+import { IHttpClient } from './http/http';
+
+import { IDirectory } from './interface';
+import { IProvider, IProviderConstructor } from './providers/provider';
+import { LocalStorage } from './storages/local';
+import { IStorage } from './storages/storage';
+import { JWT } from './tokens/jwt';
+import { ITokenConstructor } from './tokens/token';
+import forEach from './utils/for-each';
+import isFunction from './utils/is-function';
+import isObject from './utils/is-object';
+import isRegExp from './utils/is-regexp';
+import isString from './utils/is-string';
+import normalizeLocation from './utils/normalize-location';
 
 export interface IConfigOptions {
     adapter?: IAdapterConstructor;
     dialog?: IDialogConstructor;
     httpClient?: IHttpClient;
     interceptList?: (string | RegExp)[];
-    providers?: Directory<IProviderConstructor>;
+    providers?: IDirectory<IProviderConstructor>;
     storage?: IStorage;
     token?: ITokenConstructor;
 }
 
 export class Config {
 
-    protected _options: Directory<any> = {
+    protected _options: IDirectory<any> = {
         adapter: BackendAdapter,
         dialog: BrowserDialog,
         httpClient: new FetchHttpClient(),
@@ -100,7 +100,6 @@ export class Config {
             this._options.adapter = adapter;
         }
 
-
         if (dialog) {
             if (!isFunction(dialog)) {
                 throw new Error(`Config: 'dialog' is  invalid.`);
@@ -121,7 +120,7 @@ export class Config {
             }
             interceptList.forEach((compere) => {
                 if (!isString(compere) && !isRegExp(compere)) {
-                    throw new Error(`Config: 'interceptList' invalid compere ${compere}`);
+                    throw new Error(`Config: 'interceptList' invalid compere ${ compere }`);
                 }
             });
             this._options.interceptList = interceptList;
@@ -150,7 +149,7 @@ export class Config {
             }
             forEach(providers, (provider, name) => {
                 if (!isFunction(provider)) {
-                    throw new Error(`Config: 'provider' '${name}' is invalid.`);
+                    throw new Error(`Config: 'provider' '${ name }' is invalid.`);
                 }
                 this._options.providers[name] = provider;
             });
@@ -161,13 +160,13 @@ export class Config {
         let { providers } = this._options;
 
         if (!isString(provider) || !this.isProviderExists(provider)) {
-            throw new Error(`Config: '${provider}' provider is missing.`);
+            throw new Error(`Config: '${ provider }' provider is missing.`);
         }
 
         let Provider: IProviderConstructor = providers[provider];
 
         if (!isFunction(Provider)) {
-            throw new Error(`Config: provider should be a class: ${Provider}`);
+            throw new Error(`Config: provider should be a class: ${ Provider }`);
         }
 
         return new Provider(this.adapter, this.dialog);
@@ -200,4 +199,5 @@ export class Config {
 
         return false;
     }
+
 }

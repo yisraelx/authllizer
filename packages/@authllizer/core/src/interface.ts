@@ -1,3 +1,3 @@
-export interface Directory<T> {
+export interface IDirectory<T> {
     [key: string]: T;
 }

@@ -7,10 +7,10 @@ import { SignInPage } from './signin/signin.page';
 import { SignUpPage } from './signup/signup.page';
 
 const routes: Routes = [
-    {path: '', component: SignInPage},
-    {path: 'signup', component: SignUpPage},
-    {path: 'profile', component: ProfilePage, canActivate: [AuthGuard]},
-    {path: 'home', component: HomePage, canActivate: [AuthGuard]},
+    { path: '', component: SignInPage },
+    { path: 'signup', component: SignUpPage },
+    { path: 'profile', component: ProfilePage, canActivate: [AuthGuard] },
+    { path: 'home', component: HomePage, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

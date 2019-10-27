@@ -1,4 +1,3 @@
-
 import parseQuery from '../../src/utils/parse-query';
 
 describe('parseQuery()', () => {

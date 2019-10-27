@@ -23,7 +23,7 @@ export class SignOutComponent implements OnInit {
             await this.router.navigateByUrl('/');
             this.toastr.info('You have been logged out!');
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             this.toastr.error((error && error.message) || message);
         }
     }

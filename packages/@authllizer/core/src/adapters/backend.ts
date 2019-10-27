@@ -1,11 +1,11 @@
-import merge from '../utils/merge';
+import { IHttpClient, IHttpRequestOptions } from '../http/http';
+import { IDirectory } from '../interface';
 import extendClass from '../utils/extend-class';
-import isString from '../utils/is-string';
 import get from '../utils/get';
+import isString from '../utils/is-string';
 import joinUrl from '../utils/join-url';
-import {IAdapter, IAdapterResponse, IAdapterRequestOptions} from './adapter';
-import {Directory} from '../interface';
-import {IHttpClient, IHttpRequestOptions} from '../http/http';
+import merge from '../utils/merge';
+import { IAdapter, IAdapterRequestOptions, IAdapterResponse } from './adapter';
 
 export interface IBackendAdapterOptions {
 
@@ -75,21 +75,24 @@ export class BackendAdapter implements IAdapter {
     }
 
     public request<T>(requestOptions: IAdapterRequestOptions): Promise<IAdapterResponse<T>> {
-        let {extractToken} = requestOptions;
+        let { extractToken } = requestOptions;
         let stateOptions: IBackendRouteOptions = this.getDefaultRouteOptions(requestOptions);
         let url: string = this.prepareUrl(requestOptions, stateOptions);
         let httpOptions: IHttpRequestOptions = this.prepareOptions(requestOptions, stateOptions);
 
-        return this._httpClient.request<T>(url, httpOptions).then((response: T) => {
-            let adapterResponse: IAdapterResponse<T> = {response};
-            if (extractToken) {
-                adapterResponse.token = this.extractToken(response);
-            }
-            return adapterResponse;
-        });
+        return this
+            ._httpClient
+            .request<T>(url, httpOptions)
+            .then((response: T) => {
+                let adapterResponse: IAdapterResponse<T> = { response };
+                if (extractToken) {
+                    adapterResponse.token = this.extractToken(response);
+                }
+                return adapterResponse;
+            });
     }
 
-    protected prepareUrl({provider}: IAdapterRequestOptions, {url}: IBackendRouteOptions): string {
+    protected prepareUrl({ provider }: IAdapterRequestOptions, { url }: IBackendRouteOptions): string {
         if (provider && this.providerInUrl) {
             url = joinUrl(url, provider);
         }
@@ -97,8 +100,8 @@ export class BackendAdapter implements IAdapter {
         return this.baseUrl ? joinUrl(this.baseUrl, url) : url;
     }
 
-    protected prepareOptions({token, provider, data}: IAdapterRequestOptions, {httpOptions: routeHttpOptions}: IBackendRouteOptions): IHttpRequestOptions {
-        let {defaultHttpOptions, providerInUrl} = this;
+    protected prepareOptions({ token, provider, data }: IAdapterRequestOptions, { httpOptions: routeHttpOptions }: IBackendRouteOptions): IHttpRequestOptions {
+        let { defaultHttpOptions, providerInUrl } = this;
 
         let options = {
             data: {},
@@ -125,15 +128,15 @@ export class BackendAdapter implements IAdapter {
         return this.prepareData(extendOptions, data);
     }
 
-    protected getDefaultRouteOptions({type}: IAdapterRequestOptions): IBackendRouteOptions {
-        let options: IBackendRouteOptions = isString(this[type]) ? {url: (this[type] as string)} : (this[type] as IBackendRouteOptions) || {};
-        options.url = isString(options.url) ? options.url : `/${type}`;
+    protected getDefaultRouteOptions({ type }: IAdapterRequestOptions): IBackendRouteOptions {
+        let options: IBackendRouteOptions = isString(this[type]) ? { url: (this[type] as string) } : (this[type] as IBackendRouteOptions) || {};
+        options.url = isString(options.url) ? options.url : `/${ type }`;
 
         return options;
     }
 
-    protected prepareData(httpOptions: IHttpRequestOptions, data?: Directory<any>): IHttpRequestOptions {
-        let {method} = httpOptions;
+    protected prepareData(httpOptions: IHttpRequestOptions, data?: IDirectory<any>): IHttpRequestOptions {
+        let { method } = httpOptions;
 
         enum BODY_METHOD {
             POST,
@@ -156,7 +159,7 @@ export class BackendAdapter implements IAdapter {
     }
 
     protected extractToken(response: any): string {
-        let {tokenPath} = this;
+        let { tokenPath } = this;
         return get(response, tokenPath);
     }
 

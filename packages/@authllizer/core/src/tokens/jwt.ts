@@ -2,8 +2,8 @@
  * @resource https://tools.ietf.org/html/rfc7519
  */
 import decodeBase64 from '../utils/decode-base64';
-import { IToken } from './token';
 import isString from '../utils/is-string';
+import { IToken } from './token';
 
 export interface IJWTPayload {
     iss?: string;
@@ -30,15 +30,14 @@ export class JWT implements IToken {
         return JSON.parse(decodeBase64(base64));
     }
 
+    protected headerPrefix: string = 'Bearer';
+    private _token: string;
+    private _payload: IJWTPayload;
+
     public get expire(): Date {
         let { exp } = this._payload;
         return new Date(exp * 1000);
     }
-
-    private _token: string;
-    private _payload: IJWTPayload;
-
-    protected headerPrefix: string = 'Bearer';
 
     constructor(token: string | JWT) {
         this._token = String(token);
@@ -58,7 +57,7 @@ export class JWT implements IToken {
     }
 
     public toHeader(): string {
-        return `${this.headerPrefix} ${this._token}`;
+        return `${ this.headerPrefix } ${ this._token }`;
     }
 
     public toString(): string {

@@ -1,20 +1,20 @@
-import parseQuery from '../utils/parse-query';
+import { IDirectory } from '../interface';
 import extend from '../utils/extend';
 import extendClass from '../utils/extend-class';
+import parseQuery from '../utils/parse-query';
 import { IDialog } from './dialog';
-import { Directory } from '../interface';
 
 export interface IBaseDialogOptions {
     name?: string;
     redirectUri?: string;
-    displayOptions?: Directory<any>;
+    displayOptions?: IDirectory<any>;
 }
 
 export abstract class BaseDialog implements IDialog {
 
     static extend: (options: IBaseDialogOptions) => typeof BaseDialog = extendClass;
 
-    static parseUrl(url: string): Directory<any> {
+    static parseUrl(url: string): IDirectory<any> {
         let location = document.createElement('a');
         location.href = url;
         if (location.search || location.hash) {
@@ -33,17 +33,17 @@ export abstract class BaseDialog implements IDialog {
 
     protected name: string;
     protected redirectUri: string;
-    protected displayOptions: Directory<any>;
+    protected displayOptions: IDirectory<any>;
 
-    constructor(name: string, redirectUri: string, displayOptions: Directory<any>) {
+    constructor(name: string, redirectUri: string, displayOptions: IDirectory<any>) {
         this.name = this.name || name;
         this.redirectUri = this.redirectUri || redirectUri;
         this.setDisplayOptions(displayOptions);
     }
 
-    protected setDisplayOptions(...displayOptions: Directory<any>[]) {
+    public abstract open(url: string): Promise<IDirectory<any>>;
+
+    protected setDisplayOptions(...displayOptions: IDirectory<any>[]) {
         this.displayOptions = extend(this.displayOptions, ...displayOptions);
     }
-
-    public abstract open(url: string): Promise<Directory<any>>;
 }

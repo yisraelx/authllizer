@@ -34,7 +34,7 @@ export class SignUpComponent {
             await this.router.navigateByUrl('/');
             this.toastr.info('You have successfully created a new account and have been signed-in!');
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             this.toastr.error((error && error.message) || message);
         }
     }

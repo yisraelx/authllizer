@@ -1,4 +1,3 @@
-
 import joinUrl from '../../src/utils/join-url';
 
 describe('joinUrl()', () => {

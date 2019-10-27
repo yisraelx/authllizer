@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { BaseHttpClient, IHttpRequestOptions } from '@authllizer/core';
 
+/**
+ * @see https://angular.io/api/common/http/HttpClient
+ */
 export class NgxHttpClient extends BaseHttpClient {
 
     protected _client: HttpClient;
@@ -10,12 +13,17 @@ export class NgxHttpClient extends BaseHttpClient {
     }
 
     public request<T>(url: string, options: IHttpRequestOptions): Promise<T> {
-        let {method, data, params, headers, withCredentials} = options;
-        return this._client.request(method, url, {
-            body: data,
-            params,
-            headers,
-            withCredentials
-        }).toPromise() as any;
+        let { method, data, params, headers, withCredentials } = options;
+
+        return this
+            ._client
+            .request(method, url, {
+                body: data,
+                params,
+                headers,
+                withCredentials
+            })
+            .toPromise() as any;
     }
+
 }

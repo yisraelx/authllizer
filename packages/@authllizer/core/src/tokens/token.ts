@@ -1,7 +1,6 @@
-
 export interface ITokenConstructor {
-    new(token: any): IToken;
     readonly prototype: IToken;
+    new(token: any): IToken;
 }
 
 export interface IToken {

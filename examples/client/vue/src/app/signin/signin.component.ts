@@ -28,7 +28,7 @@ export class SignInComponent extends Vue {
                 this.$router.push('/');
             })
             .catch((error: AxiosError) => {
-                let {response, message}: AxiosError = error;
+                let { response, message }: AxiosError = error;
                 this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
     }
@@ -42,7 +42,7 @@ export class SignInComponent extends Vue {
                 this.$router.push('/');
             })
             .catch((error: AxiosError) => {
-                let {response, message}: AxiosError = error;
+                let { response, message }: AxiosError = error;
                 this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
     }

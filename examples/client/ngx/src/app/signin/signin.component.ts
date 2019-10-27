@@ -27,7 +27,7 @@ export class SignInComponent {
             await this.router.navigateByUrl('/');
             this.toastr.success('You have successfully signed in!');
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             this.toastr.error((error && error.message) || message);
         }
     }
@@ -38,7 +38,7 @@ export class SignInComponent {
             await this.router.navigateByUrl('/');
             this.toastr.success(`You have successfully signed in with ${ provider }!`);
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             this.toastr.error((error && error.message) || message);
         }
     }

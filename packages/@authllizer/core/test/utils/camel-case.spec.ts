@@ -1,4 +1,3 @@
-
 import camelCase from '../../src/utils/camel-case';
 
 describe('camelCase()', () => {

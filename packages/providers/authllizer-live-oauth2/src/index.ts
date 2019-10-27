@@ -1,14 +1,14 @@
-/**
- * @resource https://msdn.microsoft.com/en-us/library/hh243647.aspx
- * @resource https://msdn.microsoft.com/en-us/library/hh243646.aspx
- */
-import { OAuth2Provider, IOAuth2ProviderOptions } from '@authllizer/core';
+import { IOAuth2ProviderOptions, OAuth2Provider } from '@authllizer/core';
 
 export interface ILiveOAuth2Options extends IOAuth2ProviderOptions {
     display?: 'page' | 'popup' | 'touch' | 'none';
     locale?: string;
 }
 
+/**
+ * @resource https://msdn.microsoft.com/en-us/library/hh243647.aspx
+ * @resource https://msdn.microsoft.com/en-us/library/hh243646.aspx
+ */
 export default class LiveOAuth2 extends OAuth2Provider {
 
     static extend: (options: ILiveOAuth2Options) => typeof LiveOAuth2;

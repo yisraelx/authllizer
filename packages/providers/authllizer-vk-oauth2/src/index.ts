@@ -1,13 +1,13 @@
-/**
- * @resource https://vk.com/dev/authentication
- */
-import { OAuth2Provider, IOAuth2ProviderOptions } from '@authllizer/core';
+import { IOAuth2ProviderOptions, OAuth2Provider } from '@authllizer/core';
 
 export interface IVkOAuth2Options extends IOAuth2ProviderOptions {
     display?: 'page' | 'popup' | 'touch' | 'wap';
     v?: string;
 }
 
+/**
+ * @resource https://vk.com/dev/authentication
+ */
 export default class VkOAuth2 extends OAuth2Provider {
 
     static extend: (options: IVkOAuth2Options) => typeof VkOAuth2;

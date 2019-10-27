@@ -1,4 +1,4 @@
-let {fromCharCode} = String;
+let { fromCharCode } = String;
 
 let re_btou = new RegExp([
     '[\xC0-\xDF][\x80-\xBF]',

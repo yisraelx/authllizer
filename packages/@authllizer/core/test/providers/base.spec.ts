@@ -10,7 +10,8 @@ describe('BaseProvider', () => {
             }).extend({
                 color: 'red'
             });
-            let someProvider = new (SomeProvider as any)({}, () => { });
+            let someProvider = new (SomeProvider as any)({}, () => {
+            });
             expect(someProvider instanceof BaseProvider).toBeTruthy();
             expect(someProvider.name).toBe('some');
             expect(someProvider.foo).toBe('bar');
@@ -22,11 +23,13 @@ describe('BaseProvider', () => {
                 name = 'a';
                 color = 'blue';
             }
+
             let BProvider = AProvider.extend({
                 name: 'b',
                 color: 'red'
             });
-            let bProvider = new (BProvider as any)({}, () => { });
+            let bProvider = new (BProvider as any)({}, () => {
+            });
             expect(bProvider instanceof BaseProvider).toBeTruthy();
             expect(bProvider.name).toBe('b');
             expect(bProvider.color).toBe('red');
@@ -39,7 +42,9 @@ describe('BaseProvider', () => {
                 name = 'some';
                 foo = 'bar';
             }
-            let someProvider = new (SomeProvider as any)({}, () => { });
+
+            let someProvider = new (SomeProvider as any)({}, () => {
+            });
             expect(someProvider.name).toBe('some');
             expect(someProvider.foo).toBe('bar');
         });
@@ -61,6 +66,7 @@ describe('BaseProvider', () => {
                 displayOptions: { foo: 'bar' }
             };
             let FooProvider = BaseProvider.extend(providerConfig);
+
             function mockDialog(name, redirectUri, displayOptions) {
                 expect(name).toBe(providerConfig.name);
                 expect(redirectUri).toBe(providerConfig.redirectUri);
@@ -72,6 +78,7 @@ describe('BaseProvider', () => {
                     }
                 };
             }
+
             let fooProvider = new (FooProvider as any)('', mockDialog);
             return fooProvider.openDialog('https://test.com').then((data) => {
                 expect(data).toBe('data');

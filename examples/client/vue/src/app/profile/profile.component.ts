@@ -23,7 +23,7 @@ export class ProfileComponent extends Vue {
     getProfile() {
         Account
             .getProfile()
-            .then(({data}: AxiosResponse) => {
+            .then(({ data }: AxiosResponse) => {
                 this.$set(this, 'user', data);
             });
     }
@@ -40,7 +40,7 @@ export class ProfileComponent extends Vue {
                 this.$toasted.success('Profile has been updated.');
             })
             .catch((error: AxiosError) => {
-                let {response, message}: AxiosError = error;
+                let { response, message }: AxiosError = error;
                 this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
     }
@@ -54,7 +54,7 @@ export class ProfileComponent extends Vue {
                 this.$toasted.success(`You have successfully linked a ${ provider } account.`);
             })
             .catch((error: AxiosError) => {
-                let {response, message}: AxiosError = error;
+                let { response, message }: AxiosError = error;
                 this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
     }
@@ -68,7 +68,7 @@ export class ProfileComponent extends Vue {
                 this.$toasted.info(`You have unlinked a ${ provider } account.`);
             })
             .catch((error: AxiosError) => {
-                let {response}: AxiosError = error;
+                let { response }: AxiosError = error;
                 this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || `Could not unlink ${ provider } account.`);
             });
     }

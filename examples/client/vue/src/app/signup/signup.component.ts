@@ -39,7 +39,7 @@ export class SignUpComponent extends Vue {
                 this.$toasted.info('You have successfully created a new account and have been signed-in!');
             })
             .catch((error: AxiosError) => {
-                let {response, message}: AxiosError = error;
+                let { response, message }: AxiosError = error;
                 this.$toasted.error((response && ((response.data && response.data.message) || response.statusText)) || message);
             });
     }

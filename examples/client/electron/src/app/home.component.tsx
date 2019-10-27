@@ -39,13 +39,13 @@ export default class HomeComponent extends React.Component<{history?: History}, 
                 this.props.history.push('/signin');
             })
             .catch((error: Error | Response | any) => {
-                let {body, statusText, message} = error;
+                let { body, statusText, message } = error;
                 alert((body && (body.message || statusText)) || message);
             });
     }
 
     render() {
-        let {picture, displayName}: IProfile = this.state || {};
+        let { picture, displayName }: IProfile = this.state || {};
 
         return <div>
             <img className='avatar img-circle center-block' src={ picture || 'https://placehold.it/200x200' }/>

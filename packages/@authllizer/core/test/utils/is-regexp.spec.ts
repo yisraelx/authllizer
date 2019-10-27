@@ -1,4 +1,3 @@
-
 import isRegexp from '../../src/utils/is-regexp';
 
 describe('isRegexp()', () => {

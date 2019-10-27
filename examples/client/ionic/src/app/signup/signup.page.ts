@@ -16,7 +16,7 @@ export class SignUpPage {
             let that: AbstractControl = group.controls[thatName];
             let other: AbstractControl = group.controls[otherName];
             if (that.value !== other.value) {
-                return other.setErrors({compareTo: that.value});
+                return other.setErrors({ compareTo: that.value });
             }
         };
     }
@@ -43,7 +43,7 @@ export class SignUpPage {
             });
             await toast.present();
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             let alert = await this.alertCtrl.create({
                 message: (error && error.message) || message,
                 buttons: ['Dismiss']

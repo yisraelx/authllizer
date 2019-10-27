@@ -1,8 +1,8 @@
 import forEach from './for-each';
 
-export default function parseQuery(query: string = ''): { [key: string]: any } {
+export default function parseQuery(query: string = ''): {[key: string]: any} {
 
-    let queryObject: { [key: string]: any } = {};
+    let queryObject: {[key: string]: any} = {};
     let params: string[] = query.split('&');
 
     forEach(params, (param: string) => {

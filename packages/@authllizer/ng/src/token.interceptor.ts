@@ -1,6 +1,9 @@
-import { IHttpInterceptor, IRequestConfig } from 'angular';
 import { Authllizer } from '@authllizer/core';
+import { IHttpInterceptor, IRequestConfig } from 'angular';
 
+/**
+ * @see https://docs.angularjs.org/api/ng/service/$http#interceptors
+ */
 export class TokenInterceptor implements IHttpInterceptor {
 
     static $inject = ['$auth'];
@@ -18,5 +21,6 @@ export class TokenInterceptor implements IHttpInterceptor {
 
         return config;
 
-    }
+    };
+
 }

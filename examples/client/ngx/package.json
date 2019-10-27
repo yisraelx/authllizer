@@ -1,26 +1,26 @@
 {
-  "name": "authllizer-ngx-example",
-  "private": true,
-  "version": "0.1.0",
-  "description": "Authllizer Angular X Example",
-  "license": "MIT",
-  "author": {
-    "email": "yisraelx@gmail.com",
-    "name": "Yisrael Eliav",
-    "url": "https://github.com/yisraelx"
-  },
-  "homepage": "https://github.com/yisraelx/authllizer#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yisraelx/authllizer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yisraelx/authllizer/issues"
-  },
-  "scripts": {
-    "start": "ng serve --open",
-    "build": "ng build"
-  },
+    "name": "authllizer-ngx-example",
+    "private": true,
+    "version": "0.1.0",
+    "description": "Authllizer Angular X Example",
+    "license": "MIT",
+    "author": {
+        "email": "yisraelx@gmail.com",
+        "name": "Yisrael Eliav",
+        "url": "https://github.com/yisraelx"
+    },
+    "homepage": "https://github.com/yisraelx/authllizer#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yisraelx/authllizer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yisraelx/authllizer/issues"
+    },
+    "scripts": {
+        "start": "ng serve --open",
+        "build": "ng build"
+    },
     "dependencies": {
         "@angular/animations": "^8.2.6",
         "@angular/common": "^8.2.6",

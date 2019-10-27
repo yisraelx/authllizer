@@ -1,16 +1,16 @@
-import extendClass from '../utils/extend-class';
+import { IAdapter, IAdapterRequestOptions, IAdapterResponse } from '../adapters/adapter';
+import { IDialogConstructor } from '../dialogs/dialog';
+import { IDirectory } from '../interface';
 import extend from '../utils/extend';
+import extendClass from '../utils/extend-class';
 import forEach from '../utils/for-each';
 import { IProvider } from './provider';
-import { IAdapter, IAdapterResponse, IAdapterRequestOptions } from '../adapters/adapter';
-import { IDialogConstructor } from '../dialogs/dialog';
-import { Directory } from '../interface';
 
 export interface IBaseProviderOptions {
     name?: string;
     redirectUri?: string;
     authorizationEndpoint?: string;
-    displayOptions?: Directory<any>;
+    displayOptions?: IDirectory<any>;
 
     [key: string]: any;
 }
@@ -22,7 +22,7 @@ export abstract class BaseProvider implements IProvider {
     public name: string;
     protected redirectUri: string = window.location.origin;
     protected authorizationEndpoint: string;
-    protected displayOptions: Directory<any>;
+    protected displayOptions: IDirectory<any>;
 
     protected _adapter: IAdapter;
     protected _dialog: IDialogConstructor;
@@ -32,26 +32,31 @@ export abstract class BaseProvider implements IProvider {
         this._dialog = this._dialog || dialogClass;
     }
 
-    protected openDialog<T extends Directory<any>>(url: string): Promise<T> {
+    public abstract authenticate<R>(requestOptions: IAdapterRequestOptions): Promise<IAdapterResponse<R>>;
+
+    protected openDialog<T extends IDirectory<any>>(url: string): Promise<T> {
         let { _dialog: Dialog, name, redirectUri, displayOptions } = this;
         let dialog = new Dialog(name, redirectUri, displayOptions);
-        return dialog.open(url).then((response) => {
-            this.checkDialogResponse(response);
-            return response;
-        }) as any;
+
+        return dialog
+            .open(url)
+            .then((response) => {
+                this.checkDialogResponse(response);
+                return response;
+            }) as any;
     }
 
     /**
      * this method can be overridden, for handling unique provider dialog errors
      * @param params
      */
-    protected checkDialogResponse(params: Directory<any> = {}): void {
+    protected checkDialogResponse(params: IDirectory<any> = {}): void {
         if (params.error) {
             throw new Error(params.error);
         }
     }
 
-    protected prepareData(requestKeys: Directory<string>, ...args: Directory<any>[]): Directory<any> {
+    protected prepareData(requestKeys: IDirectory<string>, ...args: IDirectory<any>[]): IDirectory<any> {
         let params = {};
         let data = extend(...args);
         forEach(requestKeys, (requestKey: string, key: string) => {
@@ -66,5 +71,4 @@ export abstract class BaseProvider implements IProvider {
         return params;
     }
 
-    public abstract authenticate<R>(requestOptions: IAdapterRequestOptions): Promise<IAdapterResponse<R>>;
 }

@@ -1,8 +1,7 @@
-import { BaseDialog } from './base';
-import stringifyQuery from '../utils/stringify-query';
-import isObject from '../utils/is-object';
 import isFunction from '../utils/is-function';
-
+import isObject from '../utils/is-object';
+import stringifyQuery from '../utils/stringify-query';
+import { BaseDialog } from './base';
 
 export abstract class PopupDialog extends BaseDialog {
 

@@ -1,14 +1,15 @@
+import { AdapterRequestType, IAdapterRequestOptions, IAdapterResponse } from './adapters/adapter';
+import { Config, IConfigOptions } from './config';
+import { IDirectory } from './interface';
+import { IToken, ITokenConstructor } from './tokens/token';
+import EventEmitter from './utils/event-emitter';
 import extend from './utils/extend';
 import isString from './utils/is-string';
-import {AdapterRequestType, IAdapterResponse, IAdapterRequestOptions} from './adapters/adapter';
-import {Config, IConfigOptions} from './config';
-import {IToken, ITokenConstructor} from './tokens/token';
-import {Directory} from './interface';
-import EventEmitter from './utils/event-emitter';
 
 export interface IAuthllizerOptions extends IConfigOptions {
     /**
-     * if to use the Authllizer class instance or create new instance [default: true]
+     * if to use the Authllizer class instance or create new instance.
+     * @default true
      */
     useClassInstance?: boolean;
 }
@@ -19,14 +20,13 @@ export class Authllizer {
 
     static get instance(): Authllizer {
         if (!this.__instance) {
-            this.__instance = new Authllizer({useClassInstance: false});
+            this.__instance = new Authllizer({ useClassInstance: false });
         }
         return this.__instance;
     }
 
-    private _config: Config = new Config;
-
     public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    private _config: Config = new Config;
 
     constructor(options: IAuthllizerOptions = {}) {
 
@@ -42,27 +42,27 @@ export class Authllizer {
         return this;
     }
 
-    public signIn<T>(data?: Directory<any>): Promise<T> {
+    public signIn<T>(data?: IDirectory<any>): Promise<T> {
         let options: IAdapterRequestOptions = {
             type: AdapterRequestType.signIn,
             data,
             extractToken: true
         };
 
-        return this._config.adapter.request<T>(options).then(({response, token}: IAdapterResponse<T>) => {
+        return this._config.adapter.request<T>(options).then(({ response, token }: IAdapterResponse<T>) => {
             this.setToken(token);
             return response;
         });
     }
 
-    public signUp<T>(data?: Directory<any>, signIn?: boolean): Promise<T> {
+    public signUp<T>(data?: IDirectory<any>, signIn?: boolean): Promise<T> {
         let options: IAdapterRequestOptions = {
             type: AdapterRequestType.signUp,
             data,
             extractToken: signIn
         };
 
-        return this._config.adapter.request<T>(options).then(({response, token}: IAdapterResponse<T>) => {
+        return this._config.adapter.request<T>(options).then(({ response, token }: IAdapterResponse<T>) => {
             if (signIn) {
                 this.setToken(token);
             }
@@ -70,20 +70,20 @@ export class Authllizer {
         });
     }
 
-    public signOut<T>(data?: Directory<any>): Promise<T> {
+    public signOut<T>(data?: IDirectory<any>): Promise<T> {
         let options: IAdapterRequestOptions = {
             type: AdapterRequestType.signOut,
             data,
             token: this.getToken()
         };
 
-        return this._config.adapter.request<T>(options).then(({response}: IAdapterResponse<T>) => {
+        return this._config.adapter.request<T>(options).then(({ response }: IAdapterResponse<T>) => {
             this.removeToken();
             return response;
         });
     }
 
-    public authenticate<T>(provider: string, data?: Directory<any>): Promise<T> {
+    public authenticate<T>(provider: string, data?: IDirectory<any>): Promise<T> {
         let options: IAdapterRequestOptions = {
             type: AdapterRequestType.authenticate,
             data,
@@ -91,13 +91,17 @@ export class Authllizer {
             provider
         };
 
-        return this._config.provider(provider).authenticate<T>(options).then(({response, token}: IAdapterResponse<T>) => {
-            this.setToken(token);
-            return response;
-        });
+        return this
+            ._config
+            .provider(provider)
+            .authenticate<T>(options)
+            .then(({ response, token }: IAdapterResponse<T>) => {
+                this.setToken(token);
+                return response;
+            });
     }
 
-    public link<T>(provider: string, data?: Directory<any>): Promise<T> {
+    public link<T>(provider: string, data?: IDirectory<any>): Promise<T> {
         let options: IAdapterRequestOptions = {
             type: AdapterRequestType.link,
             data,
@@ -105,20 +109,27 @@ export class Authllizer {
             provider
         };
 
-        return this._config.provider(provider).authenticate<T>(options).then(({response}: IAdapterResponse<T>) => response);
+        return this._config
+            .provider(provider)
+            .authenticate<T>(options)
+            .then(({ response }: IAdapterResponse<T>) => response);
     }
 
-    public unlink<T>(provider: string, data?: Directory<any>): Promise<T> {
+    public unlink<T>(provider: string, data?: IDirectory<any>): Promise<T> {
         let options: IAdapterRequestOptions = {
             type: AdapterRequestType.unlink,
-            data: extend({provider}, data),
+            data: extend({ provider }, data),
             token: this.getToken()
         };
 
-        return this._config.adapter.request<T>(options).then(({response}: IAdapterResponse<T>) => response);
+        return this
+            ._config
+            .adapter
+            .request<T>(options)
+            .then(({ response }: IAdapterResponse<T>) => response);
     }
 
-    public refresh<T>(data?: Directory<any>): Promise<T> {
+    public refresh<T>(data?: IDirectory<any>): Promise<T> {
         let options: IAdapterRequestOptions = {
             type: AdapterRequestType.refresh,
             data,
@@ -126,10 +137,14 @@ export class Authllizer {
             extractToken: true
         };
 
-        return this._config.adapter.request<T>(options).then(({token, response}: IAdapterResponse<T>) => {
-            this.setToken(token);
-            return response;
-        });
+        return this
+            ._config
+            .adapter
+            .request<T>(options)
+            .then(({ token, response }: IAdapterResponse<T>) => {
+                this.setToken(token);
+                return response;
+            });
     }
 
     public isAuthenticated(): boolean {
@@ -143,7 +158,7 @@ export class Authllizer {
         let tokenObject;
         try {
             tokenObject = new Token(token);
-        } catch (e) {
+        } catch {
         }
 
         return tokenObject;
@@ -174,4 +189,5 @@ export class Authllizer {
     public toIntercept(url: string): boolean {
         return this.isAuthenticated() && this._config.isUrlMatchInterceptList(url);
     }
+
 }

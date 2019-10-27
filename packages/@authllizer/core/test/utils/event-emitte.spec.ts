@@ -19,7 +19,8 @@ describe('EventEmitter', () => {
         });
 
         it('should set one listener', () => {
-            let listener = () => { };
+            let listener = () => {
+            };
             let emitter = new EventEmitter<any>();
             emitter.on(listener);
             expect((emitter as any)._listeners[0]).toBe(listener);
@@ -27,7 +28,9 @@ describe('EventEmitter', () => {
         });
 
         it('should set tow listeners', () => {
-            let listeners = [() => { }, function () { }];
+            let listeners = [() => {
+            }, function () {
+            }];
             let emitter = new EventEmitter<any>();
             emitter.on(...listeners);
             expect((emitter as any)._listeners).toEqual(listeners);
@@ -37,20 +40,24 @@ describe('EventEmitter', () => {
 
     describe('remove()', () => {
         it('should not remove listener if no listener to remove', () => {
-            let emitter = new EventEmitter<any>(() => { });
+            let emitter = new EventEmitter<any>(() => {
+            });
             emitter.remove();
             expect((emitter as any)._listeners.length).toBe(1);
         });
 
         it('should remove one listener', () => {
-            let listener = () => { };
+            let listener = () => {
+            };
             let emitter = new EventEmitter<any>(listener);
             emitter.remove(listener);
             expect((emitter as any)._listeners.length).toBe(0);
         });
 
         it('should remove tow listeners', () => {
-            let listeners = [() => { }, function () { }];
+            let listeners = [() => {
+            }, function () {
+            }];
             let emitter = new EventEmitter<any>(...listeners);
             emitter.remove(...listeners);
             expect((emitter as any)._listeners.length).toBe(0);

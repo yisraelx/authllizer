@@ -1,6 +1,6 @@
+import { IToken } from '../tokens/token';
 import extend from '../utils/extend';
 import { IStorage } from './storage';
-import { IToken } from '../tokens/token';
 
 export interface IMemoryStorageOptions {
     key?: string;
@@ -30,4 +30,5 @@ export class MemoryStorage implements IStorage {
         let { key } = this;
         delete this._storage[key];
     }
+
 }

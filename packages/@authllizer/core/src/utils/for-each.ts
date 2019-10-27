@@ -1,6 +1,6 @@
 export default function forEach(collection: any = [], iteratee: any = (v: any) => v) {
     let objectKeys = !Array.isArray(collection) && Object.keys(collection);
-    let {length} = objectKeys ? objectKeys : collection;
+    let { length } = objectKeys ? objectKeys : collection;
     if (!length) {
         return collection;
     }

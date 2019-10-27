@@ -19,7 +19,7 @@ export class HomeComponent implements IComponentController {
         this
             .$http
             .get('https://api.github.com/repos/yisraelx/authllizer')
-            .then(({data}: any) => {
+            .then(({ data }: any) => {
                 if (data) {
                     if (data.stargazers_count) {
                         this.stars = data.stargazers_count;

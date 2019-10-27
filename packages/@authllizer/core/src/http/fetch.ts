@@ -1,12 +1,16 @@
-import isObject from '../utils/is-object';
-import {BaseHttpClient} from './base';
-import {IHttpRequestOptions} from './http';
 import extend from '../utils/extend';
+import isObject from '../utils/is-object';
+import { BaseHttpClient } from './base';
+import { IHttpRequestOptions } from './http';
 
 // for fetch global scope error 'TypeError: Failed to execute 'fetch' on 'Window': Illegal invocation'
 // can be 'fetch.bind(this)' to solve the error.
 let fetchBind = (input, init?) => fetch(input, init);
 
+/**
+ * @resource https://fetch.spec.whatwg.org
+ * @see https://mdn.io/fetch
+ */
 export class FetchHttpClient extends BaseHttpClient {
 
     protected _client: typeof fetch;
@@ -15,9 +19,9 @@ export class FetchHttpClient extends BaseHttpClient {
         super(client);
     }
 
-    public request<T>(url: string, options: IHttpRequestOptions): Promise<T> {
+    public request<TResponse>(url: string, options: IHttpRequestOptions): Promise<TResponse> {
 
-        let {method, data, params, headers = {}, withCredentials} = options;
+        let { method, data, params, headers = {}, withCredentials } = options;
 
         url = FetchHttpClient.extendUrlQuery(url, params);
         let credentials = (withCredentials === true && 'include') || (withCredentials === false && 'same-origin') || 'omit' as any;
@@ -38,12 +42,15 @@ export class FetchHttpClient extends BaseHttpClient {
             headers
         };
 
-        return this._client(url, requestOptions).then((response: Response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
+        return this
+            ._client(url, requestOptions)
+            .then((response: Response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+
                 throw response;
-            }
-        });
+            });
     }
+
 }

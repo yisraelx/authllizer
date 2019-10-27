@@ -1,12 +1,12 @@
-/**
- * @resource https://dev.twitch.tv/docs/authentication
- */
-import { OAuth2Provider, IOAuth2ProviderOptions } from '@authllizer/core';
+import { IOAuth2ProviderOptions, OAuth2Provider } from '@authllizer/core';
 
 export interface ITwitchOAuth2Options extends IOAuth2ProviderOptions {
 
 }
 
+/**
+ * @resource https://dev.twitch.tv/docs/authentication
+ */
 export default class TwitchOAuth2 extends OAuth2Provider {
 
     static extend: (options: ITwitchOAuth2Options) => typeof TwitchOAuth2;

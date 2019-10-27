@@ -1,10 +1,10 @@
-import { Directory } from '../interface';
+import { IDirectory } from '../interface';
 
 export interface IHttpRequestOptions {
     method?: string;
     data?: any;
-    params?: Directory<any>;
-    headers?: Directory<any>;
+    params?: IDirectory<any>;
+    headers?: IDirectory<any>;
     withCredentials?: boolean;
 }
 

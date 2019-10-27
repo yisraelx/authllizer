@@ -30,7 +30,7 @@ export class ProfileComponent implements IComponentController {
         this
             .Account
             .getProfile()
-            .then(({data}: IHttpResponse<IProfileUser>) => {
+            .then(({ data }: IHttpResponse<IProfileUser>) => {
                 this.user = data;
             })
             .catch((response: IHttpResponse<{message: string}> | Error | any) => {

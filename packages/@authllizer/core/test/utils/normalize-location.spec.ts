@@ -1,4 +1,3 @@
-
 import normalizeLocation from '../../src/utils/normalize-location';
 
 describe('normalizeLocation()', () => {
@@ -26,7 +25,7 @@ describe('normalizeLocation()', () => {
             ['http://test.com?foo=bar', 'http://test.com:80/'],
             ['http://api.test.com:5000?foo=bar#color=red', 'http://api.test.com:5000/']
         ].forEach(([url, result]) => {
-            let normalize = normalizeLocation(url, {path: true});
+            let normalize = normalizeLocation(url, { path: true });
             expect(normalize).toBe(result);
         });
     });
@@ -41,7 +40,7 @@ describe('normalizeLocation()', () => {
             ['http://test.com?foo=bar#color=red', 'http://test.com:80?foo=bar#color=red'],
             ['http://api.test.com:5000?foo=bar#color=red', 'http://api.test.com:5000?foo=bar#color=red']
         ].forEach(([url, result]) => {
-            let normalize = normalizeLocation(url, {data: true});
+            let normalize = normalizeLocation(url, { data: true });
             expect(normalize).toBe(result);
         });
     });
@@ -57,7 +56,7 @@ describe('normalizeLocation()', () => {
             ['http://test.com?foo=bar#color=red', 'http://test.com:80/?foo=bar#color=red'],
             ['http://api.test.com:5000?foo=bar#color=red', 'http://api.test.com:5000/?foo=bar#color=red']
         ].forEach(([url, result]) => {
-            let normalize = normalizeLocation(url, {path: true, data: true});
+            let normalize = normalizeLocation(url, { path: true, data: true });
             expect(normalize).toBe(result);
         });
     });

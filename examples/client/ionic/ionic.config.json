@@ -1,7 +1,7 @@
 {
-  "name": "authllizer-ionic-example",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
+    "name": "authllizer-ionic-example",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "angular"
 }

@@ -1,6 +1,6 @@
+import { IDirectory } from '../interface';
 import normalizeLocation from '../utils/normalize-location';
 import { PopupDialog } from './popup';
-import { Directory } from '../interface';
 
 export interface IBrowserDisplayOptions {
     channelmode?: 'yes' | 'no' | 1 | 0;
@@ -28,12 +28,20 @@ export interface IBrowserDialogOptions {
 export class BrowserDialog extends PopupDialog {
 
     static extend: (options: IBrowserDialogOptions) => typeof BrowserDialog;
+    protected displayOptions: IBrowserDisplayOptions;
 
     protected get dialogName(): string {
         return window.navigator.userAgent.indexOf('CriOS') > -1 ? '_blank' : this.name;
     }
 
-    protected displayOptions: IBrowserDisplayOptions;
+    public open(url: string): Promise<IDirectory<any>> {
+        this._popup = window.open(url, this.dialogName, this.stringDisplayOptions);
+        this.focus();
+
+        return this
+            .listen()
+            .then(BrowserDialog.parseUrl);
+    }
 
     protected setDisplayOptions(displayOptions: IBrowserDisplayOptions = {}) {
         displayOptions.height = displayOptions.height || 500;
@@ -42,14 +50,6 @@ export class BrowserDialog extends PopupDialog {
             top: window.screenY + ((window.outerHeight - displayOptions.height) / 2.5),
             left: window.screenX + ((window.outerWidth - displayOptions.width) / 2)
         }, displayOptions);
-    }
-
-    public open(url: string): Promise<Directory<any>> {
-        this._popup = window.open(url, this.dialogName, this.stringDisplayOptions) as Window;
-        this.focus();
-        return this.listen().then((url) => {
-            return BrowserDialog.parseUrl(url);
-        });
     }
 
     private listen(): Promise<string> {

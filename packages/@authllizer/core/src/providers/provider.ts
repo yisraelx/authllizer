@@ -1,11 +1,10 @@
-import { IAdapter, IAdapterResponse, IAdapterRequestOptions } from '../adapters/adapter';
+import { IAdapter, IAdapterRequestOptions, IAdapterResponse } from '../adapters/adapter';
 import { IDialogConstructor } from '../dialogs/dialog';
 
 export interface IProviderConstructor {
 
-    new(adapter: IAdapter, dialogClass: IDialogConstructor): IProvider;
-
     readonly prototype: IProvider;
+    new(adapter: IAdapter, dialogClass: IDialogConstructor): IProvider;
 }
 
 export interface IProvider {

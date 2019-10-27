@@ -1,12 +1,12 @@
 import isObject from './is-object';
 
 export default function createMerge(level: number = Infinity) {
-    return (target: { [key: string]: any } = {}, ...sources: { [key: string]: any }[]): { [key: string]: any } => {
-        let {length: sourcesLength} = sources;
+    return (target: {[key: string]: any} = {}, ...sources: {[key: string]: any}[]): {[key: string]: any} => {
+        let { length: sourcesLength } = sources;
         for (let i = 0; i < sourcesLength; i++) {
             let source = sources[i] || {};
             let keys = Object.keys(source);
-            let {length: keysLength} = keys;
+            let { length: keysLength } = keys;
             for (let j = 0; j < keysLength; j++) {
                 let key = keys[j];
                 let value = source[key];

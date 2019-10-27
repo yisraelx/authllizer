@@ -1,4 +1,3 @@
-
 import isDefined from '../../src/utils/is-string';
 
 describe('isDefined()', () => {

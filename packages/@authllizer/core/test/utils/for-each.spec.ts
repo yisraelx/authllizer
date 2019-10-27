@@ -1,4 +1,3 @@
-
 import forEach from '../../src/utils/for-each';
 
 describe('forEach()', () => {
@@ -10,7 +9,7 @@ describe('forEach()', () => {
     });
 
     it('should iteratee on Object', () => {
-        forEach({0: 0, 1: 1, 2: 2}, (value, key) => {
+        forEach({ 0: 0, 1: 1, 2: 2 }, (value, key) => {
             expect(value).toBe(+key);
         });
     });

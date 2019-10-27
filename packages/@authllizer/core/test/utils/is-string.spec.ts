@@ -1,4 +1,3 @@
-
 import isString from '../../src/utils/is-string';
 
 describe('isString()', () => {

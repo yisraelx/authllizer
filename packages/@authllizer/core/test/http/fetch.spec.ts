@@ -1,18 +1,18 @@
-import {FetchHttpClient} from '../../src/http/fetch';
+import { FetchHttpClient } from '../../src/http/fetch';
 
 describe('FetchHttpClient', () => {
     describe('request()', () => {
         it('should request json data', () => {
-            let data = {foo: 'bar'};
+            let data = { foo: 'bar' };
             let url = 'http://example.com';
             let options = {
                 method: 'PUT',
-                params: {color: 'red'},
+                params: { color: 'red' },
                 data,
                 withCredentials: false
             };
             let mockFetch = async (requestUrl, requestOptions) => {
-                expect(requestUrl).toBe(`${url}?color=red`);
+                expect(requestUrl).toBe(`${ url }?color=red`);
                 expect(requestOptions).toEqual({
                     method: 'PUT',
                     body: JSON.stringify(data),

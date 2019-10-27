@@ -37,7 +37,7 @@ export class SignInPage {
             });
             await toast.present();
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             let alert = await this.alertCtrl.create({
                 message: (error && error.message) || message,
                 buttons: ['Dismiss']
@@ -58,7 +58,7 @@ export class SignInPage {
             });
             await toast.present();
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             let alert = await this.alertCtrl.create({
                 message: (error && error.message) || message,
                 buttons: ['Dismiss']

@@ -1,12 +1,12 @@
-/**
- * @resource https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/
- */
-import { OAuth2Provider, IOAuth2ProviderOptions } from '@authllizer/core';
+import { IOAuth2ProviderOptions, OAuth2Provider } from '@authllizer/core';
 
 export interface IGithubOAuth2Options extends IOAuth2ProviderOptions {
     allowSignup?: boolean;
 }
 
+/**
+ * @resource https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/
+ */
 export default class GithubOAuth2 extends OAuth2Provider {
 
     static extend: (options: IGithubOAuth2Options) => typeof GithubOAuth2;

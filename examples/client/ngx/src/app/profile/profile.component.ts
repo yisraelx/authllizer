@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
             await this.getProfile();
             this.toastr.success('Profile has been updated.');
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             this.toastr.error((error && error.message) || message);
         }
     }
@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
             await this.getProfile();
             this.toastr.success(`You have successfully linked a ${ provider } account.`);
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             this.toastr.error((error && error.message) || message);
         }
     }
@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
             await this.getProfile();
             this.toastr.info(`You have unlinked a ${ provider } account.`);
         } catch (response) {
-            let {error, message}: HttpErrorResponse = response;
+            let { error, message }: HttpErrorResponse = response;
             this.toastr.error((error && error.message) || message);
         }
     }

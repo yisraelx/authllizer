@@ -1,23 +1,23 @@
 {
-  "compilerOptions": {
-    "module": "esnext",
-    "target": "es2015",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "inlineSources": true,
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "downlevelIteration": true,
-    "importHelpers": true,
-    "esModuleInterop": true,
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "outDir": "./out-tsc"
-  },
-  "include": [
-    "./src/**/*.ts"
-  ]
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es2015",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "inlineSources": true,
+        "declaration": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "downlevelIteration": true,
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "outDir": "./out-tsc"
+    },
+    "include": [
+        "./src/**/*.ts"
+    ]
 }

@@ -1,7 +1,4 @@
-/**
- * @resource https://developers.google.com/identity/protocols/OpenIDConnect
- */
-import { OAuth2Provider, IOAuth2ProviderOptions } from '@authllizer/core';
+import { IOAuth2ProviderOptions, OAuth2Provider } from '@authllizer/core';
 
 export interface IGoogleOAuth2Options extends IOAuth2ProviderOptions {
     nonce?: string;
@@ -14,6 +11,9 @@ export interface IGoogleOAuth2Options extends IOAuth2ProviderOptions {
     hd?: string;
 }
 
+/**
+ * @resource https://developers.google.com/identity/protocols/OpenIDConnect
+ */
 export default class GoogleOAuth2 extends OAuth2Provider {
 
     static extend: (options: IGoogleOAuth2Options) => typeof GoogleOAuth2;

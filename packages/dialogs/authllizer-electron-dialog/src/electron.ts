@@ -1,27 +1,28 @@
-/**
- * @resource https://github.com/electron/electron/blob/master/docs/api/browser-window.md
- */
-import {PopupDialog, IBaseDialogOptions, Directory} from '@authllizer/core';
-import {BrowserWindowConstructorOptions} from 'electron';
+import { IBaseDialogOptions, PopupDialog } from '@authllizer/core';
+import { BrowserWindowConstructorOptions } from 'electron';
 
 export interface IElectronDialogOptions extends IBaseDialogOptions {
     displayOptions?: BrowserWindowConstructorOptions;
 }
 
+/**
+ * @resource https://github.com/electron/electron/blob/master/docs/api/browser-window.md
+ */
 export class ElectronDialog extends PopupDialog {
 
     static extend: (options: IElectronDialogOptions) => typeof ElectronDialog;
 
     protected displayOptions: BrowserWindowConstructorOptions;
 
-    public open(url: string): Promise<Directory<any>> {
-        let {BrowserWindow} = (window as any).require('electron').remote;
+    public open(url: string) {
+        let { BrowserWindow } = (window as any).require('electron').remote;
         this._popup = new BrowserWindow(this.displayOptions);
         this._popup.loadURL(url);
         this.focus();
-        return this.listen().then((url: string) => {
-            return ElectronDialog.parseUrl(url);
-        });
+
+        return this
+            .listen()
+            .then(ElectronDialog.parseUrl);
     }
 
     private listen(): Promise<string> {
