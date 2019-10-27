@@ -1,0 +1,23 @@
+{
+    "preset": "ts-jest",
+    "setupFilesAfterEnv": [
+        "jest-extended"
+    ],
+    "moduleFileExtensions": [
+        "ts",
+        "js",
+        "json"
+    ],
+    "testMatch": [
+        "<rootDir>/packages/**/test/**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+        "/config/"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+        "json",
+        "text-summary",
+        "html"
+    ]
+}

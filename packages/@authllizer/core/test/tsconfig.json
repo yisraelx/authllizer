@@ -1,0 +1,12 @@
+{
+    "extends": "../../../../tsconfig.spec.json",
+    "compilerOptions": {
+        "types": [
+            "jest",
+            "jsonwebtoken"
+        ]
+    },
+    "include": [
+        "./**/*.spec.ts"
+    ]
+}
