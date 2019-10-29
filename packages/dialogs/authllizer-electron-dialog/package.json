@@ -49,7 +49,7 @@
     },
     "devDependencies": {
         "@authllizer/core": "^0.1.0",
-        "electron": "^6.0.7"
+        "electron": "^7.0.0"
     },
     "rollup": {
         "globals": {

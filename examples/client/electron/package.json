@@ -30,29 +30,28 @@
         "authllizer-google-oauth2": "^0.1.0",
         "authllizer-twitter-oauth1": "^0.1.0",
         "bootstrap": "^3.3.7",
-        "concurrently": "^4.1.2",
         "font-awesome": "^4.7.0",
         "prop-types": "^15.7.2",
-        "react": "^16.9.0",
-        "react-dom": "^16.9.0",
-        "react-router-dom": "^5.0.1",
-        "wait-on": "^3.3.0"
+        "react": "^16.11.0",
+        "react-dom": "^16.11.0",
+        "react-router-dom": "^5.1.2"
     },
     "devDependencies": {
         "@types/copy-webpack-plugin": "^5.0.0",
         "@types/html-webpack-plugin": "^3.2.1",
         "@types/node": "^10.14.17",
-        "@types/prop-types": "^15.7.2",
-        "@types/react": "^16.9.2",
-        "@types/react-dom": "^16.9.0",
-        "@types/react-router": "^5.0.3",
+        "@types/prop-types": "^15.7.3",
+        "@types/react": "^16.9.11",
+        "@types/react-dom": "^16.9.3",
+        "@types/react-router": "^5.1.2",
         "@types/webpack": "^4.39.1",
         "@types/webpack-dev-server": "^3.1.7",
         "awesome-typescript-loader": "^5.2.1",
         "clean-webpack-plugin": "^3.0.0",
+        "concurrently": "^5.0.0",
         "copy-webpack-plugin": "^5.0.4",
         "css-loader": "^3.2.0",
-        "electron": "^6.0.7",
+        "electron": "^7.0.0",
         "file-loader": "^4.2.0",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^3.2.0",
@@ -61,6 +60,7 @@
         "typescript": "~3.5.3",
         "webpack": "^4.39.3",
         "webpack-cli": "^3.3.8",
-        "webpack-dev-server": "^3.8.0"
+        "webpack-dev-server": "^3.8.0",
+        "wait-on": "^3.3.0"
     }
 }
