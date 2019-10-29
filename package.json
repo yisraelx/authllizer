@@ -22,7 +22,8 @@
     },
     "description": "Authllizer library repository",
     "scripts": {
-        "bootstrap": "yarn install && lerna run prepublish",
+        "bootstrap": "yarn install && yarn build",
+        "build": "lerna run prepublish",
         "ci:after": "yarn coverage",
         "ci:script": "yarn test",
         "clean": "lerna run clean",
@@ -31,7 +32,7 @@
         "coverage": "codecov -f ./coverage/**/coverage-final.json",
         "lint": "eslint . --ignore-pattern dist --ignore-pattern node_modules --ext .ts,.tsx",
         "prerelease": "run-s copy:license",
-        "release": "lerna publish --conventional-commits --message \"chore: publish %s\"",
+        "release": "lerna publish",
         "test": "jest -c jest.config.json",
         "verify": "run-s lint test"
     },
@@ -73,7 +74,7 @@
         "husky": "^3.0.5",
         "jest": "^24.9.0",
         "jest-extended": "^0.11.2",
-        "lerna": "2.6.0",
+        "lerna": "^3.18.3",
         "npm-run-all": "^4.1.2",
         "rimraf": "^2.6.2",
         "rollup": "^1.21.4",

@@ -1,6 +1,19 @@
 {
-    "lerna": "2.6.0",
+    "$schema": "http://json.schemastore.org/lerna",
     "npmClient": "yarn",
     "useWorkspaces": true,
-    "version": "independent"
+    "version": "independent",
+    "command": {
+        "version": {
+            "message": "chore(release): publish %s",
+            "conventionalCommits": true,
+            "commitHooks": false
+        },
+        "exec": {
+            "private": false
+        },
+        "run": {
+            "private": false
+        }
+    }
 }
