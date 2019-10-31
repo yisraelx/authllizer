@@ -1,7 +1,9 @@
 # Vue Authllizer Plugin
 [![Source Code](https://img.shields.io/badge/%3C/%3E-source--code-blue.svg)](https://github.com/yisraelx/authllizer/blob/master/packages/@authllizer/vue)
 [![Version](https://img.shields.io/npm/v/@authllizer/vue.svg)](https://www.npmjs.com/package/@authllizer/vue)
-[![MIT License](https://img.shields.io/npm/l/@authllizer/vue.svg)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/npm/l/@authllizer/vue.svg?color=yellow)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![Bundle Size](https://img.shields.io/bundlephobia/min/@authllizer/vue.svg?color=green)](https://bundlephobia.com/result?p=@authllizer/vue)
+[![TypeScript](https://img.shields.io/badge/100%25-TypeScript-blue.svg)](https://www.typescriptlang.org)
 
 **This plugin is a wrapper of [Authllizer] for comfortable using it in [VueJs].**
 

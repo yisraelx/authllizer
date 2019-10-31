@@ -24,7 +24,7 @@
     "dependencies": {
         "@authllizer/core": "^0.1.0",
         "@authllizer/ng": "^0.1.0",
-        "@uirouter/angularjs": "^1.0.22",
+        "@uirouter/angularjs": "^1.0.23",
         "angular": "^1.7.8",
         "angular-animate": "^1.7.8",
         "angular-messages": "^1.7.8",
@@ -55,9 +55,9 @@
         "@types/angular-toastr": "^1.6.34",
         "@types/copy-webpack-plugin": "^5.0.0",
         "@types/html-webpack-plugin": "^3.2.1",
-        "@types/node": "^10.14.17",
-        "@types/webpack": "^4.39.1",
-        "@types/webpack-dev-server": "^3.1.7",
+        "@types/node": "^10.17.0",
+        "@types/webpack": "^4.39.7",
+        "@types/webpack-dev-server": "^3.4.0",
         "angular2-template-loader": "^0.6.2",
         "awesome-typescript-loader": "^5.2.1",
         "clean-webpack-plugin": "^3.0.0",
@@ -68,10 +68,10 @@
         "html-webpack-plugin": "^3.2.0",
         "ng-annotate-loader": "^0.6.1",
         "style-loader": "^1.0.0",
-        "ts-node": "^8.3.0",
+        "ts-node": "^8.4.1",
         "typescript": "~3.5.3",
-        "webpack": "^4.39.3",
-        "webpack-cli": "^3.3.8",
-        "webpack-dev-server": "^3.8.0"
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10",
+        "webpack-dev-server": "^3.9.0"
     }
 }

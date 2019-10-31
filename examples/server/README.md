@@ -2,10 +2,10 @@
 
 ## Install
 ```sh
-$ npm install
+$ yarn install
 ```
 
 ## Run
 ```sh
-$ npm start
+$ yarn start
 ```

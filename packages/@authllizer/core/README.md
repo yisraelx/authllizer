@@ -1,7 +1,9 @@
 # Authllizer
 [![Source Code](https://img.shields.io/badge/%3C/%3E-source--code-blue.svg)](https://github.com/yisraelx/authllizer/blob/master/packages/@authllizer/core)
 [![Version](https://img.shields.io/npm/v/@authllizer/core.svg)](https://www.npmjs.com/package/@authllizer/core)
-[![MIT License](https://img.shields.io/npm/l/@authllizer/core.svg)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/npm/l/@authllizer/core.svg?color=yellow)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![Bundle Size](https://img.shields.io/bundlephobia/min/@authllizer/core.svg?color=green)](https://bundlephobia.com/result?p=@authllizer/core)
+[![TypeScript](https://img.shields.io/badge/100%25-TypeScript-blue.svg)](https://www.typescriptlang.org)
 
 ### Authllizer is a authentication framework for the client-side of javascript applications, written in typescript.
 

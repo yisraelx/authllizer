@@ -1,11 +1,12 @@
 # Authllizer Electron Example
+**Desktop app built with [Electron](https://electronjs.org) and [React](https://reactjs.org)**
 
 ## Install
 ```sh
-$ npm install
+$ yarn install
 ```
 
 ## Run
 ```sh
-$ npm start
+$ yarn start
 ```

@@ -1,7 +1,9 @@
 # Authllizer Cordova Dialog
 [![Source Code](https://img.shields.io/badge/%3C/%3E-source--code-blue.svg)](https://github.com/yisraelx/authllizer/blob/master/packages/dialogs/authllizer-cordova-dialog)
 [![Version](https://img.shields.io/npm/v/authllizer-cordova-dialog.svg)](https://www.npmjs.com/package/authllizer-cordova-dialog)
-[![MIT License](https://img.shields.io/npm/l/authllizer-cordova-dialog.svg)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/npm/l/authllizer-cordova-dialog.svg?color=yellow)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![Bundle Size](https://img.shields.io/bundlephobia/min/authllizer-cordova-dialog.svg?color=green)](https://bundlephobia.com/result?p=authllizer-cordova-dialog)
+[![TypeScript](https://img.shields.io/badge/100%25-TypeScript-blue.svg)](https://www.typescriptlang.org)
 
 ## Install
 ```sh

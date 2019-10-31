@@ -1,21 +1,12 @@
 # Authllizer Ionic Example
+**Mobile app built with [Ionic](https://ionicframework.com) and [Angular](https://angular.io)**
 
 ## Install
 ```sh
-$ npm install
+$ yarn install
 ```
 
 ## Run
 ```sh
-$ npm start
-```
-
-## Dev
-in the repo root
-```sh
-$ npm run bootstrap
-```
-and then in the app root
-```sh
-$ npm run ws:start
+$ yarn start
 ```

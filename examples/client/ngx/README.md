@@ -1,11 +1,12 @@
 # Authllizer Angular X Example
+**Web app built with [Angular](https://angular.io)**
 
 ## Install
 ```sh
-$ npm install
+$ yarn install
 ```
 
 ## Run
 ```sh
-$ npm start
+$ yarn start
 ```

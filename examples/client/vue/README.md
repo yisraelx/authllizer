@@ -1,11 +1,12 @@
 # Authllizer VueJs Example
+**Web app built with [VueJs](https://vuejs.org)**
 
 ## Install
 ```sh
-$ npm install
+$ yarn install
 ```
 
 ## Run
 ```sh
-$ npm start
+$ yarn start
 ```

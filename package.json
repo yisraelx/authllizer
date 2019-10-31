@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "authllizer-repository",
+    "name": "@yisraelx/authllizer",
     "version": "0.0.0-PLACEHOLDER",
     "workspaces": {
         "packages": [
