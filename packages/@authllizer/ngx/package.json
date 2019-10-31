@@ -49,15 +49,15 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@angular/common": "^8.2.6",
-        "@angular/core": "^8.2.6",
+        "@angular/common": "^8.2.13",
+        "@angular/core": "^8.2.13",
         "@authllizer/core": "^0.1.0"
     },
     "devDependencies": {
-        "@angular/common": "^8.2.6",
-        "@angular/compiler": "^8.2.6",
-        "@angular/compiler-cli": "^8.2.6",
-        "@angular/core": "^8.2.6",
+        "@angular/common": "^8.2.13",
+        "@angular/compiler": "^8.2.13",
+        "@angular/compiler-cli": "^8.2.13",
+        "@angular/core": "^8.2.13",
         "@authllizer/core": "^0.1.0",
         "rxjs": "^6.5.3"
     },

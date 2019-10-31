@@ -45,7 +45,8 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@authllizer/core": "^0.1.0"
+        "@authllizer/core": "^0.1.0",
+        "electron": "^7.0.0"
     },
     "devDependencies": {
         "@authllizer/core": "^0.1.0",
