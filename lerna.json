@@ -2,12 +2,12 @@
     "$schema": "http://json.schemastore.org/lerna",
     "npmClient": "yarn",
     "useWorkspaces": true,
-    "version": "independent",
+    "version": "0.2.0",
     "command": {
         "version": {
-            "message": "chore(release): publish %s",
+            "message": "chore(release): %s",
             "conventionalCommits": true,
-            "commitHooks": false
+            "createRelease": "github"
         },
         "exec": {
             "private": false

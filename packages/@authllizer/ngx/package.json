@@ -1,6 +1,6 @@
 {
     "name": "@authllizer/ngx",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Angular X Authllizer Module",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
@@ -51,14 +51,14 @@
     "peerDependencies": {
         "@angular/common": "^8.2.13",
         "@angular/core": "^8.2.13",
-        "@authllizer/core": "^0.1.0"
+        "@authllizer/core": "^0.2.0"
     },
     "devDependencies": {
         "@angular/common": "^8.2.13",
         "@angular/compiler": "^8.2.13",
         "@angular/compiler-cli": "^8.2.13",
         "@angular/core": "^8.2.13",
-        "@authllizer/core": "^0.1.0",
+        "@authllizer/core": "^0.2.0",
         "rxjs": "^6.5.3"
     },
     "rollup": {

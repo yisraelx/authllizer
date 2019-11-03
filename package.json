@@ -31,7 +31,7 @@
         "copy:license": "lerna exec \"node -e fs.createReadStream(process.env.LERNA_ROOT_PATH+'/LICENSE').pipe(fs.createWriteStream('LICENSE'));\"",
         "coverage": "codecov -f ./coverage/**/coverage-final.json",
         "lint": "eslint . --ignore-pattern dist --ignore-pattern node_modules --ext .ts,.tsx",
-        "prerelease": "run-s copy:license",
+        "prerelease": "run-s build copy:license",
         "release": "lerna publish",
         "test": "jest -c jest.config.json",
         "verify": "run-s lint test"

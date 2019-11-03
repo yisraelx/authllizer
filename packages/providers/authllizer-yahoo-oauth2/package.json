@@ -1,6 +1,6 @@
 {
     "name": "authllizer-yahoo-oauth2",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Authllizer Yahoo OAuth2 Provider",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
@@ -47,10 +47,10 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@authllizer/core": "^0.1.0"
+        "@authllizer/core": "^0.2.0"
     },
     "devDependencies": {
-        "@authllizer/core": "^0.1.0"
+        "@authllizer/core": "^0.2.0"
     },
     "rollup": {
         "globals": {

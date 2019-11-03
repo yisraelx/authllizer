@@ -1,7 +1,7 @@
 # Authllizer
 [![Travis build](https://travis-ci.org/yisraelx/authllizer.svg?branch=master)](https://travis-ci.org/yisraelx/authllizer)
 [![Codecov](https://codecov.io/gh/yisraelx/authllizer/branch/master/graph/badge.svg)](https://codecov.io/gh/yisraelx/authllizer)
-[![MIT License](https://img.shields.io/github/license/yisraelx/authllizer.svg)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yisraelx/authllizer/blob/master/LICENSE)
 
 [![TypeScript](https://img.shields.io/badge/100%25-TypeScript-blue.svg)](https://www.typescriptlang.org)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)

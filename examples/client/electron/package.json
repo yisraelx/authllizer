@@ -1,7 +1,7 @@
 {
     "name": "authllizer-electron-example",
     "private": true,
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Authllizer Electron Example",
     "main": "main.ts",
     "license": "MIT",
@@ -24,11 +24,11 @@
         "electron": "electron -r ts-node/register ."
     },
     "dependencies": {
-        "@authllizer/core": "^0.1.0",
-        "authllizer-electron-dialog": "^0.1.0",
-        "authllizer-facebook-oauth2": "^0.1.0",
-        "authllizer-google-oauth2": "^0.1.0",
-        "authllizer-twitter-oauth1": "^0.1.0",
+        "@authllizer/core": "^0.2.0",
+        "authllizer-electron-dialog": "^0.2.0",
+        "authllizer-facebook-oauth2": "^0.2.0",
+        "authllizer-google-oauth2": "^0.2.0",
+        "authllizer-twitter-oauth1": "^0.2.0",
         "bootstrap": "^3.3.7",
         "font-awesome": "^4.7.0",
         "prop-types": "^15.7.2",

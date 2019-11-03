@@ -1,6 +1,6 @@
 {
     "name": "authllizer-cordova-dialog",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Authllizer Cordova Dialog",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
@@ -46,11 +46,11 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@authllizer/core": "^0.1.0",
+        "@authllizer/core": "^0.2.0",
         "cordova-plugin-inappbrowser": "^3.1.0"
     },
     "devDependencies": {
-        "@authllizer/core": "^0.1.0",
+        "@authllizer/core": "^0.2.0",
         "@types/cordova": "^0.0.34",
         "cordova-plugin-inappbrowser": "^3.1.0"
     },

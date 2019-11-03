@@ -1,6 +1,6 @@
 {
     "name": "@authllizer/vue",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Vue Authllizer Plugin",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
@@ -49,11 +49,11 @@
         "url": "https://github.com/yisraelx/authllizer/issues"
     },
     "peerDependencies": {
-        "@authllizer/core": "^0.1.0",
+        "@authllizer/core": "^0.2.0",
         "vue": "^2.6.10"
     },
     "devDependencies": {
-        "@authllizer/core": "^0.1.0",
+        "@authllizer/core": "^0.2.0",
         "vue": "^2.6.10"
     },
     "rollup": {
